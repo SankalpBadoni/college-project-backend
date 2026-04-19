@@ -1,0 +1,282 @@
+{
+  "info": {
+    "name": "CollegeProject Student Module",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000" },
+    { "key": "token", "value": "" },
+    { "key": "programId", "value": "" },
+    { "key": "enrollmentId", "value": "" },
+    { "key": "paymentId", "value": "" },
+    { "key": "jobPostingId", "value": "" },
+    { "key": "templateId", "value": "" },
+    { "key": "notificationId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}/api/health", "host": ["{{baseUrl}}"], "path": ["api", "health"] }
+      }
+    },
+    {
+      "name": "Auth - Register Student",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"fullName\": \"Aarav Mehta\",\n  \"email\": \"aarav@example.com\",\n  \"password\": \"secret123\",\n  \"phone\": \"9999999999\",\n  \"profile\": {\n    \"collegeName\": \"ABC University\",\n    \"collegeId\": \"COL-1001\",\n    \"studentId\": \"STU-2001\",\n    \"courseName\": \"B.Tech CSE\",\n    \"yearOfCourse\": 3\n  },\n  \"preferredJobs\": [\n    { \"industry\": \"IT\", \"function\": \"Backend Developer\" }\n  ]\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/auth/students/register", "host": ["{{baseUrl}}"], "path": ["api", "auth", "students", "register"] }
+      }
+    },
+    {
+      "name": "Auth - Login Student",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"aarav@example.com\",\n  \"password\": \"secret123\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/auth/students/login", "host": ["{{baseUrl}}"], "path": ["api", "auth", "students", "login"] }
+      }
+    },
+    {
+      "name": "Student - Get Profile",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": { "raw": "{{baseUrl}}/api/students/me", "host": ["{{baseUrl}}"], "path": ["api", "students", "me"] }
+      }
+    },
+    {
+      "name": "Student - Update Preferred Jobs",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"preferredJobs\": [\n    { \"industry\": \"IT\", \"function\": \"Full Stack Developer\" },\n    { \"industry\": \"Fintech\", \"function\": \"Data Analyst\" }\n  ]\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/students/me/preferred-jobs", "host": ["{{baseUrl}}"], "path": ["api", "students", "me", "preferred-jobs"] }
+      }
+    },
+    {
+      "name": "Catalog - List Programs",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}/api/catalog/programs?type=course", "host": ["{{baseUrl}}"], "path": ["api", "catalog", "programs"], "query": [{ "key": "type", "value": "course" }] }
+      }
+    },
+    {
+      "name": "Catalog - Program Details",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "{{baseUrl}}/api/catalog/programs/{{programId}}", "host": ["{{baseUrl}}"], "path": ["api", "catalog", "programs", "{{programId}}"] }
+      }
+    },
+    {
+      "name": "Catalog - Upcoming Programs For Me",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": {
+          "raw": "{{baseUrl}}/api/catalog/programs/upcoming/me?window=fortnight&preferredOnly=true",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "catalog", "programs", "upcoming", "me"],
+          "query": [
+            { "key": "window", "value": "fortnight" },
+            { "key": "preferredOnly", "value": "true" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Cart - Add Item",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": { "mode": "raw", "raw": "{\n  \"programId\": \"{{programId}}\"\n}" },
+        "url": { "raw": "{{baseUrl}}/api/cart", "host": ["{{baseUrl}}"], "path": ["api", "cart"] }
+      }
+    },
+    {
+      "name": "Cart - Get",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": { "raw": "{{baseUrl}}/api/cart", "host": ["{{baseUrl}}"], "path": ["api", "cart"] }
+      }
+    },
+    {
+      "name": "Favorites - Add Item",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": { "mode": "raw", "raw": "{\n  \"programId\": \"{{programId}}\"\n}" },
+        "url": { "raw": "{{baseUrl}}/api/favorites", "host": ["{{baseUrl}}"], "path": ["api", "favorites"] }
+      }
+    },
+    {
+      "name": "Enrollments - Enroll By Credits",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"programId\": \"{{programId}}\",\n  \"mode\": \"credits\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/enrollments", "host": ["{{baseUrl}}"], "path": ["api", "enrollments"] }
+      }
+    },
+    {
+      "name": "Enrollments - My Account",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": { "raw": "{{baseUrl}}/api/enrollments/me", "host": ["{{baseUrl}}"], "path": ["api", "enrollments", "me"] }
+      }
+    },
+    {
+      "name": "Enrollments - Cancel Booking",
+      "request": {
+        "method": "PATCH",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": { "raw": "{{baseUrl}}/api/enrollments/{{enrollmentId}}/cancel", "host": ["{{baseUrl}}"], "path": ["api", "enrollments", "{{enrollmentId}}", "cancel"] }
+      }
+    },
+    {
+      "name": "Payments - Create Link",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": { "mode": "raw", "raw": "{\n  \"programId\": \"{{programId}}\"\n}" },
+        "url": { "raw": "{{baseUrl}}/api/payments/links", "host": ["{{baseUrl}}"], "path": ["api", "payments", "links"] }
+      }
+    },
+    {
+      "name": "Payments - Confirm",
+      "request": {
+        "method": "PATCH",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": { "raw": "{{baseUrl}}/api/payments/{{paymentId}}/confirm", "host": ["{{baseUrl}}"], "path": ["api", "payments", "{{paymentId}}", "confirm"] }
+      }
+    },
+    {
+      "name": "Recommendations - List",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": { "raw": "{{baseUrl}}/api/recommendations/me", "host": ["{{baseUrl}}"], "path": ["api", "recommendations", "me"] }
+      }
+    },
+    {
+      "name": "Recommendations - Generate System",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": { "raw": "{{baseUrl}}/api/recommendations/me/generate", "host": ["{{baseUrl}}"], "path": ["api", "recommendations", "me", "generate"] }
+      }
+    },
+    {
+      "name": "Notifications - List",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": { "raw": "{{baseUrl}}/api/notifications/me", "host": ["{{baseUrl}}"], "path": ["api", "notifications", "me"] }
+      }
+    },
+    {
+      "name": "Notifications - Generate Course Start",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": { "raw": "{{baseUrl}}/api/notifications/me/generate-course-start", "host": ["{{baseUrl}}"], "path": ["api", "notifications", "me", "generate-course-start"] }
+      }
+    },
+    {
+      "name": "Career Test - Active",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": { "raw": "{{baseUrl}}/api/career-tests/active", "host": ["{{baseUrl}}"], "path": ["api", "career-tests", "active"] }
+      }
+    },
+    {
+      "name": "Career Test - Submit",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"templateId\": \"{{templateId}}\",\n  \"answers\": [\n    { \"questionIndex\": 0, \"selectedOptionIndex\": 1 },\n    { \"questionIndex\": 1, \"selectedOptionIndex\": 2 }\n  ]\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/career-tests/submit", "host": ["{{baseUrl}}"], "path": ["api", "career-tests", "submit"] }
+      }
+    },
+    {
+      "name": "Career Test - Analysis",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": { "raw": "{{baseUrl}}/api/career-tests/analysis/me", "host": ["{{baseUrl}}"], "path": ["api", "career-tests", "analysis", "me"] }
+      }
+    },
+    {
+      "name": "Jobs - List Postings",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": { "raw": "{{baseUrl}}/api/jobs/postings", "host": ["{{baseUrl}}"], "path": ["api", "jobs", "postings"] }
+      }
+    },
+    {
+      "name": "Jobs - Apply",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" },
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"jobPostingId\": \"{{jobPostingId}}\",\n  \"coverLetter\": \"I am interested in this opportunity\"\n}"
+        },
+        "url": { "raw": "{{baseUrl}}/api/jobs/apply", "host": ["{{baseUrl}}"], "path": ["api", "jobs", "apply"] }
+      }
+    },
+    {
+      "name": "Jobs - My Applications",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": { "raw": "{{baseUrl}}/api/jobs/applications/me", "host": ["{{baseUrl}}"], "path": ["api", "jobs", "applications", "me"] }
+      }
+    }
+  ]
+}
