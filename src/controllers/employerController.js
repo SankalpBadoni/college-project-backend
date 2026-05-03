@@ -5,6 +5,7 @@ import {
   findEmployerCandidates,
   getEmployerDashboard,
   getEmployerPosting,
+  getJobStructure,
   listEmployerPostings,
   shortlistEmployerCandidates,
   updateEmployerCourseTags,
@@ -62,6 +63,19 @@ export const getPosting = async (req, res, next) => {
     }
 
     return res.json(posting);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const getJobStructureItem = async (req, res, next) => {
+  try {
+    const structure = await getJobStructure(req.employer._id, req.params.jobPostingId);
+    if (!structure) {
+      return res.status(404).json({ message: "Posting not found" });
+    }
+
+    return res.json(structure);
   } catch (error) {
     return next(error);
   }

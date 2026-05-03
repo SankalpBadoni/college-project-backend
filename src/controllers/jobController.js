@@ -3,9 +3,13 @@ import JobApplication from "../models/JobApplication.js";
 
 export const listJobPostings = async (req, res, next) => {
   try {
-    const postings = await JobPosting.find({ isActive: true, deadline: { $gte: new Date() } })
-      .populate("linkedPrograms", "title type")
-      .sort({ deadline: 1 });
+    const now = new Date();
+    const postings = await JobPosting.find({
+      isActive: true,
+      $or: [{ deadline: { $exists: false } }, { deadline: null }, { deadline: { $gte: now } }]
+    })
+      .populate("linkedPrograms preferredCourses requiredCompetencyLinks preferredCompetencyLinks", "title type name")
+      .sort({ createdAt: -1 });
 
     return res.json(postings);
   } catch (error) {
@@ -22,7 +26,7 @@ export const applyToJob = async (req, res, next) => {
       return res.status(404).json({ message: "Job posting not found" });
     }
 
-    if (new Date() > new Date(job.deadline)) {
+    if (job.deadline && new Date() > new Date(job.deadline)) {
       return res.status(400).json({ message: "Job application deadline is over" });
     }
 

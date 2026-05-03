@@ -127,25 +127,44 @@ export const updateEmployerProfile = async (employerId, updates) => {
 
 export const createJobPosting = async (employerId, payload) => {
   const employer = await Employer.findById(employerId);
+  const companyName = payload.companyName || employer.companyName;
   const safePayload = {
     employer: employerId,
-    companyName: payload.companyName || employer.companyName,
+    companyName,
     title: payload.title,
     description: payload.description,
+    location: payload.location,
+    workMode: payload.workMode || "onsite",
     postingType: payload.postingType || "job",
+    employmentType: payload.employmentType || payload.postingType || "full-time",
+    salaryRange: payload.salaryRange || {},
+    postedAt: payload.postedAt || new Date(),
     sourceType: payload.sourceType || "website",
     sourceLink: payload.sourceLink,
     isUrgent: Boolean(payload.isUrgent),
     requiredCount: payload.requiredCount || 1,
+    aboutCompany: payload.aboutCompany || {},
+    jobDescription: payload.jobDescription || {},
+    keyResponsibilities: payload.keyResponsibilities || [],
+    requiredQualifications: payload.requiredQualifications || {},
+    preferredQualifications: payload.preferredQualifications || {},
+    compensationBenefits: payload.compensationBenefits || {},
+    applicationProcess: payload.applicationProcess || {},
+    screeningQuestions: payload.screeningQuestions || [],
+    additionalInformation: payload.additionalInformation || {},
     restriction: payload.restriction || {},
     requiredCompetencies: payload.requiredCompetencies || [],
+    requiredCompetencyLinks: payload.requiredCompetencyLinks || [],
+    preferredCompetencyLinks: payload.preferredCompetencyLinks || [],
     industry: payload.industry,
     function: payload.function,
     deadline: payload.deadline,
+    applicationDeadline: payload.applicationDeadline || payload.deadline,
     linkedPrograms: payload.linkedPrograms || [],
     preferredCourses: payload.preferredCourses || [],
     shortlistingNotes: payload.shortlistingNotes,
     tagType: payload.tagType || "normal",
+    visualElements: payload.visualElements || {},
     isActive: payload.isActive ?? true
   };
 
@@ -167,20 +186,38 @@ export const updateEmployerPosting = async (employerId, postingId, updates) => {
     "title",
     "companyName",
     "description",
+    "location",
+    "workMode",
     "postingType",
+    "employmentType",
+    "salaryRange",
+    "postedAt",
     "sourceType",
     "sourceLink",
     "isUrgent",
     "requiredCount",
+    "aboutCompany",
+    "jobDescription",
+    "keyResponsibilities",
+    "requiredQualifications",
+    "preferredQualifications",
+    "compensationBenefits",
+    "applicationProcess",
+    "screeningQuestions",
+    "additionalInformation",
     "restriction",
     "requiredCompetencies",
+    "requiredCompetencyLinks",
+    "preferredCompetencyLinks",
     "industry",
     "function",
     "deadline",
+    "applicationDeadline",
     "linkedPrograms",
     "preferredCourses",
     "shortlistingNotes",
     "tagType",
+    "visualElements",
     "isActive"
   ]);
 
@@ -242,6 +279,45 @@ export const findEmployerCandidates = async (employerId, postingId, filters = {}
     posting,
     count: students.length,
     students
+  };
+};
+
+export const getJobStructure = async (employerId, postingId) => {
+  const posting = await getEmployerPosting(employerId, postingId);
+
+  if (!posting) {
+    return null;
+  }
+
+  return {
+    posting,
+    overview: {
+      title: posting.title,
+      companyName: posting.companyName,
+      location: posting.location,
+      workMode: posting.workMode,
+      employmentType: posting.employmentType,
+      salaryRange: posting.salaryRange,
+      postedAt: posting.postedAt,
+      deadline: posting.deadline,
+      applicationDeadline: posting.applicationDeadline
+    },
+    aboutCompany: posting.aboutCompany || {},
+    jobDescription: posting.jobDescription || {},
+    keyResponsibilities: posting.keyResponsibilities || [],
+    requiredQualifications: posting.requiredQualifications || {},
+    preferredQualifications: posting.preferredQualifications || {},
+    compensationBenefits: posting.compensationBenefits || {},
+    applicationProcess: posting.applicationProcess || {},
+    screeningQuestions: posting.screeningQuestions || [],
+    additionalInformation: posting.additionalInformation || {},
+    restriction: posting.restriction || {},
+    competencies: {
+      requiredCompetencies: posting.requiredCompetencies || [],
+      requiredCompetencyLinks: posting.requiredCompetencyLinks || [],
+      preferredCompetencyLinks: posting.preferredCompetencyLinks || []
+    },
+    visualElements: posting.visualElements || {}
   };
 };
 

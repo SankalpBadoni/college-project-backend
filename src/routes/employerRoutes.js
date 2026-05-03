@@ -5,6 +5,7 @@ import {
   deletePosting,
   getDashboard,
   getPosting,
+  getJobStructureItem,
   listCandidates,
   listPostings,
   shortlistCandidates,
@@ -24,6 +25,7 @@ router.patch("/me", protectEmployer, updateMe);
 router.post("/jobs", protectEmployer, createPosting);
 router.get("/jobs", protectEmployer, listPostings);
 router.get("/jobs/:jobPostingId", protectEmployer, getPosting);
+router.get("/jobs/:jobPostingId/structure", protectEmployer, getJobStructureItem);
 router.patch("/jobs/:jobPostingId", protectEmployer, updatePosting);
 router.delete("/jobs/:jobPostingId", protectEmployer, deletePosting);
 router.post("/jobs/:jobPostingId/candidates", protectEmployer, listCandidates);

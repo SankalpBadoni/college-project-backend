@@ -251,24 +251,77 @@
 ```json
 {
   "title": "Backend Engineer",
-  "description": "Hiring for product engineering team",
-  "postingType": "job",
-  "sourceType": "linkedin",
-  "sourceLink": "https://linkedin.com/jobs/...",
-  "isUrgent": true,
-  "requiredCount": 5,
+  "companyName": "Acme Tech",
+  "location": "Bengaluru",
+  "workMode": "hybrid",
+  "employmentType": "full-time",
+  "salaryRange": { "min": 700000, "max": 1200000, "currency": "INR", "text": "7-12 LPA" },
+  "postedAt": "2026-05-03T00:00:00.000Z",
+  "deadline": "2026-06-30T00:00:00.000Z",
+  "aboutCompany": {
+    "companyDescription": "Product company focused on B2B workflows",
+    "industry": "IT Services",
+    "mission": "Build reliable tools for teams",
+    "website": "https://acme.example.com"
+  },
+  "jobDescription": {
+    "roleSummary": "Build and maintain backend services",
+    "purpose": "Ship scalable APIs",
+    "organizationalFit": "Works with product and platform teams"
+  },
+  "keyResponsibilities": [
+    "Develop REST APIs",
+    "Work with product and QA"
+  ],
+  "requiredQualifications": {
+    "education": ["B.Tech / BE"],
+    "technicalSkills": ["Node.js", "MongoDB"],
+    "softSkills": ["Communication", "Collaboration"],
+    "experienceLevel": "0-2 years"
+  },
+  "preferredQualifications": {
+    "niceToHaveSkills": ["Docker"],
+    "certifications": [],
+    "bonusExperience": ["Internship in backend development"]
+  },
+  "compensationBenefits": {
+    "salaryDetails": "7-12 LPA",
+    "perks": ["Health insurance", "Learning budget"],
+    "growthOpportunities": ["Mentorship", "Promotion path"]
+  },
+  "applicationProcess": {
+    "howToApply": "Upload resume and portfolio link",
+    "requiredDocuments": ["Resume", "Cover letter"],
+    "hiringSteps": ["Test", "Interview", "Final round"]
+  },
+  "screeningQuestions": [
+    { "question": "Describe your experience with Node.js", "isRequired": true },
+    { "question": "Are you available to join within 30 days?", "isRequired": false }
+  ],
+  "additionalInformation": {
+    "workCulture": "Collaborative and fast-moving",
+    "recommendedPrograms": ["PROGRAM_OBJECT_ID"],
+    "workingHours": "Flexible",
+    "timezone": "IST"
+  },
   "restriction": {
     "minYear": 3,
     "maxYear": 4,
     "streams": ["CSE", "IT"],
     "genders": ["Male", "Female", "Other"]
   },
+  "requiredCompetencyLinks": ["COMPETENCY_OBJECT_ID"],
+  "preferredCompetencyLinks": ["COMPETENCY_OBJECT_ID"],
   "requiredCompetencies": ["Node.js", "MongoDB"],
   "industry": "IT Services",
   "function": "Backend",
-  "deadline": "2026-06-30T00:00:00.000Z",
   "preferredCourses": ["PROGRAM_OBJECT_ID"],
-  "tagType": "hot_job_linked"
+  "tagType": "hot_job_linked",
+  "visualElements": {
+    "coverImageUrl": "https://images.example.com/job-cover.png",
+    "bannerImageUrl": "https://images.example.com/job-banner.png",
+    "accentColor": "#1F6FEB"
+  }
 }
 ```
 
@@ -278,6 +331,10 @@
 
 ### 39. Get Posting Details
 - `GET /api/employers/jobs/:jobPostingId`
+- Auth: Bearer token
+
+### 39a. Get Job Structure
+- `GET /api/employers/jobs/:jobPostingId/structure`
 - Auth: Bearer token
 
 ### 40. Update Posting
