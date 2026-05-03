@@ -3,7 +3,16 @@ import mongoose from "mongoose";
 const preferredJobSchema = new mongoose.Schema(
   {
     industry: { type: String, required: true, trim: true },
-    function: { type: String, required: true, trim: true }
+    domain: { type: String, required: true, trim: true }
+  },
+  { _id: false }
+);
+
+const studentCompetencySchema = new mongoose.Schema(
+  {
+    competency: { type: mongoose.Schema.Types.ObjectId, ref: "Competency", required: true },
+    score: { type: Number, required: true, min: 0, max: 100 },
+    lastUpdated: { type: Date, default: Date.now }
   },
   { _id: false }
 );
@@ -32,8 +41,8 @@ const studentSchema = new mongoose.Schema(
     },
     credits: { type: Number, default: 0, min: 0 },
     preferredJobs: { type: [preferredJobSchema], default: [] },
-    cartItems: { type: [studentProgramItemSchema], default: [] },
     favoriteItems: { type: [studentProgramItemSchema], default: [] },
+    competency: { type: [studentCompetencySchema], default: [] },
     careerTestLatestAttempt: { type: mongoose.Schema.Types.ObjectId, ref: "CareerTestAttempt" }
   },
   { timestamps: true }

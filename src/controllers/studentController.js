@@ -47,3 +47,36 @@ export const updatePreferredJobs = async (req, res, next) => {
     return next(error);
   }
 };
+
+export const getDashboardData = async (req, res, next) => {
+  try {
+    const studentId = req.student._id;
+    const student = await Student.findById(studentId)
+      .select("-password")
+      .populate("competency.competency");
+
+    // In a real application, calculate completionPercentage based on profile completeness or course progress
+    const completionPercentage = 45; 
+    
+    // Determine job goal from preferredJobs if it exists
+    const jobGoal = student.preferredJobs?.length > 0 ? student.preferredJobs[0].domain : 'Lead Software Engineer';
+
+    // Mock response matching frontend dashboard expectations
+    // Real implementation would join courses, enrollments, and jobs
+    return res.json({
+      student: {
+        id: student._id,
+        fullName: student.fullName,
+        competencies: student.competency,
+        jobGoal,
+        completionPercentage
+      },
+      // In real scenario these would be fetched from Enrollment and Recommendation / JobPosting tables
+      ongoingCourses: [], 
+      recommendedCourses: [],
+      matchedJobs: []
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
