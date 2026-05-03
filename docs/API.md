@@ -206,8 +206,225 @@
 ### 31. API Health
 - `GET /api/health`
 
+## Employer Dashboard
+### 32. Register Employer
+- `POST /api/auth/employers/register`
+- Body:
+```json
+{
+  "companyName": "Acme Tech",
+  "divisionDept": "Talent Acquisition",
+  "approvingAuthority": { "name": "Rita Shah", "dept": "HR" },
+  "contactPerson": {
+    "name": "Arjun Mehta",
+    "dept": "Recruitment",
+    "email": "arjun@acme.com",
+    "phone": "9999991111"
+  },
+  "password": "secret123"
+}
+```
+
+### 33. Login Employer
+- `POST /api/auth/employers/login`
+- Body:
+```json
+{ "email": "arjun@acme.com", "password": "secret123" }
+```
+
+### 34. Get Employer Dashboard
+- `GET /api/employers/dashboard`
+- Auth: Bearer token
+
+### 35. Get My Employer Profile
+- `GET /api/employers/me`
+- Auth: Bearer token
+
+### 36. Update My Employer Profile
+- `PATCH /api/employers/me`
+- Auth: Bearer token
+
+### 37. Create Job / Internship / Requirement
+- `POST /api/employers/jobs`
+- Auth: Bearer token
+- Body:
+```json
+{
+  "title": "Backend Engineer",
+  "description": "Hiring for product engineering team",
+  "postingType": "job",
+  "sourceType": "linkedin",
+  "sourceLink": "https://linkedin.com/jobs/...",
+  "isUrgent": true,
+  "requiredCount": 5,
+  "restriction": {
+    "minYear": 3,
+    "maxYear": 4,
+    "streams": ["CSE", "IT"],
+    "genders": ["Male", "Female", "Other"]
+  },
+  "requiredCompetencies": ["Node.js", "MongoDB"],
+  "industry": "IT Services",
+  "function": "Backend",
+  "deadline": "2026-06-30T00:00:00.000Z",
+  "preferredCourses": ["PROGRAM_OBJECT_ID"],
+  "tagType": "hot_job_linked"
+}
+```
+
+### 38. List My Postings
+- `GET /api/employers/jobs`
+- Auth: Bearer token
+
+### 39. Get Posting Details
+- `GET /api/employers/jobs/:jobPostingId`
+- Auth: Bearer token
+
+### 40. Update Posting
+- `PATCH /api/employers/jobs/:jobPostingId`
+- Auth: Bearer token
+
+### 41. Delete Posting
+- `DELETE /api/employers/jobs/:jobPostingId`
+- Auth: Bearer token
+
+### 42. Find Eligible Students for a Posting
+- `POST /api/employers/jobs/:jobPostingId/candidates`
+- Auth: Bearer token
+- Body example:
+```json
+{ "completedOnly": true, "streams": ["CSE"], "genders": ["Female"] }
+```
+
+### 43. Shortlist Students for a Posting
+- `POST /api/employers/jobs/:jobPostingId/shortlist`
+- Auth: Bearer token
+- Body:
+```json
+{
+  "studentIds": ["STUDENT_OBJECT_ID"],
+  "note": "Strong match for urgent role"
+}
+```
+
+### 44. Create Live Project
+- `POST /api/employers/live-projects`
+- Auth: Bearer token
+
+### 45. Tag Existing Live Project or Course
+- `PATCH /api/employers/live-projects/:programId/tags`
+- Auth: Bearer token
+- Body:
+```json
+{
+  "employerPreferred": true,
+  "hotJobLinked": true,
+  "exclusiveJobLinked": false,
+  "preferredJobTags": ["IT:Backend Developer"]
+}
+```
+
+## Faculty Dashboard
+### 46. Register Faculty
+- `POST /api/auth/faculty/register`
+- Body:
+```json
+{
+  "fullName": "Dr. Neha Verma",
+  "email": "neha@example.com",
+  "password": "secret123",
+  "phone": "9999992222",
+  "gender": "Female",
+  "professionalProfile": {
+    "describesBest": "Data Science",
+    "otherDescription": "ML and analytics"
+  },
+  "coursesOffered": []
+}
+```
+
+### 47. Login Faculty
+- `POST /api/auth/faculty/login`
+- Body:
+```json
+{ "email": "neha@example.com", "password": "secret123" }
+```
+
+### 48. Get Faculty Dashboard
+- `GET /api/faculty/dashboard`
+- Auth: Bearer token
+
+### 49. Get My Faculty Profile
+- `GET /api/faculty/me`
+- Auth: Bearer token
+
+### 50. Update My Faculty Profile
+- `PATCH /api/faculty/me`
+- Auth: Bearer token
+
+### 51. Upload Course Material
+- `POST /api/faculty/me/materials`
+- Auth: Bearer token
+- Body:
+```json
+{
+  "program": "PROGRAM_OBJECT_ID",
+  "title": "Unit 1 Notes",
+  "description": "Intro notes",
+  "moduleName": "Basics",
+  "fileUrl": "https://files.example.com/unit1.pdf",
+  "fileType": "pdf"
+}
+```
+
+### 52. Add Module or Additional Content
+- `POST /api/faculty/me/modules`
+- Auth: Bearer token
+
+### 53. Book Live Class Slot
+- `POST /api/faculty/me/live-classes`
+- Auth: Bearer token
+
+### 54. Cancel or Update Live Class Slot
+- `PATCH /api/faculty/me/live-classes/:sessionId`
+- `DELETE /api/faculty/me/live-classes/:sessionId`
+- Auth: Bearer token
+
+### 55. Upload Assessment
+- `POST /api/faculty/me/assessments`
+- Auth: Bearer token
+
+### 56. Update Assessment Scores
+- `POST /api/faculty/me/assessments/:assessmentId/scores`
+- Auth: Bearer token
+
+### 57. View Faculty Ratings
+- `GET /api/faculty/me/ratings`
+- Auth: Bearer token
+
+### 58. Student Rating for Faculty
+- `POST /api/faculty/:facultyId/ratings`
+- Auth: Bearer token
+- Body:
+```json
+{ "studentId": "STUDENT_OBJECT_ID", "rating": 5, "comment": "Very clear explanations" }
+```
+
+## New Models Used
+- Employer
+- Faculty
+- JobPosting
+- Program
+- CourseMaterial
+- CourseModule
+- LiveClassSession
+- Assessment
+- AssessmentScore
+- FacultyRating
+
 ## Data Models Included
 - Student
+- Employer
 - Faculty
 - Program (`course`, `assessment`, `live_project`)
 - Enrollment
@@ -218,19 +435,32 @@
 - JobApplication
 - CareerTestTemplate
 - CareerTestAttempt
+- CourseMaterial
+- CourseModule
+- LiveClassSession
+- Assessment
+- AssessmentScore
+- FacultyRating
 
 ## Model Responsibilities (Which model is for what)
 - Student: Core student account and profile data, login identity, credits balance, preferred jobs, latest career test attempt reference, and embedded `cartItems` + `favoriteItems`.
-- Faculty: Faculty profile shown in program details (name, bio, expertise, experience, completed programs).
-- Program: Master catalog entity for all offerings (`course`, `assessment`, `live_project`) including description, eligibility, schedule, prices, credit cost, competencies, and placement stats.
+- Employer: Employer account, premium/normal tier, approval status, and contact/company profile data.
+- Faculty: Faculty profile shown in program details plus dashboard content, calendar, ratings, and teaching profile fields.
+- Program: Master catalog entity for all offerings (`course`, `assessment`, `live_project`) including description, eligibility, employer tags, schedule, prices, credit cost, competencies, and placement stats.
 - Enrollment: Student-to-program enrollment record with status lifecycle (`booked`, `ongoing`, `completed`, `cancelled`) and mode (`credits` or `payment`).
 - Payment: Payment-link transaction record for paid enrollment flow and confirmation tracking.
 - Recommendation: Stores recommendations received by a student from system/faculty/other students.
 - Notification: In-app notifications for course start alerts, recommendations, payment updates, and general communication.
-- JobPosting: Job opportunities visible to students, with competency requirements, deadline, and optional linked programs.
+- JobPosting: Job opportunities visible to students, with employer ownership, source link, urgency, slot count, candidate restrictions, competency requirements, deadline, tags, and optional linked programs or preferred courses.
 - JobApplication: Student applications to job postings with application status progression.
 - CareerTestTemplate: Configurable MCQ assessment template with competency-weighted options.
 - CareerTestAttempt: Student submission data for a career test, computed competency scores, and spider web chart dataset.
+- CourseMaterial: Faculty-uploaded course content.
+- CourseModule: Faculty-created module and additional content entries.
+- LiveClassSession: Faculty live class calendar slot.
+- Assessment: Faculty assessment metadata and questions.
+- AssessmentScore: Faculty grading record for a student assessment submission.
+- FacultyRating: Student star rating and comment for a faculty profile.
 
 ## Model to API Flow Mapping
 - Student: `/api/auth/students/*`, `/api/students/*`, `/api/cart*`, `/api/favorites*`, and used indirectly by all protected student APIs.

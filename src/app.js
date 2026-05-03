@@ -13,6 +13,8 @@ import notificationRoutes from "./routes/notificationRoutes.js";
 import jobRoutes from "./routes/jobRoutes.js";
 import careerTestRoutes from "./routes/careerTestRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
+import employerRoutes from "./routes/employerRoutes.js";
+import facultyRoutes from "./routes/facultyRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorHandler.js";
 
 const app = express();
@@ -36,6 +38,8 @@ app.use("/api/notifications", notificationRoutes);
 app.use("/api/jobs", jobRoutes);
 app.use("/api/career-tests", careerTestRoutes);
 app.use("/api/payments", paymentRoutes);
+app.use("/api/employers", employerRoutes);
+app.use("/api/faculty", facultyRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

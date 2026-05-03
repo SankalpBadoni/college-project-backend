@@ -1,31 +1,141 @@
-import Employer from "../models/Employer.js";
-import JobPosting from "../models/JobPosting.js";
-import JobApplication from "../models/JobApplication.js";
+import {
+  createEmployerLiveProject,
+  createJobPosting,
+  deleteEmployerPosting,
+  findEmployerCandidates,
+  getEmployerDashboard,
+  getEmployerPosting,
+  listEmployerPostings,
+  shortlistEmployerCandidates,
+  updateEmployerCourseTags,
+  updateEmployerPosting,
+  updateEmployerProfile
+} from "../services/employerService.js";
 
-export const getEmployerDashboardData = async (req, res, next) => {
+export const getDashboard = async (req, res, next) => {
   try {
-    const employerId = req.user._id;
+    return res.json(await getEmployerDashboard(req.employer._id));
+  } catch (error) {
+    return next(error);
+  }
+};
 
-    // Mock/aggregated structure for the frontend
-    
-    const stats = {
-      activeJobs: 12,        // e.g. await JobPosting.countDocuments({ employer: employerId, type: "Job", status: "Active" })
-      activeInternships: 4,  // e.g. await JobPosting.countDocuments({ employer: employerId, type: "Internship", status: "Active" })
-      totalApplicants: 342,  // e.g. await JobApplication.countDocuments({ "job.employer": employerId })
-      interviewsScheduled: 8
-    };
+export const getMe = async (req, res, next) => {
+  try {
+    return res.json(req.employer);
+  } catch (error) {
+    return next(error);
+  }
+};
 
-    const recentApplicants = [
-      { id: 1, candidateName: "Candidate Name A", matchScore: 95, jobTitle: "Senior Frontend Engineer", appliedAt: "2 hours ago" },
-      { id: 2, candidateName: "Candidate Name B", matchScore: 95, jobTitle: "Senior Frontend Engineer", appliedAt: "2 hours ago" },
-      { id: 3, candidateName: "Candidate Name C", matchScore: 95, jobTitle: "Senior Frontend Engineer", appliedAt: "2 hours ago" },
-      { id: 4, candidateName: "Candidate Name D", matchScore: 95, jobTitle: "Senior Frontend Engineer", appliedAt: "2 hours ago" }
-    ];
+export const updateMe = async (req, res, next) => {
+  try {
+    const employer = await updateEmployerProfile(req.employer._id, req.body);
+    return res.json({ message: "Employer profile updated", employer });
+  } catch (error) {
+    return next(error);
+  }
+};
 
-    return res.json({
-      stats,
-      recentApplicants
-    });
+export const createPosting = async (req, res, next) => {
+  try {
+    const posting = await createJobPosting(req.employer._id, req.body);
+    return res.status(201).json({ message: "Posting created", posting });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const listPostings = async (req, res, next) => {
+  try {
+    return res.json(await listEmployerPostings(req.employer._id));
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const getPosting = async (req, res, next) => {
+  try {
+    const posting = await getEmployerPosting(req.employer._id, req.params.jobPostingId);
+    if (!posting) {
+      return res.status(404).json({ message: "Posting not found" });
+    }
+
+    return res.json(posting);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const updatePosting = async (req, res, next) => {
+  try {
+    const posting = await updateEmployerPosting(req.employer._id, req.params.jobPostingId, req.body);
+    if (!posting) {
+      return res.status(404).json({ message: "Posting not found" });
+    }
+
+    return res.json({ message: "Posting updated", posting });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const deletePosting = async (req, res, next) => {
+  try {
+    const posting = await deleteEmployerPosting(req.employer._id, req.params.jobPostingId);
+    if (!posting) {
+      return res.status(404).json({ message: "Posting not found" });
+    }
+
+    return res.json({ message: "Posting deleted" });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const createLiveProject = async (req, res, next) => {
+  try {
+    const project = await createEmployerLiveProject(req.employer._id, req.body);
+    return res.status(201).json({ message: "Live project created", project });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const updateCourseTags = async (req, res, next) => {
+  try {
+    const program = await updateEmployerCourseTags(req.params.programId, req.body);
+    if (!program) {
+      return res.status(404).json({ message: "Program not found" });
+    }
+
+    return res.json({ message: "Course tags updated", program });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const listCandidates = async (req, res, next) => {
+  try {
+    const result = await findEmployerCandidates(req.employer._id, req.params.jobPostingId, req.body || {});
+    if (!result) {
+      return res.status(404).json({ message: "Posting not found" });
+    }
+
+    return res.json(result);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const shortlistCandidates = async (req, res, next) => {
+  try {
+    const posting = await shortlistEmployerCandidates(req.employer._id, req.params.jobPostingId, req.body.studentIds || [], req.body.note);
+    if (!posting) {
+      return res.status(404).json({ message: "Posting not found" });
+    }
+
+    return res.json({ message: "Students shortlisted", posting });
   } catch (error) {
     return next(error);
   }

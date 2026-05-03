@@ -1,37 +1,235 @@
-import Faculty from "../models/Faculty.js";
-import Enrollment from "../models/Enrollment.js";
-import Program from "../models/Program.js";
+import {
+  cancelLiveClassSession,
+  createAssessment,
+  createCourseMaterial,
+  createCourseModule,
+  createLiveClassSession,
+  deleteCourseMaterial,
+  deleteCourseModule,
+  getFacultyDashboard,
+  listAssessments,
+  listCourseMaterials,
+  listCourseModules,
+  listFacultyRatings,
+  listLiveClassSessions,
+  submitFacultyRating,
+  updateAssessment,
+  updateCourseMaterial,
+  updateCourseModule,
+  updateFacultyProfile,
+  updateLiveClassSession,
+  upsertAssessmentScore
+} from "../services/facultyService.js";
 
-export const getFacultyDashboardData = async (req, res, next) => {
+export const getDashboard = async (req, res, next) => {
   try {
-    const facultyId = req.user._id;
+    return res.json(await getFacultyDashboard(req.faculty._id));
+  } catch (error) {
+    return next(error);
+  }
+};
 
-    // In a real application, you would aggregate these from actual databases.
-    // Here we provide a mock/aggregated structure similar to what the frontend expects.
+export const getMe = async (req, res, next) => {
+  try {
+    return res.json(req.faculty);
+  } catch (error) {
+    return next(error);
+  }
+};
 
-    const stats = {
-      totalEnrolled: 1248, // e.g. await Enrollment.countDocuments({ "program.faculty": facultyId })
-      activeCourses: 4,    // e.g. await Program.countDocuments({ faculty: facultyId, status: "Active" })
-      liveProjects: 2,
-      avgRating: 4.8
-    };
+export const updateMe = async (req, res, next) => {
+  try {
+    const faculty = await updateFacultyProfile(req.faculty._id, req.body);
+    return res.json({ message: "Faculty profile updated", faculty });
+  } catch (error) {
+    return next(error);
+  }
+};
 
-    const recentEnrollments = [
-      { id: 1, studentName: "Student Name A", course: "Advanced React Patterns", isNew: true },
-      { id: 2, studentName: "Student Name B", course: "Advanced React Patterns", isNew: true },
-      { id: 3, studentName: "Student Name C", course: "Advanced React Patterns", isNew: true }
-    ];
+export const createMaterial = async (req, res, next) => {
+  try {
+    const material = await createCourseMaterial(req.faculty._id, req.body);
+    return res.status(201).json({ message: "Course material uploaded", material });
+  } catch (error) {
+    return next(error);
+  }
+};
 
-    const upcomingSessions = [
-      { id: 1, title: "System Design Masterclass", time: "10:00 AM - 11:30 AM • Virtual Meets", date: "Oct 21" },
-      { id: 2, title: "System Design Masterclass", time: "10:00 AM - 11:30 AM • Virtual Meets", date: "Oct 22" }
-    ];
+export const listMaterials = async (req, res, next) => {
+  try {
+    return res.json(await listCourseMaterials(req.faculty._id, req.query));
+  } catch (error) {
+    return next(error);
+  }
+};
 
-    return res.json({
-      stats,
-      recentEnrollments,
-      upcomingSessions
-    });
+export const updateMaterial = async (req, res, next) => {
+  try {
+    const material = await updateCourseMaterial(req.faculty._id, req.params.materialId, req.body);
+    if (!material) {
+      return res.status(404).json({ message: "Material not found" });
+    }
+
+    return res.json({ message: "Course material updated", material });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const deleteMaterial = async (req, res, next) => {
+  try {
+    const material = await deleteCourseMaterial(req.faculty._id, req.params.materialId);
+    if (!material) {
+      return res.status(404).json({ message: "Material not found" });
+    }
+
+    return res.json({ message: "Course material deleted" });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const createModule = async (req, res, next) => {
+  try {
+    const module = await createCourseModule(req.faculty._id, req.body);
+    return res.status(201).json({ message: "Module created", module });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const listModules = async (req, res, next) => {
+  try {
+    return res.json(await listCourseModules(req.faculty._id, req.query));
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const updateModule = async (req, res, next) => {
+  try {
+    const module = await updateCourseModule(req.faculty._id, req.params.moduleId, req.body);
+    if (!module) {
+      return res.status(404).json({ message: "Module not found" });
+    }
+
+    return res.json({ message: "Module updated", module });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const deleteModule = async (req, res, next) => {
+  try {
+    const module = await deleteCourseModule(req.faculty._id, req.params.moduleId);
+    if (!module) {
+      return res.status(404).json({ message: "Module not found" });
+    }
+
+    return res.json({ message: "Module deleted" });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const createLiveClass = async (req, res, next) => {
+  try {
+    const session = await createLiveClassSession(req.faculty._id, req.body);
+    return res.status(201).json({ message: "Live class created", session });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const listLiveClasses = async (req, res, next) => {
+  try {
+    return res.json(await listLiveClassSessions(req.faculty._id, req.query));
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const updateLiveClass = async (req, res, next) => {
+  try {
+    const session = await updateLiveClassSession(req.faculty._id, req.params.sessionId, req.body);
+    if (!session) {
+      return res.status(404).json({ message: "Live class not found" });
+    }
+
+    return res.json({ message: "Live class updated", session });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const cancelLiveClass = async (req, res, next) => {
+  try {
+    const session = await cancelLiveClassSession(req.faculty._id, req.params.sessionId);
+    if (!session) {
+      return res.status(404).json({ message: "Live class not found" });
+    }
+
+    return res.json({ message: "Live class cancelled", session });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const createAssessmentItem = async (req, res, next) => {
+  try {
+    const assessment = await createAssessment(req.faculty._id, req.body);
+    return res.status(201).json({ message: "Assessment created", assessment });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const listAssessmentItems = async (req, res, next) => {
+  try {
+    return res.json(await listAssessments(req.faculty._id, req.query));
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const updateAssessmentItem = async (req, res, next) => {
+  try {
+    const assessment = await updateAssessment(req.faculty._id, req.params.assessmentId, req.body);
+    if (!assessment) {
+      return res.status(404).json({ message: "Assessment not found" });
+    }
+
+    return res.json({ message: "Assessment updated", assessment });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const gradeAssessment = async (req, res, next) => {
+  try {
+    const score = await upsertAssessmentScore(req.faculty._id, req.params.assessmentId, req.body);
+    if (!score) {
+      return res.status(404).json({ message: "Assessment not found" });
+    }
+
+    return res.json({ message: "Assessment score updated", score });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const listRatings = async (req, res, next) => {
+  try {
+    return res.json(await listFacultyRatings(req.faculty._id));
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const submitRating = async (req, res, next) => {
+  try {
+    const rating = await submitFacultyRating(req.params.facultyId || req.faculty._id, req.body);
+    return res.status(201).json({ message: "Rating saved", rating });
   } catch (error) {
     return next(error);
   }

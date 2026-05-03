@@ -37,7 +37,9 @@ const studentSchema = new mongoose.Schema(
       collegeId: { type: String, required: true, trim: true },
       studentId: { type: String, required: true, trim: true },
       courseName: { type: String, required: true, trim: true },
-      yearOfCourse: { type: Number, required: true, min: 1, max: 6 }
+      yearOfCourse: { type: Number, required: true, min: 1, max: 6 },
+      stream: { type: String, trim: true },
+      gender: { type: String, enum: ["Male", "Female", "Other"], trim: true }
     },
     credits: { type: Number, default: 0, min: 0 },
     preferredJobs: { type: [preferredJobSchema], default: [] },

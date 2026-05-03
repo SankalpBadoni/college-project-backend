@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const programSchema = new mongoose.Schema(
   {
+    employer: { type: mongoose.Schema.Types.ObjectId, ref: "Employer" },
     title: { type: String, required: true, trim: true },
     description: { type: String, required: true, trim: true },
     type: { type: String, required: true, enum: ["course", "assessment", "live_project"] },
@@ -9,6 +10,10 @@ const programSchema = new mongoose.Schema(
     faculty: { type: mongoose.Schema.Types.ObjectId, ref: "Faculty" },
     competencies: [{ type: String, trim: true }],
     preferredJobTags: [{ type: String, trim: true }],
+    employerPreferred: { type: Boolean, default: false },
+    hotJobLinked: { type: Boolean, default: false },
+    exclusiveJobLinked: { type: Boolean, default: false },
+    linkedJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: "JobPosting" }],
     minYearEligible: { type: Number, default: 1 },
     maxYearEligible: { type: Number, default: 6 },
     startDate: { type: Date },

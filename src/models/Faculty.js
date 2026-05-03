@@ -27,8 +27,22 @@ const facultySchema = new mongoose.Schema(
       describesBest: { type: String, required: true },
       otherDescription: { type: String, trim: true }
     },
+
+    profile: {
+      headline: { type: String, trim: true },
+      bio: { type: String, trim: true },
+      website: { type: String, trim: true },
+      linkedinUrl: { type: String, trim: true },
+      officeHours: { type: String, trim: true }
+    },
     
     coursesOffered: { type: [courseOfferedSchema], default: [] },
+
+    ratingSummary: {
+      average: { type: Number, default: 0, min: 0, max: 5 },
+      count: { type: Number, default: 0, min: 0 },
+      stars: { type: [Number], default: [] }
+    },
     
     isApproved: { type: Boolean, default: false },
     approvedAt: { type: Date }
