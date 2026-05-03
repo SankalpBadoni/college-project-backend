@@ -1,5 +1,7 @@
 import Program from "../models/Program.js";
 import Enrollment from "../models/Enrollment.js";
+import CourseModule from "../models/CourseModule.js";
+import CourseMaterial from "../models/CourseMaterial.js";
 
 const createWindowDate = (windowType) => {
   const now = new Date();
@@ -58,11 +60,29 @@ export const getProgramDetails = async (req, res, next) => {
       status: { $in: ["booked", "ongoing", "completed"] }
     });
 
+    let courseStructure = null;
+    if (program.type === "course") {
+      const [modules, materials] = await Promise.all([
+        CourseModule.find({ program: program._id }).sort({ order: 1, createdAt: 1 }),
+        CourseMaterial.find({ program: program._id }).sort({ createdAt: 1 })
+      ]);
+
+      courseStructure = {
+        overview: program.courseOverview || {},
+        introduction: program.courseIntroduction || {},
+        progress: program.courseProgress || {},
+        certification: program.certification || {},
+        modules,
+        materials
+      };
+    }
+
     return res.json({
       ...program.toObject(),
       enrolledCount,
       expectedStartDate: program.startDate,
-      deadlineForApplication: program.applicationDeadline
+      deadlineForApplication: program.applicationDeadline,
+      courseStructure
     });
   } catch (error) {
     return next(error);

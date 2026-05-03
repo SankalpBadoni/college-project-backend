@@ -410,6 +410,78 @@
 { "studentId": "STUDENT_OBJECT_ID", "rating": 5, "comment": "Very clear explanations" }
 ```
 
+### 59. Update Course Overview / Landing Section
+- `PATCH /api/faculty/me/courses/:programId/overview`
+- Auth: Bearer token
+- Body:
+```json
+{
+  "title": "Complete Web Development",
+  "description": "Build modern web apps end to end",
+  "courseOverview": {
+    "shortDescription": "A flexible full-stack course",
+    "targetAudience": ["Beginners", "Career switchers"],
+    "learningOutcomes": ["Build REST APIs", "Ship a frontend app"],
+    "prerequisites": [],
+    "numberOfModules": 8
+  },
+  "courseIntroduction": {
+    "enabled": false,
+    "welcomeVideoUrl": "",
+    "roadmap": []
+  },
+  "courseProgress": {
+    "enabled": false,
+    "milestones": [],
+    "badges": []
+  },
+  "certification": {
+    "enabled": false,
+    "minimumScore": 80,
+    "projectRequired": false,
+    "criteria": []
+  }
+}
+```
+
+### 60. Get Course Structure
+- `GET /api/faculty/me/courses/:programId/structure`
+- Auth: Bearer token
+
+## Course Structure Fields
+### Program Course Overview
+- `courseOverview.shortDescription`
+- `courseOverview.targetAudience`
+- `courseOverview.learningOutcomes`
+- `courseOverview.prerequisites`
+- `courseOverview.numberOfModules`
+- `courseOverview.numberOfLessons`
+
+### Program Course Introduction
+- `courseIntroduction.enabled`
+- `courseIntroduction.welcomeVideoUrl`
+- `courseIntroduction.platformGuide`
+- `courseIntroduction.roadmap`
+- `courseIntroduction.visualElements`
+
+### Course Modules
+- `module.title`
+- `module.objectives`
+- `module.videoLessons`
+- `module.readingMaterials`
+- `module.examples`
+- `module.interactiveElements`
+- `module.assessments`
+- `module.capstoneProject`
+- `module.visualElements`
+
+### Course Materials
+- `phase`: `pre | mid | post | ongoing`
+- `materialKind`: `ppt | pdf | infographic_static | infographic_animated | video | live_project | assessment | quiz | assignment | notes | other`
+- `assetStyle`: `static | animated | interactive | document | video | live`
+- `isVisualRelief`: `true | false`
+- `visualElements`
+
 ## New Models Used
 - Employer
 - Faculty

@@ -12,8 +12,10 @@ import {
   listCourseModules,
   listFacultyRatings,
   listLiveClassSessions,
+  getCourseStructure,
   submitFacultyRating,
   updateAssessment,
+  updateCourseOverview,
   updateCourseMaterial,
   updateCourseModule,
   updateFacultyProfile,
@@ -41,6 +43,32 @@ export const updateMe = async (req, res, next) => {
   try {
     const faculty = await updateFacultyProfile(req.faculty._id, req.body);
     return res.json({ message: "Faculty profile updated", faculty });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const updateCourseOverviewItem = async (req, res, next) => {
+  try {
+    const course = await updateCourseOverview(req.faculty._id, req.params.programId, req.body);
+    if (!course) {
+      return res.status(404).json({ message: "Course not found" });
+    }
+
+    return res.json({ message: "Course overview updated", course });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const getCourseStructureItem = async (req, res, next) => {
+  try {
+    const structure = await getCourseStructure(req.faculty._id, req.params.programId);
+    if (!structure) {
+      return res.status(404).json({ message: "Course not found" });
+    }
+
+    return res.json(structure);
   } catch (error) {
     return next(error);
   }

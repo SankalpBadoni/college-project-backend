@@ -8,6 +8,7 @@ import {
   deleteMaterial,
   deleteModule,
   getDashboard,
+  getCourseStructureItem,
   getMe,
   gradeAssessment,
   listAssessmentItems,
@@ -16,6 +17,7 @@ import {
   listModules,
   listRatings,
   submitRating,
+  updateCourseOverviewItem,
   updateAssessmentItem,
   updateLiveClass,
   updateMaterial,
@@ -29,6 +31,8 @@ const router = Router();
 router.get("/dashboard", protectFaculty, getDashboard);
 router.get("/me", protectFaculty, getMe);
 router.patch("/me", protectFaculty, updateMe);
+router.patch("/me/courses/:programId/overview", protectFaculty, updateCourseOverviewItem);
+router.get("/me/courses/:programId/structure", protectFaculty, getCourseStructureItem);
 
 router.post("/me/materials", protectFaculty, createMaterial);
 router.get("/me/materials", protectFaculty, listMaterials);

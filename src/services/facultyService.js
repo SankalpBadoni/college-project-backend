@@ -94,6 +94,65 @@ export const updateFacultyProfile = async (facultyId, updates) => {
   return Faculty.findByIdAndUpdate(facultyId, payload, { new: true, runValidators: true }).select("-password");
 };
 
+export const updateCourseOverview = async (facultyId, programId, updates) => {
+  const payload = pick(updates, [
+    "title",
+    "description",
+    "courseOverview",
+    "courseIntroduction",
+    "courseProgress",
+    "certification",
+    "competencies",
+    "preferredJobTags",
+    "minYearEligible",
+    "maxYearEligible",
+    "startDate",
+    "applicationDeadline",
+    "durationHours",
+    "maxStudents",
+    "creditCost",
+    "priceInr",
+    "status",
+    "isActive"
+  ]);
+
+  return Program.findOneAndUpdate({ _id: programId, faculty: facultyId, type: "course" }, payload, {
+    new: true,
+    runValidators: true
+  }).populate("faculty employer linkedJobs");
+};
+
+export const getCourseStructure = async (facultyId, programId) => {
+  const course = await Program.findOne({ _id: programId, faculty: facultyId, type: "course" })
+    .populate("faculty employer linkedJobs")
+    .populate({
+      path: "linkedJobs",
+      populate: { path: "linkedPrograms preferredCourses" }
+    });
+
+  if (!course) {
+    return null;
+  }
+
+  const modules = await CourseModule.find({ faculty: facultyId, program: programId })
+    .populate("program", "title type")
+    .sort({ order: 1, createdAt: 1 });
+  const materials = await CourseMaterial.find({ faculty: facultyId, program: programId })
+    .populate("program", "title type")
+    .populate("module", "title")
+    .sort({ createdAt: 1 });
+
+  return {
+    course,
+    overview: course.courseOverview || {},
+    introduction: course.courseIntroduction || {},
+    progress: course.courseProgress || {},
+    certification: course.certification || {},
+    modules,
+    materials
+  };
+};
+
 export const createCourseMaterial = async (facultyId, payload) =>
   CourseMaterial.create({ faculty: facultyId, ...payload });
 

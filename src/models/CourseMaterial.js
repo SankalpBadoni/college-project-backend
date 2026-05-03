@@ -4,12 +4,22 @@ const courseMaterialSchema = new mongoose.Schema(
   {
     faculty: { type: mongoose.Schema.Types.ObjectId, ref: "Faculty", required: true },
     program: { type: mongoose.Schema.Types.ObjectId, ref: "Program", required: true },
+    module: { type: mongoose.Schema.Types.ObjectId, ref: "CourseModule" },
     title: { type: String, required: true, trim: true },
     description: { type: String, trim: true },
     moduleName: { type: String, trim: true },
     fileUrl: { type: String, required: true, trim: true },
-    fileType: { type: String, enum: ["pdf", "video", "link", "doc", "slides", "other"], default: "other" },
+    fileType: { type: String, enum: ["pdf", "ppt", "video", "link", "doc", "slides", "infographic_static", "infographic_animated", "assessment", "quiz", "assignment", "live_project", "other"], default: "other" },
+    phase: { type: String, enum: ["pre", "mid", "post", "ongoing"], default: "mid" },
+    materialKind: { type: String, enum: ["ppt", "pdf", "infographic_static", "infographic_animated", "video", "live_project", "assessment", "quiz", "assignment", "notes", "other"], default: "other" },
+    assetStyle: { type: String, enum: ["static", "animated", "interactive", "document", "video", "live"], default: "document" },
+    isVisualRelief: { type: Boolean, default: false },
     visibility: { type: String, enum: ["students", "faculty", "public"], default: "students" },
+    visualElements: {
+      previewImageUrl: { type: String, trim: true },
+      thumbnailUrl: { type: String, trim: true },
+      animationUrl: { type: String, trim: true }
+    },
     tags: [{ type: String, trim: true }]
   },
   { timestamps: true }
