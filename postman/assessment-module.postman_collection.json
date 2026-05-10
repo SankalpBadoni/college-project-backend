@@ -1,0 +1,265 @@
+{
+  "info": {
+    "_postman_id": "assessment-module-collection",
+    "name": "Career Profiler Assessment Module",
+    "description": "Complete API endpoints for personality assessment module",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Assessment Questions",
+      "item": [
+        {
+          "name": "Get All Questions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/assessment/questions",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "assessment", "questions"]
+            },
+            "description": "Fetch all assessment questions grouped by section (strengths and weaknesses)"
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/api/assessment/questions",
+                  "host": ["{{BASE_URL}}"],
+                  "path": ["api", "assessment", "questions"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "body": "{\n  \"success\": true,\n  \"message\": \"Assessment questions retrieved successfully\",\n  \"data\": {\n    \"strengths\": [\n      {\n        \"_id\": \"...\",\n        \"questionId\": 1,\n        \"section\": \"strengths\",\n        \"questionText\": \"Which of the following best describes your professional strength?\",\n        \"options\": [\n          {\n            \"code\": \"A\",\n            \"title\": \"Risk taker\",\n            \"description\": \"I readily explore new opportunities and challenges.\",\n            \"personality\": \"Butterfly\"\n          }\n        ]\n      }\n    ],\n    \"weaknesses\": []\n  },\n  \"totalQuestions\": 13\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Strength Questions Only",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/assessment/questions?section=strengths",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "assessment", "questions"],
+              "query": [
+                {
+                  "key": "section",
+                  "value": "strengths"
+                }
+              ]
+            },
+            "description": "Get only strength section questions"
+          }
+        },
+        {
+          "name": "Get Weakness Questions Only",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/assessment/questions?section=weaknesses",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "assessment", "questions"],
+              "query": [
+                {
+                  "key": "section",
+                  "value": "weaknesses"
+                }
+              ]
+            },
+            "description": "Get only weakness section questions"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Assessment Submission",
+      "item": [
+        {
+          "name": "Submit Assessment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"USER_MONGODB_ID\",\n  \"strengthResponses\": [\n    {\n      \"questionId\": 1,\n      \"selected\": \"A\"\n    },\n    {\n      \"questionId\": 2,\n      \"selected\": \"C\"\n    },\n    {\n      \"questionId\": 3,\n      \"selected\": \"B\"\n    },\n    {\n      \"questionId\": 4,\n      \"selected\": \"D\"\n    },\n    {\n      \"questionId\": 5,\n      \"selected\": \"A\"\n    },\n    {\n      \"questionId\": 6,\n      \"selected\": \"B\"\n    },\n    {\n      \"questionId\": 7,\n      \"selected\": \"C\"\n    },\n    {\n      \"questionId\": 8,\n      \"selected\": \"D\"\n    }\n  ],\n  \"weaknessResponses\": [\n    {\n      \"questionId\": 1,\n      \"selected\": \"A\"\n    },\n    {\n      \"questionId\": 2,\n      \"selected\": \"B\"\n    },\n    {\n      \"questionId\": 3,\n      \"selected\": \"C\"\n    },\n    {\n      \"questionId\": 4,\n      \"selected\": \"D\"\n    },\n    {\n      \"questionId\": 5,\n      \"selected\": \"A\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/api/assessment/submit",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "assessment", "submit"]
+            },
+            "description": "Submit completed assessment and receive personality results"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Assessment Results",
+      "item": [
+        {
+          "name": "Get Latest Results",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/api/assessment/results/USER_ID",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "assessment", "results", "USER_ID"]
+            },
+            "description": "Get user's latest assessment results"
+          }
+        },
+        {
+          "name": "Get Assessment History",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/api/assessment/history/USER_ID?limit=10",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "assessment", "history", "USER_ID"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Get user's previous assessment results (paginated)"
+          }
+        },
+        {
+          "name": "Check Completion Status",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/api/assessment/check-completion/USER_ID",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "assessment", "check-completion", "USER_ID"]
+            },
+            "description": "Check if user has completed the assessment"
+          }
+        },
+        {
+          "name": "Delete Assessment Result",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/api/assessment/results/RESPONSE_ID",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "assessment", "results", "RESPONSE_ID"]
+            },
+            "description": "Delete an assessment result (owner or admin only)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin Statistics",
+      "item": [
+        {
+          "name": "Get Assessment Statistics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/api/assessment/statistics",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "assessment", "statistics"]
+            },
+            "description": "Get overall assessment statistics (admin only)"
+          }
+        },
+        {
+          "name": "Get Users by Personality",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ADMIN_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{BASE_URL}}/api/assessment/personality/Lion",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api", "assessment", "personality", "Lion"]
+            },
+            "description": "Get all users with a specific dominant personality type (admin only). Valid types: Butterfly, Dove, Lion, Owl"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "http://localhost:5000",
+      "type": "string"
+    },
+    {
+      "key": "TOKEN",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "ADMIN_TOKEN",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "USER_ID",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "RESPONSE_ID",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
