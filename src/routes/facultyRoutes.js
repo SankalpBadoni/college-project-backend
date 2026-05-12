@@ -18,6 +18,7 @@ import {
   listRatings,
   submitRating,
   updateCourseOverviewItem,
+  createCourseItem,
   updateAssessmentItem,
   updateLiveClass,
   updateMaterial,
@@ -31,6 +32,7 @@ const router = Router();
 router.get("/dashboard", protectFaculty, getDashboard);
 router.get("/me", protectFaculty, getMe);
 router.patch("/me", protectFaculty, updateMe);
+router.post("/me/courses", protectFaculty, createCourseItem);
 router.patch("/me/courses/:programId/overview", protectFaculty, updateCourseOverviewItem);
 router.get("/me/courses/:programId/structure", protectFaculty, getCourseStructureItem);
 

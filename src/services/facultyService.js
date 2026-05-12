@@ -35,7 +35,7 @@ const recalculateFacultyRatingSummary = async (facultyId) => {
 
 export const getFacultyDashboard = async (facultyId) => {
   const faculty = await Faculty.findById(facultyId);
-  const programs = await Program.find({ faculty: facultyId }).select("_id title type status startDate");
+  const programs = await Program.find({ faculty: facultyId }).select("_id title description type status startDate durationHours");
   const programIds = programs.map((program) => program._id);
   const recentEnrollments = await Enrollment.find({ program: { $in: programIds } })
     .populate("student", "fullName email profile")
@@ -83,6 +83,7 @@ export const getFacultyDashboard = async (facultyId) => {
       averageRating,
       ratingCount
     },
+    programs,
     recentEnrollments,
     upcomingLiveClasses,
     ratings
@@ -94,10 +95,24 @@ export const updateFacultyProfile = async (facultyId, updates) => {
   return Faculty.findByIdAndUpdate(facultyId, payload, { new: true, runValidators: true }).select("-password");
 };
 
+export const createCourse = async (facultyId, payload) => {
+  return Program.create({
+    faculty: facultyId,
+    type: payload.type || "course",
+    status: payload.status || "published",
+    ...pick(payload, [
+      "title", "description", "competencies", "preferredJobTags", "minYearEligible", 
+      "maxYearEligible", "startDate", "applicationDeadline", "durationHours", "maxStudents",
+      "creditCost", "priceInr", "courseOverview", "courseIntroduction", "courseProgress", "certification"
+    ])
+  });
+};
+
 export const updateCourseOverview = async (facultyId, programId, updates) => {
   const payload = pick(updates, [
     "title",
     "description",
+    "type",
     "courseOverview",
     "courseIntroduction",
     "courseProgress",
@@ -116,14 +131,14 @@ export const updateCourseOverview = async (facultyId, programId, updates) => {
     "isActive"
   ]);
 
-  return Program.findOneAndUpdate({ _id: programId, faculty: facultyId, type: "course" }, payload, {
+  return Program.findOneAndUpdate({ _id: programId, faculty: facultyId }, payload, {
     new: true,
     runValidators: true
   }).populate("faculty employer linkedJobs");
 };
 
 export const getCourseStructure = async (facultyId, programId) => {
-  const course = await Program.findOne({ _id: programId, faculty: facultyId, type: "course" })
+  const course = await Program.findOne({ _id: programId, faculty: facultyId })
     .populate("faculty employer linkedJobs")
     .populate({
       path: "linkedJobs",
@@ -134,10 +149,10 @@ export const getCourseStructure = async (facultyId, programId) => {
     return null;
   }
 
-  const modules = await CourseModule.find({ faculty: facultyId, program: programId })
+  const modules = await CourseModule.find({ program: programId })
     .populate("program", "title type")
     .sort({ order: 1, createdAt: 1 });
-  const materials = await CourseMaterial.find({ faculty: facultyId, program: programId })
+  const materials = await CourseMaterial.find({ program: programId })
     .populate("program", "title type")
     .populate("module", "title")
     .sort({ createdAt: 1 });

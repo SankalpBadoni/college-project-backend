@@ -1,6 +1,19 @@
 import JobPosting from "../models/JobPosting.js";
 import JobApplication from "../models/JobApplication.js";
 
+export const getJobMetadata = async (req, res, next) => {
+  return res.json({
+    industries: [
+      "Information Technology", "Finance", "Healthcare", "Manufacturing", 
+      "Retail", "Education", "Consulting", "Design & Arts"
+    ],
+    departments: [
+      "Engineering", "Design", "Product", "Marketing", "Sales", 
+      "Human Resources", "Finance", "Operations", "Customer Support"
+    ]
+  });
+};
+
 export const listJobPostings = async (req, res, next) => {
   try {
     const now = new Date();
@@ -12,6 +25,21 @@ export const listJobPostings = async (req, res, next) => {
       .sort({ createdAt: -1 });
 
     return res.json(postings);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const getJobById = async (req, res, next) => {
+  try {
+    const job = await JobPosting.findById(req.params.id)
+      .populate("employer", "companyName profileImage")
+      .populate("requiredCompetencyLinks preferredCompetencyLinks linkedPrograms", "title type name");
+    
+    if (!job) {
+      return res.status(404).json({ message: "Job not found" });
+    }
+    return res.json(job);
   } catch (error) {
     return next(error);
   }

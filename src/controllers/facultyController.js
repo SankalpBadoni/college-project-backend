@@ -20,7 +20,8 @@ import {
   updateCourseModule,
   updateFacultyProfile,
   updateLiveClassSession,
-  upsertAssessmentScore
+  upsertAssessmentScore,
+  createCourse
 } from "../services/facultyService.js";
 
 export const getDashboard = async (req, res, next) => {
@@ -56,6 +57,15 @@ export const updateCourseOverviewItem = async (req, res, next) => {
     }
 
     return res.json({ message: "Course overview updated", course });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const createCourseItem = async (req, res, next) => {
+  try {
+    const course = await createCourse(req.faculty._id, req.body);
+    return res.status(201).json({ message: "Course created successfully", course });
   } catch (error) {
     return next(error);
   }
