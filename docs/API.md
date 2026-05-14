@@ -422,7 +422,16 @@
 ### 51. Upload Course Material
 - `POST /api/faculty/me/materials`
 - Auth: Bearer token
-- Body:
+- Content-Type: `multipart/form-data` (recommended)
+- Multipart fields:
+  - `file`: PDF/PPT/DOC/video file (optional)
+  - `program`: `PROGRAM_OBJECT_ID` (required)
+  - `title`: material title (required)
+  - `description`, `moduleName`, `fileType` (optional)
+- Notes:
+  - When `file` is provided, backend uploads to AWS S3 and sets `fileUrl` automatically.
+  - If `file` is not provided, you can still send `fileUrl` in JSON body.
+- JSON Body example (without file upload):
 ```json
 {
   "program": "PROGRAM_OBJECT_ID",
