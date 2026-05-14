@@ -13,6 +13,7 @@ import {
   listFacultyRatings,
   listLiveClassSessions,
   getCourseStructure,
+  getCourseMaterialById,
   submitFacultyRating,
   updateAssessment,
   updateCourseOverview,
@@ -23,6 +24,7 @@ import {
   upsertAssessmentScore,
   createCourse
 } from "../services/facultyService.js";
+import { deleteFileFromS3, inferMaterialTypeFromMimeType, uploadBufferToS3 } from "../utils/aws.js";
 
 export const getDashboard = async (req, res, next) => {
   try {
@@ -85,10 +87,33 @@ export const getCourseStructureItem = async (req, res, next) => {
 };
 
 export const createMaterial = async (req, res, next) => {
+  let uploadedFileUrl;
+
   try {
-    const material = await createCourseMaterial(req.faculty._id, req.body);
+    const payload = { ...req.body };
+
+    if (req.file) {
+      const uploadResult = await uploadBufferToS3({
+        buffer: req.file.buffer,
+        originalName: req.file.originalname,
+        mimeType: req.file.mimetype,
+        folder: `course-materials/${req.faculty._id}/${payload.program || "general"}`
+      });
+
+      payload.fileUrl = uploadResult.fileUrl;
+      uploadedFileUrl = uploadResult.fileUrl;
+      if (!payload.fileType) {
+        payload.fileType = inferMaterialTypeFromMimeType(req.file.mimetype);
+      }
+    }
+
+    const material = await createCourseMaterial(req.faculty._id, payload);
     return res.status(201).json({ message: "Course material uploaded", material });
   } catch (error) {
+    if (uploadedFileUrl) {
+      await deleteFileFromS3(uploadedFileUrl).catch(() => {});
+    }
+
     return next(error);
   }
 };
@@ -102,14 +127,45 @@ export const listMaterials = async (req, res, next) => {
 };
 
 export const updateMaterial = async (req, res, next) => {
+  let uploadedFileUrl;
+
   try {
-    const material = await updateCourseMaterial(req.faculty._id, req.params.materialId, req.body);
+    const existingMaterial = await getCourseMaterialById(req.faculty._id, req.params.materialId);
+    if (!existingMaterial) {
+      return res.status(404).json({ message: "Material not found" });
+    }
+
+    const payload = { ...req.body };
+    if (req.file) {
+      const uploadResult = await uploadBufferToS3({
+        buffer: req.file.buffer,
+        originalName: req.file.originalname,
+        mimeType: req.file.mimetype,
+        folder: `course-materials/${req.faculty._id}/${existingMaterial.program?._id || "general"}`
+      });
+
+      payload.fileUrl = uploadResult.fileUrl;
+      uploadedFileUrl = uploadResult.fileUrl;
+      if (!payload.fileType) {
+        payload.fileType = inferMaterialTypeFromMimeType(req.file.mimetype);
+      }
+    }
+
+    const material = await updateCourseMaterial(req.faculty._id, req.params.materialId, payload);
     if (!material) {
       return res.status(404).json({ message: "Material not found" });
     }
 
+    if (uploadedFileUrl && existingMaterial.fileUrl && existingMaterial.fileUrl !== uploadedFileUrl) {
+      await deleteFileFromS3(existingMaterial.fileUrl).catch(() => {});
+    }
+
     return res.json({ message: "Course material updated", material });
   } catch (error) {
+    if (uploadedFileUrl) {
+      await deleteFileFromS3(uploadedFileUrl).catch(() => {});
+    }
+
     return next(error);
   }
 };
@@ -120,6 +176,8 @@ export const deleteMaterial = async (req, res, next) => {
     if (!material) {
       return res.status(404).json({ message: "Material not found" });
     }
+
+    await deleteFileFromS3(material.fileUrl).catch(() => {});
 
     return res.json({ message: "Course material deleted" });
   } catch (error) {

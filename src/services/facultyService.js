@@ -171,6 +171,9 @@ export const getCourseStructure = async (facultyId, programId) => {
 export const createCourseMaterial = async (facultyId, payload) =>
   CourseMaterial.create({ faculty: facultyId, ...payload });
 
+export const getCourseMaterialById = async (facultyId, materialId) =>
+  CourseMaterial.findOne({ _id: materialId, faculty: facultyId }).populate("program", "title type");
+
 export const listCourseMaterials = async (facultyId, filters = {}) => {
   const query = { faculty: facultyId };
   if (filters.programId) {

@@ -26,6 +26,7 @@ import {
   updateModule
 } from "../controllers/facultyController.js";
 import { protectFaculty, protectStudent } from "../middleware/auth.js";
+import { uploadCourseMaterialFile } from "../middleware/upload.js";
 
 const router = Router();
 
@@ -36,9 +37,9 @@ router.post("/me/courses", protectFaculty, createCourseItem);
 router.patch("/me/courses/:programId/overview", protectFaculty, updateCourseOverviewItem);
 router.get("/me/courses/:programId/structure", protectFaculty, getCourseStructureItem);
 
-router.post("/me/materials", protectFaculty, createMaterial);
+router.post("/me/materials", protectFaculty, uploadCourseMaterialFile, createMaterial);
 router.get("/me/materials", protectFaculty, listMaterials);
-router.patch("/me/materials/:materialId", protectFaculty, updateMaterial);
+router.patch("/me/materials/:materialId", protectFaculty, uploadCourseMaterialFile, updateMaterial);
 router.delete("/me/materials/:materialId", protectFaculty, deleteMaterial);
 
 router.post("/me/modules", protectFaculty, createModule);
