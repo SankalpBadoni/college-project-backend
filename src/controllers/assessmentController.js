@@ -1,4 +1,6 @@
 import AssessmentResponse from "../models/AssessmentResponse.js";
+import Student from "../models/Student.js";
+import { Competency } from "../models/Competency.js";
 import * as assessmentService from "../services/assessmentService.js";
 import {
   calculateScores,
@@ -11,6 +13,10 @@ import {
   getCareerRecommendations,
   generateExecutiveSummary,
 } from "../utils/personalityAnalysis.js";
+import {
+  PERSONALITY_COMPETENCY_MAP,
+  generateRandomCompetencyScores,
+} from "../utils/personalityCompetencyMap.js";
 
 /**
  * GET /api/assessment/questions
@@ -82,11 +88,45 @@ export const submitAssessment = async (req, res, next) => {
       status: "completed",
     };
 
+    // Check if this is the student's FIRST assessment (for credits)
+    const isFirstAssessment =
+      !(await assessmentService.hasUserCompletedAssessment(userId));
+
     // Save to database
     const savedResponse = await assessmentService.createOrUpdateResponse(
       userId,
       responseData
     );
+
+    // --- Award 1000 credits on FIRST assessment ---
+    let creditsAwarded = 0;
+    if (isFirstAssessment) {
+      await Student.findByIdAndUpdate(userId, { $inc: { credits: 1000 } });
+      creditsAwarded = 1000;
+    }
+
+    // --- Assign competency scores based on dominant personality ---
+    const competencyScores = generateRandomCompetencyScores(
+      dominantInfo.dominantType
+    );
+    const competencyNames = competencyScores.map((c) => c.name);
+    const competencyDocs = await Competency.find({
+      name: { $in: competencyNames },
+    }).lean();
+
+    const competencyArray = competencyScores
+      .map((cs) => {
+        const doc = competencyDocs.find((d) => d.name === cs.name);
+        if (!doc) return null;
+        return { competency: doc._id, score: cs.score, lastUpdated: new Date() };
+      })
+      .filter(Boolean);
+
+    if (competencyArray.length > 0) {
+      await Student.findByIdAndUpdate(userId, {
+        competency: competencyArray,
+      });
+    }
 
     // Generate executive summary
     const executiveSummary = generateExecutiveSummary(
@@ -120,6 +160,8 @@ export const submitAssessment = async (req, res, next) => {
         },
         careerSuggestions: careerRecommendations,
         executiveSummary,
+        competencyScores,
+        creditsAwarded,
         submittedAt: savedResponse.createdAt,
       },
     });

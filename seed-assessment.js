@@ -1,10 +1,6 @@
-/**
- * Seed Assessment Questions into Database
- * Run: node seed-assessment.js
- */
-
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import connectDB from "./src/config/db.js";
 import AssessmentQuestion from "./src/models/AssessmentQuestion.js";
 import { assessmentQuestions } from "./src/data/assessmentQuestionsData.js";
 
@@ -14,7 +10,7 @@ const seedAssessmentQuestions = async () => {
   try {
     // Connect to MongoDB
     console.log("🔄 Connecting to MongoDB...");
-    await mongoose.connect(process.env.MONGODB_URI);
+    await connectDB();
     console.log("✅ Connected to MongoDB");
 
     // Clear existing questions

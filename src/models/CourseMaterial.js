@@ -14,7 +14,7 @@ const courseMaterialSchema = new mongoose.Schema(
     materialKind: { type: String, enum: ["ppt", "pdf", "infographic_static", "infographic_animated", "video", "live_project", "assessment", "quiz", "assignment", "notes", "other"], default: "other" },
     assetStyle: { type: String, enum: ["static", "animated", "interactive", "document", "video", "live"], default: "document" },
     isVisualRelief: { type: Boolean, default: false },
-    visibility: { type: String, enum: ["students", "faculty", "public"], default: "students" },
+    visibility: { type: Array, default: ["students", "faculty", "public"] },
     visualElements: {
       previewImageUrl: { type: String, trim: true },
       thumbnailUrl: { type: String, trim: true },

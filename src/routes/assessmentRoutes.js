@@ -1,6 +1,6 @@
 import express from "express";
 import * as assessmentController from "../controllers/assessmentController.js";
-import { protect } from "../middleware/auth.js";
+import { protectAccount as protect } from "../middleware/auth.js";
 import {
   validateAssessmentSubmission,
   validateQuestionsQuery,
