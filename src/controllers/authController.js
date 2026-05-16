@@ -27,7 +27,7 @@ const loginWithModel = async (res, model, findQuery, password, responseKey, resp
 
 export const registerStudent = async (req, res, next) => {
   try {
-    const { fullName, email, password, phone, profile, preferredJobs = [] } = req.body;
+    const { fullName, email, password, phone, profile, preferredJobs = [], strengths, weaknesses } = req.body;
 
     if (!profile?.collegeId || !profile?.studentId) {
       return res.status(400).json({ message: "collegeId and studentId are mandatory" });
@@ -45,7 +45,9 @@ export const registerStudent = async (req, res, next) => {
       password: hashedPassword,
       phone,
       profile,
-      preferredJobs
+      preferredJobs,
+      strengths: strengths || {},
+      weaknesses: weaknesses || {}
     });
 
     return res.status(201).json({

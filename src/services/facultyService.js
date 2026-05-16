@@ -101,7 +101,7 @@ export const createCourse = async (facultyId, payload) => {
     type: payload.type || "course",
     status: payload.status || "published",
     ...pick(payload, [
-      "title", "description", "competencies", "preferredJobTags", "minYearEligible", 
+      "title", "description", "industry", "domain", "competencies", "preferredJobTags", "minYearEligible", 
       "maxYearEligible", "startDate", "applicationDeadline", "durationHours", "maxStudents",
       "creditCost", "priceInr", "courseOverview", "courseIntroduction", "courseProgress", "certification"
     ])

@@ -45,6 +45,14 @@ const studentSchema = new mongoose.Schema(
     preferredJobs: { type: [preferredJobSchema], default: [] },
     favoriteItems: { type: [studentProgramItemSchema], default: [] },
     competency: { type: [studentCompetencySchema], default: [] },
+    strengths: {
+      technical: [{ type: mongoose.Schema.Types.ObjectId, ref: "Competency" }],
+      behavioral: [{ type: mongoose.Schema.Types.ObjectId, ref: "Competency" }]
+    },
+    weaknesses: {
+      technical: [{ type: mongoose.Schema.Types.ObjectId, ref: "Competency" }],
+      behavioral: [{ type: mongoose.Schema.Types.ObjectId, ref: "Competency" }]
+    },
     careerTestLatestAttempt: { type: mongoose.Schema.Types.ObjectId, ref: "CareerTestAttempt" }
   },
   { timestamps: true }

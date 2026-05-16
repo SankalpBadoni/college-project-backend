@@ -101,7 +101,8 @@ export const uploadBufferToS3 = async ({ buffer, originalName, mimeType, folder 
       Bucket: AWS_BUCKET_NAME,
       Key: key,
       Body: buffer,
-      ContentType: mimeType
+      ContentType: mimeType,
+      ACL: "public-read"
     })
   );
 

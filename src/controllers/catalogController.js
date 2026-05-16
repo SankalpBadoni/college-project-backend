@@ -118,3 +118,23 @@ export const listUpcomingPrograms = async (req, res, next) => {
     return next(error);
   }
 };
+export const getProgramModules = async (req, res, next) => {
+  try {
+    const modules = await CourseModule.find({ program: req.params.programId })
+      .sort({ order: 1, createdAt: 1 });
+    return res.json(modules);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const getModuleMaterials = async (req, res, next) => {
+  try {
+    const { programId, moduleId } = req.params;
+    const materials = await CourseMaterial.find({ program: programId, module: moduleId })
+      .sort({ createdAt: 1 });
+    return res.json(materials);
+  } catch (error) {
+    return next(error);
+  }
+};
