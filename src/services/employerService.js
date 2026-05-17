@@ -237,6 +237,7 @@ export const createEmployerLiveProject = async (employerId, payload) => {
     description: payload.description,
     type: "live_project",
     status: payload.status || "published",
+    coverImageUrl: payload.coverImageUrl,
     competencies: payload.competencies || [],
     preferredJobTags: payload.preferredJobTags || [],
     employerPreferred: Boolean(payload.employerPreferred),

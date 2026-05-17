@@ -15,12 +15,15 @@ import {
   getMe
 } from "../controllers/employerController.js";
 import { protectEmployer } from "../middleware/auth.js";
+import { uploadGenericFile } from "../middleware/upload.js";
+import { uploadGenericFileController } from "../controllers/facultyController.js";
 
 const router = Router();
 
 router.get("/dashboard", protectEmployer, getDashboard);
 router.get("/me", protectEmployer, getMe);
 router.patch("/me", protectEmployer, updateMe);
+router.post("/me/upload", protectEmployer, uploadGenericFile, uploadGenericFileController);
 
 router.post("/jobs", protectEmployer, createPosting);
 router.get("/jobs", protectEmployer, listPostings);

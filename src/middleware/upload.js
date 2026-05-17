@@ -27,3 +27,12 @@ const materialUpload = multer({
 });
 
 export const uploadCourseMaterialFile = materialUpload.single("file");
+
+const genericUpload = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 50 * 1024 * 1024
+  }
+});
+
+export const uploadGenericFile = genericUpload.single("file");

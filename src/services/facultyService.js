@@ -103,7 +103,8 @@ export const createCourse = async (facultyId, payload) => {
     ...pick(payload, [
       "title", "description", "industry", "domain", "competencies", "preferredJobTags", "minYearEligible", 
       "maxYearEligible", "startDate", "applicationDeadline", "durationHours", "maxStudents",
-      "creditCost", "priceInr", "courseOverview", "courseIntroduction", "courseProgress", "certification"
+      "creditCost", "priceInr", "courseOverview", "courseIntroduction", "courseProgress", "certification",
+      "coverImageUrl"
     ])
   });
 };
@@ -128,7 +129,8 @@ export const updateCourseOverview = async (facultyId, programId, updates) => {
     "creditCost",
     "priceInr",
     "status",
-    "isActive"
+    "isActive",
+    "coverImageUrl"
   ]);
 
   return Program.findOneAndUpdate({ _id: programId, faculty: facultyId }, payload, {

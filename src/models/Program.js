@@ -7,6 +7,7 @@ const programSchema = new mongoose.Schema(
     description: { type: String, required: true, trim: true },
     type: { type: String, required: true, enum: ["course", "live_course", "assessment", "live_project"] },
     status: { type: String, default: "published", enum: ["draft", "published", "archived"] },
+    coverImageUrl: { type: String, trim: true },
     faculty: { type: mongoose.Schema.Types.ObjectId, ref: "Faculty" },
     industry: { type: mongoose.Schema.Types.ObjectId, ref: "Industry" },
     domain: { type: mongoose.Schema.Types.ObjectId, ref: "Domain" },

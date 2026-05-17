@@ -330,3 +330,22 @@ export const submitRating = async (req, res, next) => {
     return next(error);
   }
 };
+
+export const uploadGenericFileController = async (req, res, next) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
+
+    const uploadResult = await uploadBufferToS3({
+      buffer: req.file.buffer,
+      originalName: req.file.originalname,
+      mimeType: req.file.mimetype,
+      folder: `course-assets/${req.faculty._id}`
+    });
+
+    return res.json({ fileUrl: uploadResult.fileUrl });
+  } catch (error) {
+    return next(error);
+  }
+};

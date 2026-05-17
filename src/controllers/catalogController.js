@@ -36,6 +36,7 @@ export const listPrograms = async (req, res, next) => {
 
     const programs = await Program.find(filter)
       .populate("faculty", "fullName bio expertise experienceYears completedPrograms")
+      .populate("industry", "name")
       .sort({ createdAt: -1 });
 
     return res.json(programs);
@@ -46,10 +47,9 @@ export const listPrograms = async (req, res, next) => {
 
 export const getProgramDetails = async (req, res, next) => {
   try {
-    const program = await Program.findById(req.params.programId).populate(
-      "faculty",
-      "fullName bio expertise experienceYears completedPrograms"
-    );
+    const program = await Program.findById(req.params.programId)
+      .populate("faculty", "fullName bio expertise experienceYears completedPrograms")
+      .populate("industry", "name");
 
     if (!program) {
       return res.status(404).json({ message: "Program not found" });

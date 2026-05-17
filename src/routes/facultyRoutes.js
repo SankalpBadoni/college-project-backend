@@ -23,10 +23,11 @@ import {
   updateLiveClass,
   updateMaterial,
   updateMe,
-  updateModule
+  updateModule,
+  uploadGenericFileController
 } from "../controllers/facultyController.js";
 import { protectFaculty, protectStudent } from "../middleware/auth.js";
-import { uploadCourseMaterialFile } from "../middleware/upload.js";
+import { uploadCourseMaterialFile, uploadGenericFile } from "../middleware/upload.js";
 
 const router = Router();
 
@@ -37,6 +38,7 @@ router.post("/me/courses", protectFaculty, createCourseItem);
 router.patch("/me/courses/:programId/overview", protectFaculty, updateCourseOverviewItem);
 router.get("/me/courses/:programId/structure", protectFaculty, getCourseStructureItem);
 
+router.post("/me/upload", protectFaculty, uploadGenericFile, uploadGenericFileController);
 router.post("/me/materials", protectFaculty, uploadCourseMaterialFile, createMaterial);
 router.get("/me/materials", protectFaculty, listMaterials);
 router.patch("/me/materials/:materialId", protectFaculty, uploadCourseMaterialFile, updateMaterial);
