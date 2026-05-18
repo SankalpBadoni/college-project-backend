@@ -122,11 +122,19 @@ export const submitAssessment = async (req, res, next) => {
       })
       .filter(Boolean);
 
+    const studentUpdatePayload = {
+      assessmentResult: {
+        dominantType: dominantInfo.dominantType,
+        secondaryType: dominantInfo.secondaryType,
+        completedAt: new Date()
+      }
+    };
+
     if (competencyArray.length > 0) {
-      await Student.findByIdAndUpdate(userId, {
-        competency: competencyArray,
-      });
+      studentUpdatePayload.competency = competencyArray;
     }
+
+    await Student.findByIdAndUpdate(userId, studentUpdatePayload);
 
     // Generate executive summary
     const executiveSummary = generateExecutiveSummary(

@@ -53,7 +53,12 @@ const studentSchema = new mongoose.Schema(
       technical: [{ type: mongoose.Schema.Types.ObjectId, ref: "Competency" }],
       behavioral: [{ type: mongoose.Schema.Types.ObjectId, ref: "Competency" }]
     },
-    careerTestLatestAttempt: { type: mongoose.Schema.Types.ObjectId, ref: "CareerTestAttempt" }
+    careerTestLatestAttempt: { type: mongoose.Schema.Types.ObjectId, ref: "CareerTestAttempt" },
+    assessmentResult: {
+      dominantType: { type: String, enum: ["Butterfly", "Dove", "Lion", "Owl"] },
+      secondaryType: { type: String, enum: ["Butterfly", "Dove", "Lion", "Owl"] },
+      completedAt: { type: Date }
+    }
   },
   { timestamps: true }
 );
