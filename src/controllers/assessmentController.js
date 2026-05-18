@@ -204,10 +204,52 @@ export const getAssessmentResults = async (req, res, next) => {
       });
     }
 
+    // Fetch student to get competency scores
+    const student = await Student.findById(userId).populate("competency.competency");
+    const competencyScores = student?.competency?.map(c => ({
+      name: c.competency?.name || "",
+      score: c.score
+    })).filter(c => c.name) || [];
+
+    // Generate personality analysis on the fly
+    const analysis = generatePersonalityAnalysis(
+      response.dominantType,
+      response.secondaryType,
+      response.percentages
+    );
+
+    // Build the formatted results matching the submit endpoint structure exactly!
+    const resultsData = {
+      assessmentId: response._id,
+      scores: response.scores,
+      percentages: response.percentages,
+      dominantType: response.dominantType,
+      secondaryType: response.secondaryType,
+      personalityAnalysis: {
+        dominant: {
+          type: analysis.dominantPersonality.type,
+          summary: analysis.dominantPersonality.summary,
+          strengths: analysis.dominantPersonality.strengths,
+          weaknesses: analysis.dominantPersonality.weaknesses,
+        },
+        secondary: {
+          type: analysis.secondaryPersonality.type,
+          summary: analysis.secondaryPersonality.summary,
+        },
+        blend: analysis.blendedProfile,
+      },
+      careerSuggestions: {
+        recommended: response.careerSuggestions
+      },
+      competencyScores,
+      creditsAwarded: 0,
+      submittedAt: response.createdAt,
+    };
+
     res.status(200).json({
       success: true,
       message: "Assessment results retrieved successfully",
-      data: response,
+      data: resultsData,
     });
   } catch (error) {
     next(error);
