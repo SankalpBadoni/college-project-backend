@@ -39,7 +39,9 @@ const studentSchema = new mongoose.Schema(
       courseName: { type: String, required: true, trim: true },
       yearOfCourse: { type: Number, required: true, min: 1, max: 6 },
       stream: { type: String, trim: true },
-      gender: { type: String, enum: ["Male", "Female", "Other"], trim: true }
+      gender: { type: String, enum: ["Male", "Female", "Other"], trim: true },
+      careerIcon: { type: String, default: "💼" },
+      dreamJobUrl: { type: String, default: "" }
     },
     credits: { type: Number, default: 0, min: 0 },
     preferredJobs: { type: [preferredJobSchema], default: [] },

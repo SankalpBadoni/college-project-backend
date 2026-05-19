@@ -19,6 +19,7 @@ import liveProjectRoutes from "./routes/liveProjectRoutes.js";
 import liveCourseRoutes from "./routes/liveCourseRoutes.js";
 import assessmentRoutes from "./routes/assessmentRoutes.js";
 import taxonomyRoutes from "./routes/taxonomyRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorHandler.js";
 
 const app = express();
@@ -48,6 +49,7 @@ app.use("/api/live-projects", liveProjectRoutes);
 app.use("/api/live-courses", liveCourseRoutes);
 app.use("/api/assessment", assessmentRoutes);
 app.use("/api/taxonomy", taxonomyRoutes);
+app.use("/api/admin", adminRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
