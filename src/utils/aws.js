@@ -41,7 +41,11 @@ const extensionByMimeType = {
   "video/mp4": ".mp4",
   "video/webm": ".webm",
   "video/quicktime": ".mov",
-  "video/x-matroska": ".mkv"
+  "video/x-matroska": ".mkv",
+  "image/jpeg": ".jpg",
+  "image/png": ".png",
+  "image/webp": ".webp",
+  "image/gif": ".gif"
 };
 
 const sanitizeSegment = (value) =>
@@ -80,6 +84,10 @@ export const inferMaterialTypeFromMimeType = (mimeType = "") => {
 
   if (mimeType.startsWith("video/")) {
     return "video";
+  }
+
+  if (mimeType.startsWith("image/")) {
+    return mimeType === "image/gif" ? "infographic_animated" : "infographic_static";
   }
 
   return "other";

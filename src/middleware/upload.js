@@ -9,7 +9,11 @@ const ALLOWED_MIME_TYPES = new Set([
   "video/mp4",
   "video/webm",
   "video/quicktime",
-  "video/x-matroska"
+  "video/x-matroska",
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/gif"
 ]);
 
 const materialUpload = multer({
@@ -19,7 +23,7 @@ const materialUpload = multer({
   },
   fileFilter: (req, file, cb) => {
     if (!ALLOWED_MIME_TYPES.has(file.mimetype)) {
-      return cb(new Error("Unsupported file type. Allowed types: PDF, PPT/PPTX, DOC/DOCX, MP4, WEBM, MOV, MKV."));
+      return cb(new Error("Unsupported file type. Allowed types: PDF, PPT/PPTX, DOC/DOCX, MP4, WEBM, MOV, MKV, PNG, JPG/JPEG, WEBP, GIF."));
     }
 
     return cb(null, true);

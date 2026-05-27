@@ -92,6 +92,13 @@ export const createMaterial = async (req, res, next) => {
   try {
     const payload = { ...req.body };
 
+    // Safely parse nested visualElements keys sent via multipart/form-data
+    if (req.body["visualElements[thumbnailUrl]"]) {
+      payload.visualElements = { thumbnailUrl: req.body["visualElements[thumbnailUrl]"] };
+    } else if (req.body["visualElements.thumbnailUrl"]) {
+      payload.visualElements = { thumbnailUrl: req.body["visualElements.thumbnailUrl"] };
+    }
+
     if (req.file) {
       const uploadResult = await uploadBufferToS3({
         buffer: req.file.buffer,
