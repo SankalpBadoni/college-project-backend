@@ -1,0 +1,295 @@
+{
+    "industries": [
+        { "name": "IT & Technology" },
+        { "name": "Finance" },
+        { "name": "Healthcare" },
+        { "name": "Education" },
+        { "name": "Manufacturing" },
+        { "name": "Retail & E-Commerce" },
+        { "name": "Telecommunications" },
+        { "name": "Energy & Utilities" },
+        { "name": "Media & Entertainment" },
+        { "name": "Consulting" }
+    ],
+    "domains": [
+        { "name": "Software Engineering", "industryName": "IT & Technology" },
+        { "name": "Data Science", "industryName": "IT & Technology" },
+        { "name": "Cybersecurity", "industryName": "IT & Technology" },
+        { "name": "Cloud Computing", "industryName": "IT & Technology" },
+        { "name": "Investment Banking", "industryName": "Finance" },
+        { "name": "Risk Management", "industryName": "Finance" },
+        { "name": "Financial Analysis", "industryName": "Finance" },
+        { "name": "Clinical Operations", "industryName": "Healthcare" },
+        { "name": "Healthcare Informatics", "industryName": "Healthcare" },
+        { "name": "Curriculum Development", "industryName": "Education" },
+        { "name": "Instructional Design", "industryName": "Education" },
+        { "name": "Supply Chain Management", "industryName": "Manufacturing" },
+        { "name": "Quality Assurance", "industryName": "Manufacturing" },
+        { "name": "Digital Marketing", "industryName": "Retail & E-Commerce" },
+        { "name": "Customer Experience", "industryName": "Retail & E-Commerce" },
+        { "name": "Network Engineering", "industryName": "Telecommunications" },
+        { "name": "Renewable Energy", "industryName": "Energy & Utilities" },
+        { "name": "Content Production", "industryName": "Media & Entertainment" },
+        { "name": "Business Strategy", "industryName": "Consulting" }
+    ],
+    "subCompetencies": [
+        { "name": "React", "description": "Frontend JavaScript library" },
+        { "name": "Node.js", "description": "Backend JavaScript runtime" },
+        { "name": "Python", "description": "Programming language for automation and AI" },
+        { "name": "TensorFlow", "description": "Machine learning framework" },
+        { "name": "Docker", "description": "Containerization platform" },
+        { "name": "Kubernetes", "description": "Container orchestration platform" },
+        { "name": "AWS", "description": "Cloud computing platform" },
+        { "name": "Azure", "description": "Microsoft cloud platform" },
+        { "name": "Penetration Testing", "description": "Security testing methodology" },
+        { "name": "Firewall Management", "description": "Network security administration" },
+        { "name": "Financial Modeling", "description": "Building financial forecasting models" },
+        { "name": "Valuation", "description": "Business and asset valuation techniques" },
+        { "name": "SQL", "description": "Structured query language" },
+        { "name": "Power BI", "description": "Business intelligence visualization tool" },
+        { "name": "Tableau", "description": "Data visualization platform" },
+        { "name": "Lean Manufacturing", "description": "Process optimization methodology" },
+        { "name": "Six Sigma", "description": "Quality management methodology" },
+        { "name": "SEO", "description": "Search engine optimization" },
+        { "name": "Google Analytics", "description": "Web analytics platform" },
+        { "name": "Agile Methodology", "description": "Iterative project management approach" },
+        { "name": "Scrum", "description": "Agile framework" },
+        { "name": "Communication", "description": "Professional communication skills" },
+        { "name": "Problem Solving", "description": "Analytical and solution-oriented thinking" },
+        { "name": "Leadership", "description": "Team leadership and management" },
+        { "name": "Critical Thinking", "description": "Logical evaluation and reasoning" }
+    ],
+    "competencies": [
+        {
+            "name": "Full-Stack Development",
+            "type": "technical",
+            "domainNames": ["Software Engineering"],
+            "industryNames": ["IT & Technology"],
+            "subCompetencies": ["React", "Node.js", "SQL"]
+        },
+        {
+            "name": "Machine Learning",
+            "type": "technical",
+            "domainNames": ["Data Science", "Software Engineering"],
+            "industryNames": ["IT & Technology", "Healthcare"],
+            "subCompetencies": ["Python", "TensorFlow", "SQL"]
+        },
+        {
+            "name": "Cloud Architecture",
+            "type": "technical",
+            "domainNames": ["Cloud Computing", "Software Engineering"],
+            "industryNames": ["IT & Technology", "Telecommunications"],
+            "subCompetencies": ["AWS", "Azure", "Docker", "Kubernetes"]
+        },
+        {
+            "name": "Cybersecurity Analysis",
+            "type": "technical",
+            "domainNames": ["Cybersecurity", "Network Engineering"],
+            "industryNames": ["IT & Technology", "Telecommunications"],
+            "subCompetencies": ["Penetration Testing", "Firewall Management"]
+        },
+        {
+            "name": "Financial Analysis",
+            "type": "technical",
+            "domainNames": ["Financial Analysis", "Investment Banking"],
+            "industryNames": ["Finance", "Consulting"],
+            "subCompetencies": ["Financial Modeling", "Valuation", "Power BI"]
+        },
+        {
+            "name": "Business Intelligence",
+            "type": "technical",
+            "domainNames": ["Data Science", "Business Strategy"],
+            "industryNames": ["Finance", "Consulting", "Retail & E-Commerce"],
+            "subCompetencies": ["SQL", "Power BI", "Tableau"]
+        },
+        {
+            "name": "Digital Marketing Strategy",
+            "type": "technical",
+            "domainNames": ["Digital Marketing"],
+            "industryNames": ["Retail & E-Commerce", "Media & Entertainment"],
+            "subCompetencies": ["SEO", "Google Analytics"]
+        },
+        {
+            "name": "Quality Management",
+            "type": "technical",
+            "domainNames": ["Quality Assurance", "Supply Chain Management"],
+            "industryNames": ["Manufacturing"],
+            "subCompetencies": ["Lean Manufacturing", "Six Sigma"]
+        },
+        {
+            "name": "Agile Project Management",
+            "type": "behavioral",
+            "domainNames": ["Software Engineering", "Business Strategy"],
+            "industryNames": ["IT & Technology", "Consulting"],
+            "subCompetencies": ["Agile Methodology", "Scrum", "Leadership"]
+        },
+        {
+            "name": "Communication",
+            "type": "behavioral",
+            "domainNames": ["Business Strategy", "Instructional Design", "Customer Experience"],
+            "industryNames": ["Consulting", "Education", "Retail & E-Commerce"],
+            "subCompetencies": ["Communication"]
+        },
+        {
+            "name": "Problem Solving",
+            "type": "behavioral",
+            "domainNames": ["Software Engineering", "Risk Management", "Clinical Operations"],
+            "industryNames": ["IT & Technology", "Finance", "Healthcare"],
+            "subCompetencies": ["Problem Solving", "Critical Thinking"]
+        },
+        {
+            "name": "Leadership",
+            "type": "behavioral",
+            "domainNames": ["Business Strategy", "Supply Chain Management"],
+            "industryNames": ["Consulting", "Manufacturing"],
+            "subCompetencies": ["Leadership", "Communication"]
+        },
+        {
+            "name": "Creativity",
+            "type": "behavioral",
+            "domainNames": ["Instructional Design", "Content Production"],
+            "industryNames": ["Education", "Media & Entertainment"],
+            "subCompetencies": []
+        },
+        {
+            "name": "Adaptability",
+            "type": "behavioral",
+            "domainNames": ["Customer Experience", "Business Strategy"],
+            "industryNames": ["Retail & E-Commerce", "Consulting"],
+            "subCompetencies": []
+        },
+        {
+            "name": "Networking",
+            "type": "behavioral",
+            "domainNames": ["Digital Marketing", "Business Strategy"],
+            "industryNames": ["Retail & E-Commerce", "Consulting"],
+            "subCompetencies": []
+        },
+        {
+            "name": "Ideation",
+            "type": "behavioral",
+            "domainNames": ["Instructional Design", "Business Strategy"],
+            "industryNames": ["Education", "Consulting"],
+            "subCompetencies": []
+        },
+        {
+            "name": "Multitasking",
+            "type": "behavioral",
+            "domainNames": ["Clinical Operations", "Customer Experience"],
+            "industryNames": ["Healthcare", "Retail & E-Commerce"],
+            "subCompetencies": []
+        },
+        {
+            "name": "Teamwork",
+            "type": "behavioral",
+            "domainNames": ["Clinical Operations", "Software Engineering", "Business Strategy"],
+            "industryNames": ["Healthcare", "IT & Technology", "Consulting"],
+            "subCompetencies": []
+        },
+        {
+            "name": "Empathy",
+            "type": "behavioral",
+            "domainNames": ["Customer Experience", "Clinical Operations"],
+            "industryNames": ["Retail & E-Commerce", "Healthcare"],
+            "subCompetencies": []
+        },
+        {
+            "name": "Conflict Resolution",
+            "type": "behavioral",
+            "domainNames": ["Clinical Operations", "Business Strategy"],
+            "industryNames": ["Healthcare", "Consulting"],
+            "subCompetencies": []
+        },
+        {
+            "name": "Active Listening",
+            "type": "behavioral",
+            "domainNames": ["Customer Experience", "Clinical Operations"],
+            "industryNames": ["Retail & E-Commerce", "Healthcare"],
+            "subCompetencies": []
+        },
+        {
+            "name": "Patience",
+            "type": "behavioral",
+            "domainNames": ["Customer Experience", "Clinical Operations"],
+            "industryNames": ["Retail & E-Commerce", "Healthcare"],
+            "subCompetencies": []
+        },
+        {
+            "name": "Supportiveness",
+            "type": "behavioral",
+            "domainNames": ["Customer Experience", "Clinical Operations"],
+            "industryNames": ["Retail & E-Commerce", "Healthcare"],
+            "subCompetencies": []
+        },
+        {
+            "name": "Decision Making",
+            "type": "behavioral",
+            "domainNames": ["Business Strategy", "Risk Management"],
+            "industryNames": ["Consulting", "Finance"],
+            "subCompetencies": []
+        },
+        {
+            "name": "Strategic Thinking",
+            "type": "behavioral",
+            "domainNames": ["Business Strategy", "Financial Analysis"],
+            "industryNames": ["Consulting", "Finance"],
+            "subCompetencies": []
+        },
+        {
+            "name": "Persuasion",
+            "type": "behavioral",
+            "domainNames": ["Digital Marketing", "Business Strategy"],
+            "industryNames": ["Retail & E-Commerce", "Consulting"],
+            "subCompetencies": []
+        },
+        {
+            "name": "Initiative",
+            "type": "behavioral",
+            "domainNames": ["Business Strategy", "Software Engineering"],
+            "industryNames": ["Consulting", "IT & Technology"],
+            "subCompetencies": []
+        },
+        {
+            "name": "Competitiveness",
+            "type": "behavioral",
+            "domainNames": ["Business Strategy", "Financial Analysis"],
+            "industryNames": ["Consulting", "Finance"],
+            "subCompetencies": []
+        },
+        {
+            "name": "Analytical Thinking",
+            "type": "technical",
+            "domainNames": ["Data Science", "Financial Analysis", "Risk Management"],
+            "industryNames": ["IT & Technology", "Finance", "Consulting"],
+            "subCompetencies": []
+        },
+        {
+            "name": "Attention to Detail",
+            "type": "technical",
+            "domainNames": ["Software Engineering", "Financial Analysis", "Quality Assurance"],
+            "industryNames": ["IT & Technology", "Finance", "Manufacturing"],
+            "subCompetencies": []
+        },
+        {
+            "name": "Research",
+            "type": "technical",
+            "domainNames": ["Data Science", "Instructional Design", "Business Strategy"],
+            "industryNames": ["IT & Technology", "Education", "Consulting"],
+            "subCompetencies": []
+        },
+        {
+            "name": "Data Literacy",
+            "type": "technical",
+            "domainNames": ["Data Science", "Financial Analysis", "Healthcare Informatics"],
+            "industryNames": ["IT & Technology", "Finance", "Healthcare"],
+            "subCompetencies": []
+        },
+        {
+            "name": "Systematic Planning",
+            "type": "technical",
+            "domainNames": ["Software Engineering", "Supply Chain Management"],
+            "industryNames": ["IT & Technology", "Manufacturing"],
+            "subCompetencies": []
+        }
+    ]
+}

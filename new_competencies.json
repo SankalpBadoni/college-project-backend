@@ -1,0 +1,1156 @@
+{
+  "newSubCompetencies": [
+    { "name": "Algorithmic Code Optimization", "description": "Analyzing and refining code structures to improve execution speed and reduce memory consumption." },
+    { "name": "Cross-Browser & Platform Testing", "description": "Ensuring software layouts and functionalities perform consistently across diverse browsers and operating systems." },
+    { "name": "Architectural Design Patterns", "description": "Applying established software design templates to solve recurring engineering problems reliably." },
+    { "name": "Feature Engineering", "description": "Transforming raw data variables into descriptive features that enhance machine learning model performance." },
+    { "name": "Statistical Hypothesis Testing", "description": "Applying mathematical criteria to determine if data sample patterns reflect true population characteristics." },
+    { "name": "Exploratory Data Analysis", "description": "Summarizing main data characteristics through visual and statistical summaries to uncover hidden patterns." },
+    { "name": "Neural Network Architecture Design", "description": "Configuring layer structures, weights, and activation functions for deep learning models." },
+    { "name": "Hyperparameter Tuning", "description": "Optimizing external model configurations to maximize predictive accuracy and prevent overfitting." },
+    { "name": "Natural Language Tokenization", "description": "Breaking text documents into words, phrases, or symbols to prepare them for computational analysis." },
+    { "name": "Multi-Cloud Network Provisioning", "description": "Configuring secure virtual networks, subnets, and routing across distinct public cloud vendors." },
+    { "name": "Auto-scaling & Load Balancing Configuration", "description": "Setting performance thresholds to dynamically adjust compute capacity to match incoming traffic traffic." },
+    { "name": "Serverless Function Orchestration", "description": "Deploying event-driven, abstract computing logic without managing physical or virtual host resources." },
+    { "name": "Penetration Testing & Ethical Hacking", "description": "Simulating hostile cyberattacks on networks and applications to expose hidden system vulnerabilities." },
+    { "name": "Cryptographic Key Management", "description": "Administering generation, distribution, storage, and replacement policies for data encryption keys." },
+    { "name": "Threat Vector Analysis", "description": "Identifying and mapping potential paths that malicious actors could exploit to breach perimeter security." },
+    { "name": "Product Backlog Prioritization", "description": "Ranking user stories and feature requests based on business value, technical dependencies, and resources." },
+    { "name": "Market Opportunity Sizing", "description": "Calculating Addressable Markets using top-down and bottom-up financial data projection frameworks." },
+    { "name": "User Persona Development", "description": "Synthesizing target user demographics, behaviors, and motivations into functional behavioral profiles." },
+    { "name": "High-Fidelity Wireframing", "description": "Creating detailed, interactive digital layouts representing exact final interface UI dimensions." },
+    { "name": "Usability Testing & Session Recording", "description": "Observing user interactions with digital interfaces to identify point-of-use friction and confusion." },
+    { "name": "Design Systems Component Architecture", "description": "Building standardized, reusable UI elements that guarantee consistent branding across platforms." },
+    { "name": "CI/CD Pipeline Automation", "description": "Writing code-driven deployment workflows that compile, test, and ship software code iterations automatically." },
+    { "name": "Infrastructure as Code Implementation", "description": "Managing data centers and virtual networks using declarative, version-controlled scripts." },
+    { "name": "Log Aggregation & Telemetry Analysis", "description": "Consolidating distributed system outputs to monitor infrastructure health and pinpoint failures." },
+    { "name": "ITIL Framework Alignment", "description": "Applying standard service management lifecycles to align IT activities with corporate strategy." },
+    { "name": "SLA & KPI Tracking", "description": "Monitoring service desk response times, system availability metrics, and resolution rates." },
+    { "name": "Incident Root Cause Analysis", "description": "Investigating critical system outages using structural frameworks to prevent operational recurrence." },
+    { "name": "Enterprise Blueprint Alignment", "description": "Mapping IT assets, software dependencies, and data flows to long-term corporate growth roadmaps." },
+    { "name": "Technical Debt Evaluation", "description": "Assessing the systemic risks and future costs of shortcut software architectural choices." },
+    { "name": "Legacy System Modernization Strategies", "description": "Planning safe migrations or integrations for aging software platforms into contemporary environments." },
+    { "name": "Credit Underwriting Analysis", "description": "Evaluating individual and commercial loan applicant financials to determine credit default risk." },
+    { "name": "Retail Wealth Advisory", "description": "Matching consumer risk profiles with retail investment, savings, and portfolio management options." },
+    { "name": "Branch Cash Operations Management", "description": "Balancing physical vault reserves, teller allocations, and retail branch transaction protocols." },
+    { "name": "Syndicated Loan Structuring", "description": "Arranging large debt financing agreements backed by a consortium of participating banking entities." },
+    { "name": "Treasury Management Services", "description": "Optimizing corporate client working capital, corporate cash collection systems, and liquidity positions." },
+    { "name": "Trade Finance Instruments", "description": "Issuing letters of credit and standby guarantees to mitigate international import-export transaction risks." },
+    { "name": "M&A Financial Modeling", "description": "Constructing complex pro forma company valuations to forecast financial outcomes of corporate mergers." },
+    { "name": "LBO Valuation Modeling", "description": "Evaluating highly leveraged corporate acquisitions through structured debt and cash yield projections." },
+    { "name": "IPO Underwriting & Bookbuilding", "description": "Managing equity capital raises, primary share pricing vectors, and institutional investor bidding networks." },
+    { "name": "Multi-Asset Portfolio Construction", "description": "Allocating capital across global equities, fixed-income, commodities, and alternative assets based on yield targets." },
+    { "name": "Fiduciary Risk Compliance", "description": "Adhering to legal standards governing client trust accounts, wealth inheritance structures, and asset custody." },
+    { "name": "Alternative Asset Due Diligence", "description": "Investigating hedge fund, private equity, and real estate investment options for structural irregularities." },
+    { "name": "Variance Analysis & Budget Forecasting", "description": "Comparing actual corporate spend targets against projected allocations to identify operational variances." },
+    { "name": "Strategic Long-Range Planning", "description": "Modeling ten-year financial outlooks based on operational drivers, macroeconomic shifts, and capital investment." },
+    { "name": "Capital Expenditure Optimization", "description": "Assessing return on investment and payback periods for substantial corporate infrastructure investments." },
+    { "name": "GAAP & IFRS Financial Reconciliation", "description": "Ensuring corporate ledgers and financial statements fully comply with standard accounting rules." },
+    { "name": "Internal Controls & Sarbanes-Oxley Auditing", "description": "Testing organizational workflows to confirm absolute accuracy in external financial disclosure systems." },
+    { "name": "Tax Provision Ledger Management", "description": "Calculating deferred corporate tax assets and operational liabilities across sovereign tax legal bounds." },
+    { "name": "Value-at-Risk Stress Modeling", "description": "Using statistical scenarios to quantify maximal potential investment losses across defined horizons." },
+    { "name": "Enterprise Risk Governance Frameworks", "description": "Designing corporate policies to identify, categorize, and mitigate systemic institutional vulnerabilities." },
+    { "name": "Counterparty Credit Risk Mitigation", "description": "Evaluating trading partner default likelihoods and structuring protective collateral margin agreements." },
+    { "name": "Liquidity Buffer Management", "description": "Maintaining regulatory cash and liquid asset margins to weather unexpected wholesale funding calls." },
+    { "name": "FX & Interest Rate Derivative Hedging", "description": "Deploying swaps, options, and futures to insulate corporate balance sheets from currency volatility." },
+    { "name": "Yield Curve Analytics", "description": "Interpreting sovereign and corporate bond yield spreads to time institutional debt issues optimally." },
+    { "name": "API Banking Integration", "description": "Linking banking core engines with external platforms to enable instant, program-driven cash payments." },
+    { "name": "Automated KYC Verification Systems", "description": "Deploying identity and data matching models to screen incoming digital customer registrations rapidly." },
+    { "name": "Decentralized Ledger Asset Settlement", "description": "Configuring distributed ledger architectures to securely settle high-value cross-border financial tokens." },
+    { "name": "Anti-Money Laundering Transaction Monitoring", "description": "Deploying behavioral alerting scripts to flag patterns linked to illicit global asset routing." },
+    { "name": "Basel III & IV Capital Adequacy Reporting", "description": "Calculating weighted asset risk metrics to report capital stability compliance to regulatory monitors." },
+    { "name": "SEC & FinCEN Disclosure Management", "description": "Compiling and authenticating mandated regular financial market operation records for agency oversight." },
+    { "name": "Evidence-Based Clinical Diagnosis", "description": "Synthesizing patient telemetry, history, and current symptoms to select valid treatment paths." },
+    { "name": "Pharmacological Treatment Pathing", "description": "Determining exact medication dosages and identifying negative chemical interactions for patients." },
+    { "name": "Acute Patient Resuscitation", "description": "Executing critical life-support procedures under high-stress clinical environment emergency situations." },
+    { "name": "Inpatient Triage Prioritization", "description": "Assessing arriving emergency room patient conditions to route critical resources to severe cases first." },
+    { "name": "Advanced Wound Care Management", "description": "Treating severe physical trauma incisions using specialized sterile barriers and negative pressure tools." },
+    { "name": "Electronic Health Record Documentation Compliance", "description": "Logging exact medication, vitals, and provider actions within legally auditable medical interfaces." },
+    { "name": "Healthcare Facility Budget Optimization", "description": "Balancing hospital staff payrolls, supply inventories, and elective procedure revenue targets." },
+    { "name": "Medicare & Private Insurance Reimbursement Operations", "description": "Managing complex diagnostic-related group code billing systems to minimize payment rejections." },
+    { "name": "Clinical Quality Improvement Frameworks", "description": "Applying Lean-Six Sigma metrics to reduce post-surgical infection rates and shorten hospital stays." },
+    { "name": "Diagnostic Medical Imaging Interpretation", "description": "Analyzing structural anomalies within high-resolution MRI, CT scan, and X-ray source data files." },
+    { "name": "Laboratory Pathology Specimen Processing", "description": "Isolating, staining, and examining biological tissue cultures using automated chemical assay suites." },
+    { "name": "Molecular Assay Diagnostics", "description": "Running genetic amplification tests to definitively identify targeted viral or bacterial pathogens." },
+    { "name": "Epidemiological Outbreak Investigation", "description": "Tracking localized disease clusters using localized contact mapping and molecular tracking vectors." },
+    { "name": "Community Health Vector Interventions", "description": "Designing local sanitation, vaccination, and preventative education programs to lower endemic illness." },
+    { "name": "Biostatistical Public Health Monitoring", "description": "Analyzing demographic vital data arrays to flag emergent health disparities and systemic gaps." },
+    { "name": "Biocompatible Hardware Engineering", "description": "Designing implantable medical mechanisms that resist degradation and biological host rejection." },
+    { "name": "FDA Class III Device Certification Pathways", "description": "Navigating complex pre-market approval pipelines for critical, life-sustaining medical hardware components." },
+    { "name": "Medical Sensor Signal Calibration", "description": "Fine-tuning electronic telemetry filters within active patient monitoring devices to prevent false alerts." },
+    { "name": "HL7 & FHIR Data Interoperability Architecture", "description": "Configuring standard health informatics protocols to transfer patient data files securely between platforms." },
+    { "name": "Clinical Decision Support Engine Optimization", "description": "Programming system logic loops to alert practicing physicians of dangerous, latent cross-treatment risks." },
+    { "name": "Health Data Privacy & HIPAA System Governance", "description": "Structuring multi-tier database access roles to prevent unauthorized exposure of sensitive patient records." },
+    { "name": "Differentiated Pedagogical Delivery", "description": "Structuring lessons using multiple communication formats to match varied student learning speeds." },
+    { "name": "Classroom Behavioral Modification Strategy", "description": "Deploying non-adversarial intervention techniques to keep student groups focused on educational tasks." },
+    { "name": "Inquiry-Based Lesson Framing", "description": "Designing coursework structured around open research prompts that challenge student problem-solving skills." },
+    { "name": "Backward Curriculum Design Frameworks", "description": "Building academic courses by first establishing final mastery targets, then designing supporting lessons." },
+    { "name": "Universal Design for Learning Adaptation", "description": "Modifying instructional materials to ensure full access for students with diverse physical or cognitive profiles." },
+    { "name": "Cross-Disciplinary Curriculum Scaffolding", "description": "Interweaving science, mathematics, and literacy targets into integrated thematic learning blocks." },
+    { "name": "LMS Platform Administration & Integration", "description": "Configuring learning management systems to track student progress and host educational materials." },
+    { "name": "Immersive Educational Content Design", "description": "Creating virtual and augmented reality modules to simulate real-world scientific or historical environments." },
+    { "name": "Asynchronous Instructional Video Production", "description": "Authoring concise, well-paced multimedia modules optimized for self-directed student progress." },
+    { "name": "Psychometric Validity Testing", "description": "Analyzing test questions statistically to ensure exams measure targeted knowledge fields accurately without bias." },
+    { "name": "Formative Learner Analytics Tracking", "description": "Evaluating weekly dashboard activities to spot and assist struggling students before formal exams." },
+    { "name": "Rubric Architecture Development", "description": "Creating objective, multi-tier grading criteria that eliminate subjective evaluator bias from assessments." },
+    { "name": "Academic Guidance & Career Mapping", "description": "Advising students on prerequisite paths, higher education selections, and professional alignments." },
+    { "name": "Student Crisis Intervention Coordination", "description": "Connecting at-risk youth with institutional mental health, financial aid, and academic relief pathways." },
+    { "name": "Campus Residential Life Engagement Operations", "description": "Directing community programs that foster safety, personal growth, and social connection within student housing." },
+    { "name": "Enterprise Skill Capability Gap Auditing", "description": "Analyzing workforce performance deficiencies to target high-ROI professional development investments." },
+    { "name": "Executive Leadership Program Design", "description": "Structuring advanced business simulation and coaching pathways for high-potential corporate managers." },
+    { "name": "Training ROI Financial Attribution", "description": "Measuring post-training productivity jumps against program costs to prove fiscal business value." },
+    { "name": "Lean Cellular Manufacturing Orchestration", "description": "Arranging factory workspaces to optimize workflow steps, minimize material handling, and cut idle times." },
+    { "name": "Overall Equipment Effectiveness Optimization", "description": "Analyzing machine availability, performance speeds, and quality rates to maximize production output." },
+    { "name": "Capacity Constraint Balancing", "description": "Modifying raw assembly line paces to clear operational bottlenecks and match dynamic demand signals." },
+    { "name": "Statistical Process Control Implementation", "description": "Using control charts to track production variances and adjust machinery before errors occur." },
+    { "name": "Six Sigma Root Cause Elimination", "description": "Applying structural frameworks to uncover and permanently fix hidden defects in manufacturing setups." },
+    { "name": "Failure Mode & Effects Analysis", "description": "Reviewing system layouts proactively to score and mitigate potential mechanical and process risks." },
+    { "name": "Predictive Vibration & Thermal Analysis", "description": "Monitoring structural frequencies and heat profiles to fix factory components before actual failures." },
+    { "name": "Total Productive Maintenance Deployment", "description": "Training line operators to handle routine equipment care, reducing reliance on specialized technicians." },
+    { "name": "Precision Machinery Lubrication Management", "description": "Scheduling fluid changes and oil analyses to extend the operational lifespan of heavy factory gear." },
+    { "name": "Strategic Global Sourcing Mechanics", "description": "Evaluating supplier networks across cost, geographic risk, and capacity metrics to secure raw input access." },
+    { "name": "Supplier Performance SLA Governance", "description": "Enforcing strict delivery speed, material quality, and pricing compliance rules across vendor operations." },
+    { "name": "Total Cost of Ownership Formulation", "description": "Calculating all costs linked to vendor inputs, factoring in logistics, custom duties, and storage fees." },
+    { "name": "Hazard Identification & Risk Assessment", "description": "Auditing manufacturing work environments to pinpoint and eliminate physical, chemical, and ergonomic risks." },
+    { "name": "OSHA Compliance Recordkeeping Protocols", "description": "Documenting safety incidents and workplace adjustments to meet rigorous federal reporting standards." },
+    { "name": "Hazardous Material Lockout/Tagout Systems", "description": "Enforcing strict energy isolation procedures to protect workers during heavy machinery maintenance." },
+    { "name": "PLC & SCADA systems Programming", "description": "Writing logic code to automate industrial hardware and manage unified control dashboards." },
+    { "name": "Robotic Kinematics Configuration", "description": "Calibrating multi-axis robotic arms for precision tasks like automated welding, sorting, and assembly." },
+    { "name": "Industrial IoT Sensor Mesh Deployment", "description": "Installing edge-connected sensor arrays across factories to gather real-time operational data." },
+    { "name": "Assortment Breadth & Depth Calibration", "description": "Balancing retail product choices to capture maximum consumer demand without overloading store shelves." },
+    { "name": "Inventory Turn Optimization Analytics", "description": "Tracking sales velocity against inventory metrics to free up capital and reduce slow-moving stock." },
+    { "name": "Markdown Lifecycle Strategy Planning", "description": "Designing step-down discount schedules to clear seasonal inventory while protecting profit margins." },
+    { "name": "Planogram Compliance & Auditing", "description": "Designing and verifying visual display layouts to maximize product visibility and drive impulse buys." },
+    { "name": "Foot-Traffic Heatmap Pathing", "description": "Analyzing customer store movement patterns to optimize layout designs and display placements." },
+    { "name": "In-Store Shrinkage Prevention Tactics", "description": "Deploying loss-prevention systems and staff training to cut stock losses from theft and damage." },
+    { "name": "Omnichannel Order Fulfillment Routing", "description": "Connecting online shopping systems with physical stores to enable efficient local shipping and pickup options." },
+    { "name": "Last-Mile Delivery Cost Mitigation", "description": "Optimizing local delivery networks and courier partnerships to lower the cost of final drop-offs." },
+    { "name": "E-Commerce Conversion Funnel Design", "description": "Streamlining website checkout steps to minimize cart abandonment and boost successful purchases." },
+    { "name": "Programmatic Bidding Algorithm Control", "description": "Managing automated digital ad spend systems to secure target ad placements at optimized conversion costs." },
+    { "name": "Customer Lifetime Value Attribution Models", "description": "Analyzing historical purchase paths to allocate marketing budgets toward high-value consumer groups." },
+    { "name": "Retargeting & Audience Segmentation Frameworks", "description": "Building custom digital ad cohorts based on browsing behaviors to re-engage interested web users." },
+    { "name": "Omnichannel Voice-of-Customer Capture", "description": "Consolidating feedback from reviews, support calls, and social media into actionable insights." },
+    { "name": "Customer Effort Score Minimization", "description": "Redesigning returns, exchanges, and support paths to make resolving issues effortless for shoppers." },
+    { "name": "Loyalty Program Engagement Architectures", "description": "Designing rewards programs that drive repeat purchases and increase brand attachment." },
+    { "name": "Gross Margin Return on Investment Modeling", "description": "Calculating the precise financial return generated by inventory investments across product categories." },
+    { "name": "Private Label Portfolio Scaling", "description": "Identifying high-margin category gaps where owned-brand products can capture market share from name brands." },
+    { "name": "Vendor Allowance & Rebate Negotiation", "description": "Structuring volume-discount and promotional funding deals with suppliers to lower product costs." },
+    { "name": "Corporate Valuation & Market Entry Strategy", "description": "Analyzing competitor landscapes and macro data to design expansion plans for enterprise clients." },
+    { "name": "Operating Model Design Blueprints", "description": "Restructuring corporate processes, reporting lines, and technologies to boost operational efficiency." },
+    { "name": "Hypothesis-Driven Problem Solving Frameworks", "description": "Breaking complex corporate challenges into testable components to identify root causes quickly." },
+    { "name": "Value Stream Mapping & Process Design", "description": "Analyzing business steps from end to end to remove waste and design streamlined workflows." },
+    { "name": "SGA Overhead Cost Rationalization", "description": "Auditing corporate overhead expenses to trim waste without harming core operational output." },
+    { "name": "Supply Chain Network Footprint Design", "description": "Modeling distribution center and factory locations to balance shipping costs against service speed." },
+    { "name": "HR Service Delivery Model Redesign", "description": "Structuring HR operations into shared services, expert hubs, and business partner alignments." },
+    { "name": "Strategic Workforce Demand Forecasting", "description": "Predicting future talent needs by mapping technological shifts against expected retirements and turnover." },
+    { "name": "Total Rewards Alignment Strategy", "description": "Designing compensation, benefit, and performance packages to attract and retain specialized talent fields." },
+    { "name": "IT Investment Business Case Formulation", "description": "Calculating cost savings, efficiency boosts, and payback periods for large enterprise technology spend." },
+    { "name": "Enterprise Software Vendor Selection Frameworks", "description": "Evaluating complex technology systems against strict technical, security, and pricing criteria." },
+    { "name": "Digital Transformation Roadmap Sequencing", "description": "Ordering complex technology rollouts to minimize business disruptions and maximize early wins." },
+    { "name": "Stakeholder Resistance Risk Mapping", "description": "Identifying groups likely to push back on corporate changes and creating tailored engagement plans." },
+    { "name": "Change Agent Network Activation", "description": "Training internal champions across departments to model new behaviors and drive project adoption." },
+    { "name": "Post-Go-Live Behavior Anchor Protocols", "description": "Designing continuous feedback loops and incentive structures to ensure new workplace processes stick." },
+    { "name": "IP Routing & Core Network Architecture", "description": "Designing global data routing systems to move high-volume traffic reliably across core networks." },
+    { "name": "MPLS & SD-WAN Network Configuration", "description": "Setting up software-defined wide area networks to optimize data paths and lower corporate telecom costs." },
+    { "name": "Network Function Virtualization Deployment", "description": "Moving traditional hardware tasks like firewalls and routing into flexible, cloud-managed software setups." },
+    { "name": "NOC Operations & Incident Escalation", "description": "Managing network operations center systems to spot, isolate, and resolve network outages fast." },
+    { "name": "Mean Time to Repair Optimization Metrics", "description": "Streamlining engineering response steps to restore telecom service quickly after hardware failures." },
+    { "name": "Capacity Management & Traffic Shaping Engineering", "description": "Throttling and routing network bandwidth during peak times to prevent dropped calls and slow data." },
+    { "name": "Link Budget Calculation & RF Design", "description": "Calculating radio frequency signal strengths and antenna needs to maximize cell tower coverage areas." },
+    { "name": "5G New Radio Cell Site Optimization", "description": "Tuning cell tower software and beamforming settings to deliver peak data speeds and lowest latencies." },
+    { "name": "Spectrum Interference Detection Analytics", "description": "Locating and neutralizing external radio signals that disrupt mobile network connections." },
+    { "name": "GPON & FTTH Architecture Engineering", "description": "Designing fiber-optic distribution systems to bring high-speed internet connections directly to homes." },
+    { "name": "Optical Time-Domain Reflectometer Testing", "description": "Analyzing light pulses down fiber lines to find exact locations of cable cracks or breaks." },
+    { "name": "Outside Plant Civil Engineering Layouts", "description": "Planning physical cable paths, utility pole use, and underground trenching needed for fiber rollouts." },
+    { "name": "ARPU Optimization Pricing Modeling", "description": "Designing service bundles and add-ons to lift the average monthly revenue generated per user." },
+    { "name": "Subscriber Churn Predictive Modeling", "description": "Analyzing usage and billing data to spot unhappy users and offer retention discounts proactively." },
+    { "name": "Wholesale Roaming Interconnect Settlement Mechanics", "description": "Negotiating financial terms for handling traffic from partner network users traveling abroad." },
+    { "name": "Supercritical Boiler Combustion Optimization", "description": "Tuning air-to-fuel ratios and water temperatures to maximize energy efficiency in fossil fuel plants." },
+    { "name": "Nuclear Reactor Core Neutronics Controls", "description": "Managing control rod systems and coolant flows to keep nuclear reactions steady and safe." },
+    { "name": "Turbine Lifecycle Maintenance Scheduling", "description": "Using thermal and acoustic data to schedule overhaul work on massive power turbines before failure." },
+    { "name": "Substation Automation & Protection Design", "description": "Installing smart relays and breakers to isolate electrical grid faults instantly and prevent blackouts." },
+    { "name": "High-Voltage DC Transmission Grid Engineering", "description": "Designing long-distance, high-voltage direct current lines to move power efficiently with low losses." },
+    { "name": "Grid Reactive Power Compensation Management", "description": "Balancing active and reactive power levels on grids to stabilize system voltages under varying loads." },
+    { "name": "Photovoltaic Inverter Station Engineering", "description": "Optimizing inverter hardware to convert solar DC power into clean grid-ready AC power efficiently." },
+    { "name": "Wind Turbine Pitch Control Maintenance", "description": "Calibrating automated blade adjustments to capture maximum wind energy while preventing structural stress." },
+    { "name": "Battery Energy Storage Integration Dynamics", "description": "Linking massive battery banks with grid software to smooth out changes in solar and wind generation." },
+    { "name": "Directional Well Drilling Trajectory Control", "description": "Steering drilling bits through underground rock formations to tap target oil and gas pockets precisely." },
+    { "name": "Subsea Production Manifold Engineering", "description": "Designing seabed valve and piping networks to manage oil extraction in deepwater environments." },
+    { "name": "Refinery Fluid Catalytic Cracking Tuning", "description": "Optimizing temperature and chemical reactions to split heavy crude oil into gasoline and diesel." },
+    { "name": "Biological Nutrient Removal System Control", "description": "Managing bacteria populations in wastewater tanks to break down nitrogen and phosphorus safely." },
+    { "name": "Water Distribution Hydraulic Modeling", "description": "Simulating pipe flows and water pressures to ensure consistent delivery across municipal systems." },
+    { "name": "SCADA Water Quality Isolation Protocols", "description": "Programming automated systems to close main valves instantly if chemical contaminants are detected." },
+    { "name": "Day-Ahead Wholesale Power Market Bidding", "description": "Using weather forecasts and demand models to bid power plant capacities into energy market clearings." },
+    { "name": "Financial Transmission Rights Risk Hedging", "description": "Buying grid transmission insurance tokens to lock in power delivery costs across congested paths." },
+    { "name": "PPA Structural Term Negotiation", "description": "Negotiating long-term power purchase agreements between green energy developers and corporate buyers." },
+    { "name": "Non-Linear Video Editing Workflow Design", "description": "Organizing raw film clips and audio tracks within timeline systems to streamline post-production steps." },
+    { "name": "Color Grading & LUT Implementation Mechanics", "description": "Applying lookup tables and color adjustments to raw video files to establish distinct visual styles." },
+    { "name": "Multi-Track Audio Mastering & Compression", "description": "Balancing dialogue, sound effects, and music tracks to deliver clean audio mixes across playback hardware." },
+    { "name": "Investigative Public Records Discovery Pathways", "description": "Filing freedom of information requests and digging through corporate ledgers to uncover hidden stories." },
+    { "name": "Defamation Libel Legal Risk Verification", "description": "Reviewing article drafts against libel laws to ensure arguments are backed by verifiable proof." },
+    { "name": "Real-Time Newsroom Wire Curation", "description": "Filtering incoming social media and wire updates to isolate and verify breaking news stories." },
+    { "name": "IP Video Contribution Routing Platforms", "description": "Managing SRT and Zixi network links to stream live video feeds from remote fields back to stations." },
+    { "name": "Master Control Room Signal Switch Over", "description": "Managing live studio feeds, commercials, and graphics to deliver uninterrupted station broadcasts." },
+    { "name": "Over-The-Top Streaming Transcoding Frameworks", "description": "Encoding master video feeds into different internet bitrates to support uninterrupted streaming on phones and TVs." },
+    { "name": "Real-Time C++ Game Loop Optimization", "description": "Writing memory-efficient code to maintain steady 60+ FPS frame rates during demanding gameplay moments." },
+    { "name": "Shader Development & HLSL Programming", "description": "Programming custom GPU rendering scripts to create realistic lighting, shadows, and surface details." },
+    { "name": "Skeletal Rigging & Character Mesh Weighting", "description": "Building internal digital bone networks that allow 3D character models to move realistically." },
+    { "name": "Real-Time Programmatic Bidding Floor Optimizations", "description": "Adjusting minimum ad prices dynamically to maximize revenue from ad networks bidding on ad space." },
+    { "name": "Contextual First-Party Audience Graph Profiling", "description": "Grouping users by reading habits to offer advertisers precise ad targets without relying on third-party cookies." },
+    { "name": "Dynamic Creative Optimization Iteration Systems", "description": "Assembling ad components like headlines and images on the fly to match target user profiles." },
+    { "name": "Building Information Modeling Lifecycle Management", "description": "Creating detailed 3D digital structural models that track building data from initial design through demolition." },
+    { "name": "Parametric Generative Façade Design Frameworks", "description": "Using algorithms to design exterior walls that optimize natural lighting while lowering building cooling loads." },
+    { "name": "Adaptive Adaptive Reuse Spatial Planning", "description": "Redesigning historic industrial structures to function as modern apartments or commercial offices safely." },
+    { "name": "Geotechnical Subsurface Foundation Engineering", "description": "Analyzing soil core samples to design foundations capable of supporting heavy structures safely." },
+    { "name": "Finite Element Structural Analysis Modeling", "description": "Simulating high winds and seismic activity on structural designs to identify and fix stress weak points." },
+    { "name": "Reinforced Concrete Post-Tensioning Specifications", "description": "Calculating exact tension forces needed for internal steel cables to maximize concrete floor spans." },
+    { "name": "Earned Value Management Project Tracking", "description": "Comparing actual project costs and schedules against baselines to predict final construction outcomes." },
+    { "name": "Critical Path Method Schedule Optimizations", "description": "Mapping task dependencies to isolate critical construction steps and prevent project delays." },
+    { "name": "Subcontractor Scope Interdependency Coordination", "description": "Scheduling trade groups like electrical and plumbing to prevent overlapping work and project conflicts." },
+    { "name": "Lean Construction Pull-Planning Frameworks", "description": "Working backward from project milestones with site foremen to schedule tasks based on real site readiness." },
+    { "name": "Prograph Field Layout Calibration Instruments", "description": "Using robotic total stations to project digital blueprint coordinates onto physical jobsites accurately." },
+    { "name": "Daily Site Quality Logging Standards", "description": "Documenting concrete tests, weld quality inspections, and safety checks to build compliance records." },
+    { "name": "Pro Forma Cash Flow IRR Modeling", "description": "Projecting acquisition costs, construction spends, and rental incomes to calculate project investment returns." },
+    { "name": "Municipal Zoning Variance Navigation Strategy", "description": "Presenting project cases to city boards to secure exceptions for building heights or density limits." },
+    { "name": "Commercial Tenant Improvement Scope Negotiation", "description": "Structuring contract deals defining which buildout costs are paid by the landlord versus the business tenant." },
+    { "name": "BMS Direct Digital Control Tuning", "description": "Programming building management software to optimize HVAC and lighting runs based on room occupancy." },
+    { "name": "Chilled Water Plant Energy Balancing", "description": "Tuning cooling towers and water pump speeds to minimize electricity consumption in large facilities." },
+    { "name": "NFPA Life Safety Asset Maintenance", "description": "Testing fire alarms, sprinklers, and emergency lights to ensure compliance with safety codes." },
+    { "name": "Property Management System Core Configuration", "description": "Setting up hotel software to handle room assignments, guest checking, and housekeeping task updates." },
+    { "name": "Front Desk Upsell Conversion Execution", "description": "Training guest services agents to offer premium room upgrades and amenities during check-in." },
+    { "name": "VIP Guest Guest Profile Personalization Protocols", "description": "Reviewing past stay records to customize room settings and amenities for high-value returning guests." },
+    { "name": "HACCP Thermal Control Compliance Audits", "description": "Monitoring food temperatures from delivery through service to eliminate foodborne illness risks." },
+    { "name": "Beverage Pour Cost Optimization Analytics", "description": "Tracking ingredient waste and portion sizes against beverage sales to maximize bar profit margins." },
+    { "name": "Kitchen Kitchen Ticket Throughput Engineering", "description": "Arranging kitchen stations and cooking steps to ensure all guest plates at a table finish at the same time." },
+    { "name": "GDS Distribution Channel Optimization Models", "description": "Managing hotel inventory across travel networks like Expedia and Amadeus to maximize room booking volumes." },
+    { "name": "Consortium Corporate Rate Contract Negotiations", "description": "Securing high-volume room deals with corporate travel departments by offering guaranteed lower rates." },
+    { "name": "Inbound Tour Packaging Profit Mechanics", "description": "Bundling hotel stays, ground transport, and local tours into profitable packages for wholesale agencies." },
+    { "name": "B2B Exhibition Floor Layout Configurations", "description": "Designing floor layouts for conventions to maximize booth spaces while keeping foot-traffic flows safe." },
+    { "name": "AV Power Load Distribution Mapping", "description": "Calculating electrical needs for large stage lighting and sound systems to prevent circuit overloads." },
+    { "name": "Event Contingency Evacuation Scenario Execution", "description": "Creating and coordinating emergency backup plans with local authorities for large public events." },
+    { "name": "Dynamic Elastic Room Rate Configuration", "description": "Using algorithms to adjust room rates instantly based on local market demand and competitor pricing." },
+    { "name": "Opaque Channel Inventory Liquidation Tactics", "description": "Selling unsold rooms anonymously through discount sites to protect regular pricing structures." },
+    { "name": "Group Booking Displacement Financial Analysis", "description": "Comparing group discount requests against projected regular revenues to ensure booking profitability." },
+    { "name": "Precision Variable-Rate Seeding Calibrations", "description": "Programming tractor systems to adjust seed spacing dynamically based on changing soil productivity maps." },
+    { "name": "Integrated Pest Management Field Scopes", "description": "Using pest counts and beneficial insect balances to manage crop health with minimal chemical sprays." },
+    { "name": "Subsurface Drip Irrigation Scheduling Metrics", "description": "Using soil moisture data to deliver precise water amounts directly to plant roots, cutting water waste." },
+    { "name": "Total Mixed Ration Feed Formulations", "description": "Blending grains, silage, and vitamins into precise mixes optimized for livestock health and milk yields." },
+    { "name": "Livestock Bio-Telemetry Telemetry Interpretation", "description": "Monitoring health data from livestock collar sensors to spot and treat illnesses early." },
+    { "name": "Automated Milking Parlor Throughput Controls", "description": "Managing robotic milking stations to track milk yields and maintain animal comfort." },
+    { "name": "Aseptic Thermal Processing Thermal Control", "description": "Sterilizing liquid foods rapidly and packaging them in sterile rooms to create shelf-stable products." },
+    { "name": "Modified Atmosphere Packaging Gas Balancing", "description": "Replacing air inside food packaging with precise gas mixes to delay spoilage and extend shelf life." },
+    { "name": "Food Retort Sterilization Validation Standards", "description": "Testing industrial pressure-cookers to verify they eliminate harmful bacteria like botulinum reliably." },
+    { "name": "Continuous Forest Inventory Growth Projections", "description": "Using field measurements and satellite data to calculate timber volumes and long-term forest growth rates." },
+    { "name": "Variable Retention Logging Spatial Plan Models", "description": "Designing timber harvests that leave ecological hubs standing to protect local wildlife and soil health." },
+    { "name": "Wildfire Fuel Mitigation Silviculture Layouts", "description": "Thinning undergrowth and brush strategically to create defensive breaks that slow down forest fires." },
+    { "name": "Hyperspectral Crop Stress Remote Sensing", "description": "Analyzing satellite and drone imagery to spot crop diseases and water shortages before they show in fields." },
+    { "name": "Autonomous Drone Flight Trajectory Pathing", "description": "Programming drone paths to scan fields and spray crops evenly without manual guidance errors." },
+    { "name": "Agricultural IoT Edge Connectivity Mesh Architecture", "description": "Setting up long-range wireless networks to connect remote soil and weather sensors back to farm computers." },
+    { "name": "Computational Fluid Dynamics Wing Profiling", "description": "Simulating airflow over wing shapes to maximize lift and reduce fuel-burning drag forces." },
+    { "name": "Carbon-Fiber Composite Autoclave Curing Specs", "description": "Managing pressure and temperature cycles to bake high-strength aerospace components without hidden air pockets." },
+    { "name": "Damage Tolerance Structural Fatigue Analysis", "description": "Calculating how small cracks grow in airplane structures over time to set safe inspection intervals." },
+    { "name": "ARINC 429 Data Bus Protocol Configuration", "description": "Setting up digital communication lines to transmit flight data reliably between airplane computer boxes." },
+    { "name": "Inertial Reference System Alignment Calibrations", "description": "Calibrating internal laser gyro sensors to track aircraft positions accurately without relying on GPS." },
+    { "name": "Synthetic Aperture Radar Processing Logic", "description": "Programming radar systems to assemble high-resolution terrain images through clouds and darkness." },
+    { "name": "MIL-STD-810H Environmental Testing Engineering", "description": "Exposing military hardware to extreme shock, heat, and cold to verify field reliability." },
+    { "name": "Jam-Resistant Tactical Data Link Networks", "description": "Configuring secure Link-16 radio systems to share battlefield data without enemy interference." },
+    { "name": "Phased Array Active Radar Calibration", "description": "Tuning antenna arrays to steer radar beams electronically, tracking multiple targets at the same time." },
+    { "name": "ETOPS Fuel Emergency Flight Management", "description": "Planning safe flight routes for twin-engine jets over oceans, ensuring safe single-engine landing options." },
+    { "name": "CAT III Autoland Approach Monitoring Protocols", "description": "Monitoring automated instrument guidance systems during landings in near-zero visibility fog." },
+    { "name": "Weight & Balance Payload Center Management", "description": "Calculating aircraft cargo placements to keep the center of gravity within safe flight limits." },
+    { "name": "Orbital Trajectory Delta-V Formulation", "description": "Calculating precise engine burn times and energy needs to move satellites between space orbits." },
+    { "name": "Spacecraft Hydrazine Propulsion Valve Integration", "description": "Designing fuel feed systems that operate reliably in zero gravity and extreme space temperatures." },
+    { "name": "Satellite Thermal Radiation Shield Assembly", "description": "Designing multi-layer insulation blankets to keep satellite electronics working in direct solar heat and deep space cold." },
+    { "name": "Cross-Border M&A Due Diligence Scopes", "description": "Reviewing foreign target company legal structures and liabilities to protect buyers in international deals." },
+    { "name": "Antitrust Hart-Scott-Rodino Valuation Filing Strategy", "description": "Structuring merger filings to demonstrate market competition remains healthy and pass federal reviews." },
+    { "name": "Shareholder Rights Agreement Carve-Out Formatting", "description": "Drafting investor contracts with protective clauses like drag-along rights and board seat protections." },
+    { "name": "Electronic Discovery EDRM Lifecycle Workflows", "description": "Using technology tools to collect, filter, and review high-volume email archives for court cases." },
+    { "name": "Deposition Interrogatory Line-of-Questioning Design", "description": "Structuring deposition questions to lock witness testimonies into clear positions before trial." },
+    { "name": "Appellate Brief Jurisdictional Precedent Syntheses", "description": "Analyzing past appeals court rulings to draft persuasive arguments for overturning trial verdicts." },
+    { "name": "Patent Claim Construction Markman Frameworks", "description": "Drafting clear patent descriptions to establish exact boundaries of technological ownership." },
+    { "name": "FRAND Licensing Terms Fair Market Metrics", "description": "Negotiating fair royalty rates for essential industry patents to avoid anti-competitive legal issues." },
+    { "name": "Trademark Infringement Confusion Analysis Indices", "description": "Evaluating market surveys and visual brand similarities to prove consumers will mistake rival products." },
+    { "name": "Master Services Agreement Risk Allocations", "description": "Drafting commercial service contracts with clear liability limits and indemnity protections." },
+    { "name": "Contract Lifecycle Management Automation Workflows", "description": "Programming alert triggers and approval paths into contract software to prevent missed renewal deadlines." },
+    { "name": "Force Majeure Clause Trigger Verifications", "description": "Assessing if natural disasters or market blackouts meet legal tests to excuse contract performance." },
+    { "name": "Legal Department Spend Alternative Fee Metrics", "description": "Structuring legal billing deals like capped fees to lower corporate law firm spends." },
+    { "name": "Outside Counsel SLA Compliance Scorecards", "description": "Tracking external law firm performance across response speeds and budgeting accuracy metrics." },
+    { "name": "Matter Intake Workflow Automation Paths", "description": "Designing digital intake paths to route internal legal requests to the right specialist teams automatically." },
+    { "name": "Legislative Draft Regulatory Impact Projections", "description": "Modeling economic and social impacts of proposed bills before they are introduced into law." },
+    { "name": "Public Stakeholder Testimony Synthesis Frameworks", "description": "Consolidating public hearing feedback into actionable policy changes that reflect community needs." },
+    { "name": "Statutory Authorization Intent Alignments", "description": "Verifying new administrative regulations match the legal boundaries set by original enabling legislation." },
+    { "name": "Municipal Fund Balance Encumbrance Accounting", "description": "Tracking dedicated tax funds to ensure tax collections are spent exactly on voter-approved projects." },
+    { "name": "Capital Improvement Plan Debt Service Profiles", "description": "Balancing long-term municipal bond sales against tax projections to fund infrastructure projects safely." },
+    { "name": "Government Grant Audit Compliance Assurances", "description": "Reviewing public spending records to prove federal grant funds met all usage and tracking rules." },
+    { "name": "Transit-Oriented Development Spatial Zoning Models", "description": "Updating city zoning codes to allow high-density housing and shops near mass transit stations." },
+    { "name": "GIS Urban Canopy Impervious Surface Vectors", "description": "Using mapping software to analyze concrete runoffs and tree coverages to design better city drainage." },
+    { "name": "Blight Remediation Condemnation Title Frameworks", "description": "Navigating eminent domain rules to reclaim abandoned properties for public parks or housing projects." },
+    { "name": "Multi-Channel Citizen Service Intake Routing", "description": "Linking city call centers, websites, and apps into a unified system to track public service requests." },
+    { "name": "ADA Public Facility Accessibility Compliance", "description": "Auditing public buildings and sidewalks to ensure full accessibility for disabled residents." },
+    { "name": "Digital Divide Broadband Subsidy Allocations", "description": "Directing public funds to expand high-speed internet networks in underserved or low-income neighborhoods." },
+    { "name": "Administrative Warrant Ex Parte Probable Cause", "description": "Compiling health or building hazard proof to secure inspection access from judges when owners refuse." },
+    { "name": "Title 42 Environmental Enforcement Actions", "description": "Issuing citations and fines to facilities violating state air or water pollution limits." },
+    { "name": "Evidentiary Chain-of-Custody Field Standards", "description": "Logging and sealing physical hazard samples to ensure inspection findings stand up in court challenges." },
+    { "name": "Theory of Change Logic Model Architectures", "description": "Mapping program activities to immediate outputs and long-term community benefits to guide non-profit goals." },
+    { "name": "Beneficiary Feedback Verification Loop Models", "description": "Structuring regular surveys and focus groups to adjust social programs based on client feedback." },
+    { "name": "Cross-Sector Collaborative Governance Compacts", "description": "Structuring formal partnerships between charities, businesses, and government teams to share project loads." },
+    { "name": "Major Donor CRM Pipeline Funnel Strategies", "description": "Tracking high-value donor interactions through software to time capital campaign asks effectively." },
+    { "name": "Planned Giving Endowment Annuity Formats", "description": "Structuring complex donor legacy gifts like trusts that provide life incomes while funding charities later." },
+    { "name": "Charitable Capital Campaign Milestone Framing", "description": "Designing marketing strategies and match-gift windows to rally donor communities around big building goals." },
+    { "name": "Uniform Guidance 2 CFR 200 Allocation Compliance", "description": "Reviewing federal grant budgets to ensure administrative and program spend splits meet regulations." },
+    { "name": "Federal Drawdown Auditable Ledger Verifications", "description": "Matching grant spending records with program progress to justify fund withdrawals during federal reviews." },
+    { "name": "Sub-Recipient Monitoring Risk Assessment Metrics", "description": "Auditing smaller local non-profits handling shared grant funds to ensure full financial compliance." },
+    { "name": "Trauma-Informed Community Organizing Frameworks", "description": "Designing community programs that respect local histories of trauma to build trust and high engagement." },
+    { "name": "Participatory Action Research Local Group Dynamics", "description": "Training neighborhood residents to gather local data directly, giving them ownership over local research." },
+    { "name": "Grassroots Coalition Platform Mobilization Models", "description": "Uniting diverse neighborhood advocacy groups around unified legislative goals to maximize political impacts." },
+    { "name": "Social Return on Investment Calculation Formulations", "description": "Assigning financial values to social outcomes to prove the real dollar value created by non-profit programs." },
+    { "name": "Randomized Control Trial Social Program Assurances", "description": "Comparing target groups against control groups to isolate the true impacts of social interventions." },
+    { "name": "Qualitative Coding Matrix Narrative Analyticals", "description": "Analyzing deep interview feedback systematically to identify trends in community well-being." },
+    { "name": "Hub-and-Spoke Cross-Dock Routing Schedules", "description": "Unloading arriving trucks and sorting items directly onto outbound trucks to skip costly warehouse storage." },
+    { "name": "Intermodal Container Drayage Drayage Coordination", "description": "Scheduling truck transfers between ocean ports, rail yards, and warehouses to minimize container delay fees." },
+    { "name": "TMS Carrier Capacity Allocation Optimizations", "description": "Using transport software to select shipping carriers that balance best service speeds against lowest contract costs." },
+    { "name": "ASRS High-Density Inventory Configurations", "description": "Programming automated storage crane systems to place and retrieve heavy pallets from high warehouse racks." },
+    { "name": "WMS Directed-Picking Path Optimization Steps", "description": "Using warehouse software to design shortest walking paths for workers, cutting order packing times." },
+    { "name": "Cycle-Counting Statistical Reconciliation Systems", "description": "Auditing random inventory sections daily to maintain high accuracy counts without shutting down warehouses." },
+    { "name": "Telematics Route Optimization Scheduling", "description": "Using real-time truck data and traffic models to design delivery routes that lower fuel burns." },
+    { "name": "Preventative Fleet Maintenance Diagnostic Metrics", "description": "Analyzing engine codes and brake wear signs to fix delivery trucks before road breakdowns happen." },
+    { "name": "FMCSA Hours-of-Service ELD Compliance Auditing", "description": "Reviewing electronic truck logs to ensure driver rest breaks meet federal road safety laws." },
+    { "name": "SOP Multi-Echelon Inventory Safety Allocations", "description": "Calculating safe inventory backup stock levels across global distribution centers to prevent product shortages." },
+    { "name": "Collaborative CPFR Supplier Demand Alignment", "description": "Sharing sales forecasts with manufacturers early to match factory runs with upcoming market demands." },
+    { "name": "Bill of Materials Lead-Time Constraints", "description": "Mapping raw material lead times to ensure factory inputs arrive right when assembly schedules require." },
+    { "name": "Landed-Cost Ocean Freight Rate Negotiations", "description": "Negotiating long-term ocean shipping contracts that include bunker fuel adjustments and port fee caps." },
+    { "name": "Customs Harmonized System Code Classifications", "description": "Assigning accurate tariff codes to international shipments to ensure customs compliance and minimize duties." },
+    { "name": "Cold-Chain Reefer Temperature Log Assurances", "description": "Monitoring temperature tracking data across reefer containers to prove perishable items stayed safe during transit." },
+    { "name": "NVH NVH Damping Simulation Engineering", "description": "Using software to model and eliminate body vibrations and cabin noises in new vehicle designs." },
+    { "name": "ADAS Radar-Camera Sensor Fusion Calibrations", "description": "Combining radar and camera data streams to help car safety systems spot lane boundaries and obstacles reliably." },
+    { "name": "Bi-Material Crash Simulation Safety Analytics", "description": "Simulating car crashes to design steel and aluminum structures that absorb impact forces and protect cabins." },
+    { "name": "Li-Ion Battery Thermal Runaway Insulations", "description": "Designing cooling channels and fire barriers to keep electric car battery packs at safe working temperatures." },
+    { "name": "800V Powertrain Inverter Switching Frequency Tuning", "description": "Tuning electrical components within high-voltage EV powertrains to maximize energy efficiency and driving ranges." },
+    { "name": "Regenerative Braking Torque Transition Controls", "description": "Programming smooth handoffs between electric motor braking and physical brakes to ensure steady vehicle stops." },
+    { "name": "BIW Stamping Tolerance Quality Matrices", "description": "Monitoring metal stamping steps to ensure structural car body parts line up exactly during robot assembly." },
+    { "name": "Automotive Cataphoretic E-Coat Corrosion Barriers", "description": "Managing automated chemical bath dips to coat car bodies with durable, rust-preventing base primers." },
+    { "name": "Factory AGV Material Delivery Sequencing", "description": "Programming self-driving cart networks to deliver specific parts to assembly lines right as matching cars arrive." },
+    { "name": "OEM Proprietary OBD-II CAN-Bus Interrogations", "description": "Using advanced scanning tools to read hidden engine codes and data streams from onboard computers." },
+    { "name": "Warranty Flat-Rate Labor Repair Estimations", "description": "Setting standardized repair time guides for dealerships to manage fair warranty payouts from car makers." },
+    { "name": "Remanufactured Component Core Core Evaluation Standards", "description": "Inspecting used car parts like transmissions to see if internal metals are sound enough for factory rebuilds." },
+    { "name": "Micro-Mobility Geofencing Precision Coordinates", "description": "Programming GPS boundary rules into rental scooter networks to lower speeds or block parking in busy pedestrian zones." },
+    { "name": "MaaS Multi-Modal API Fare Integrations", "description": "Linking train, bus, and scooter payment networks into a single app to enable unified trip bookings." },
+    { "name": "Dynamic Ride-Share Dispatch Match Engine Logistics", "description": "Using algorithms to match ride-share drivers with nearby riders, lowering wait times and empty driving miles." },
+    { "name": "Active Listening", "description": "Focusing completely on what others are saying, understanding their points, and asking appropriate questions without interrupting." },
+    { "name": "Empathy and Compassion", "description": "Demonstrating awareness of others' feelings and providing support during difficult emotional or physical situations." },
+    { "name": "Conflict De-escalation", "description": "Calming tense situations using strategic phrasing, tone management, and respectful boundary setting." },
+    { "name": "Instructional Clarity", "description": "Explaining complex concepts using simple, accessible language tailored to the audience's background." },
+    { "name": "Patience and Encouragement", "description": "Maintaining a supportive demeanor while guiding individuals through slow or repetitive learning cycles." },
+    { "name": "Constructive Feedback Delivery", "description": "Providing actionable performance feedback that motivates improvement without causing defensiveness." },
+    { "name": "Cross-Functional Collaboration", "description": "Working productively with team members from different departments to achieve shared organizational goals." },
+    { "name": "Negotiation and Persuasion", "description": "Guiding discussions toward mutually beneficial agreements using logical arguments and shared value mapping." },
+    { "name": "Stakeholder Relationship Management", "description": "Building long-term trust and alignment with clients, partners, and internal leadership groups." }
+  ],
+  "newCompetencies": [
+    {
+      "name": "Full-Stack Code Craftsmanship",
+      "type": "technical",
+      "domainNames": ["Software Engineering"],
+      "industryNames": ["IT & Technology"],
+      "subCompetencies": ["Algorithmic Code Optimization", "Cross-Browser & Platform Testing", "Architectural Design Patterns"]
+    },
+    {
+      "name": "Predictive Modeling & Insights",
+      "type": "technical",
+      "domainNames": ["Data Science & Analytics"],
+      "industryNames": ["IT & Technology"],
+      "subCompetencies": ["Feature Engineering", "Statistical Hypothesis Testing", "Exploratory Data Analysis"]
+    },
+    {
+      "name": "Advanced Model Engineering",
+      "type": "technical",
+      "domainNames": ["Artificial Intelligence & Machine Learning"],
+      "industryNames": ["IT & Technology"],
+      "subCompetencies": ["Neural Network Architecture Design", "Hyperparameter Tuning", "Natural Language Tokenization"]
+    },
+    {
+      "name": "Cloud Infrastructure Provisioning",
+      "type": "technical",
+      "domainNames": ["Cloud Infrastructure"],
+      "industryNames": ["IT & Technology"],
+      "subCompetencies": ["Multi-Cloud Network Provisioning", "Auto-scaling & Load Balancing Configuration", "Serverless Function Orchestration"]
+    },
+    {
+      "name": "Defensive Information Security",
+      "type": "technical",
+      "domainNames": ["Cybersecurity"],
+      "industryNames": ["IT & Technology"],
+      "subCompetencies": ["Penetration Testing & Ethical Hacking", "Cryptographic Key Management", "Threat Vector Analysis"]
+    },
+    {
+      "name": "Product Strategy & Lifecycle Execution",
+      "type": "technical",
+      "domainNames": ["Product Management"],
+      "industryNames": ["IT & Technology"],
+      "subCompetencies": ["Product Backlog Prioritization", "Market Opportunity Sizing", "User Persona Development"]
+    },
+    {
+      "name": "User-Centric Interface Architecture",
+      "type": "technical",
+      "domainNames": ["UX/UI Design"],
+      "industryNames": ["IT & Technology"],
+      "subCompetencies": ["High-Fidelity Wireframing", "Usability Testing & Session Recording", "Design Systems Component Architecture"]
+    },
+    {
+      "name": "Automated Infrastructure Orchestration",
+      "type": "technical",
+      "domainNames": ["DevOps & Site Reliability"],
+      "industryNames": ["IT & Technology"],
+      "subCompetencies": ["CI/CD Pipeline Automation", "Infrastructure as Code Implementation", "Log Aggregation & Telemetry Analysis"]
+    },
+    {
+      "name": "IT Service Desk Governance",
+      "type": "technical",
+      "domainNames": ["IT Support & Service Management"],
+      "industryNames": ["IT & Technology"],
+      "subCompetencies": ["ITIL Framework Alignment", "SLA & KPI Tracking", "Incident Root Cause Analysis"]
+    },
+    {
+      "name": "Enterprise Technical Blueprinting",
+      "type": "technical",
+      "domainNames": ["Enterprise Architecture"],
+      "industryNames": ["IT & Technology"],
+      "subCompetencies": ["Enterprise Blueprint Alignment", "Technical Debt Evaluation", "Legacy System Modernization Strategies"]
+    },
+    {
+      "name": "Consumer Credit Risk Assessment",
+      "type": "technical",
+      "domainNames": ["Retail Banking"],
+      "industryNames": ["Finance"],
+      "subCompetencies": ["Credit Underwriting Analysis", "Retail Wealth Advisory", "Branch Cash Operations Management"]
+    },
+    {
+      "name": "Corporate Credit Loan Structuring",
+      "type": "technical",
+      "domainNames": ["Corporate Banking"],
+      "industryNames": ["Finance"],
+      "subCompetencies": ["Syndicated Loan Structuring", "Treasury Management Services", "Trade Finance Instruments"]
+    },
+    {
+      "name": "Investment Banking Valuation Modeling",
+      "type": "technical",
+      "domainNames": ["Investment Banking"],
+      "industryNames": ["Finance"],
+      "subCompetencies": ["M&A Financial Modeling", "LBO Valuation Modeling", "IPO Underwriting & Bookbuilding"]
+    },
+    {
+      "name": "Institutional Asset Management Strategy",
+      "type": "technical",
+      "domainNames": ["Asset & Wealth Management"],
+      "industryNames": ["Finance"],
+      "subCompetencies": ["Multi-Asset Portfolio Construction", "Fiduciary Risk Compliance", "Alternative Asset Due Diligence"]
+    },
+    {
+      "name": "Corporate Financial Planning Optimization",
+      "type": "technical",
+      "domainNames": ["Financial Planning & Analysis"],
+      "industryNames": ["Finance"],
+      "subCompetencies": ["Variance Analysis & Budget Forecasting", "Strategic Long-Range Planning", "Capital Expenditure Optimization"]
+    },
+    {
+      "name": "Corporate Auditing Ledger Management",
+      "type": "technical",
+      "domainNames": ["Accounting & Audit"],
+      "industryNames": ["Finance"],
+      "subCompetencies": ["GAAP & IFRS Financial Reconciliation", "Internal Controls & Sarbanes-Oxley Auditing", "Tax Provision Ledger Management"]
+    },
+    {
+      "name": "Quantitative Enterprise Risk Management",
+      "type": "technical",
+      "domainNames": ["Risk Management"],
+      "industryNames": ["Finance"],
+      "subCompetencies": ["Value-at-Risk Stress Modeling", "Enterprise Risk Governance Frameworks", "Counterparty Credit Risk Mitigation"]
+    },
+    {
+      "name": "Capital Treasury Market Risk Management",
+      "type": "technical",
+      "domainNames": ["Treasury & Capital Markets"],
+      "industryNames": ["Finance"],
+      "subCompetencies": ["Liquidity Buffer Management", "FX & Interest Rate Derivative Hedging", "Yield Curve Analytics"]
+    },
+    {
+      "name": "FinTech Core Platform Integration",
+      "type": "technical",
+      "domainNames": ["FinTech Operations"],
+      "industryNames": ["Finance"],
+      "subCompetencies": ["API Banking Integration", "Automated KYC Verification Systems", "Decentralized Ledger Asset Settlement"]
+    },
+    {
+      "name": "Regulatory Compliance Reporting Assurance",
+      "type": "technical",
+      "domainNames": ["Compliance & Regulatory Reporting"],
+      "industryNames": ["Finance"],
+      "subCompetencies": ["Anti-Money Laundering Transaction Monitoring", "Basel III & IV Capital Adequacy Reporting", "SEC & FinCEN Disclosure Management"]
+    },
+    {
+      "name": "Clinical Diagnostic Pathway Selection",
+      "type": "technical",
+      "domainNames": ["Clinical Care"],
+      "industryNames": ["Healthcare & Life Sciences"],
+      "subCompetencies": ["Evidence-Based Clinical Diagnosis", "Pharmacological Treatment Pathing", "Acute Patient Resuscitation"]
+    },
+    {
+      "name": "Acute Patient Care Management",
+      "type": "technical",
+      "domainNames": ["Nursing & Patient Support"],
+      "industryNames": ["Healthcare & Life Sciences"],
+      "subCompetencies": ["Inpatient Triage Prioritization", "Advanced Wound Care Management", "Electronic Health Record Documentation Compliance"]
+    },
+    {
+      "name": "Healthcare Facility Operations Leadership",
+      "type": "technical",
+      "domainNames": ["Healthcare Administration"],
+      "industryNames": ["Healthcare & Life Sciences"],
+      "subCompetencies": ["Healthcare Facility Budget Optimization", "Medicare & Private Insurance Reimbursement Operations", "Clinical Quality Improvement Frameworks"]
+    },
+    {
+      "name": "Diagnostic Imaging Laboratory Pathology",
+      "type": "technical",
+      "domainNames": ["Medical Diagnostics"],
+      "industryNames": ["Healthcare & Life Sciences"],
+      "subCompetencies": ["Diagnostic Medical Imaging Interpretation", "Laboratory Pathology Specimen Processing", "Molecular Assay Diagnostics"]
+    },
+    {
+      "name": "Epidemiological Community Health Surveillance",
+      "type": "technical",
+      "domainNames": ["Public Health"],
+      "industryNames": ["Healthcare & Life Sciences"],
+      "subCompetencies": ["Epidemiological Outbreak Investigation", "Community Health Vector Interventions", "Biostatistical Public Health Monitoring"]
+    },
+    {
+      "name": "Biocompatible Hardware Device Engineering",
+      "type": "technical",
+      "domainNames": ["Medical Devices"],
+      "industryNames": ["Healthcare & Life Sciences"],
+      "subCompetencies": ["Biocompatible Hardware Engineering", "FDA Class III Device Certification Pathways", "Medical Sensor Signal Calibration"]
+    },
+    {
+      "name": "Health Informatics Data Architecture",
+      "type": "technical",
+      "domainNames": ["Health Informatics"],
+      "industryNames": ["Healthcare & Life Sciences"],
+      "subCompetencies": ["HL7 & FHIR Data Interoperability Architecture", "Clinical Decision Support Engine Optimization", "Health Data Privacy & HIPAA System Governance"]
+    },
+    {
+      "name": "Differentiated Pedagogical Delivery Strategy",
+      "type": "technical",
+      "domainNames": ["Teaching & Instruction"],
+      "industryNames": ["Education & Training"],
+      "subCompetencies": ["Differentiated Pedagogical Delivery", "Classroom Behavioral Modification Strategy", "Inquiry-Based Lesson Framing"]
+    },
+    {
+      "name": "Backward Curriculum Design Alignment",
+      "type": "technical",
+      "domainNames": ["Curriculum Design"],
+      "industryNames": ["Education & Training"],
+      "subCompetencies": ["Backward Curriculum Design Frameworks", "Universal Design for Learning Adaptation", "Cross-Disciplinary Curriculum Scaffolding"]
+    },
+    {
+      "name": "LMS Learning Technology Infrastructure",
+      "type": "technical",
+      "domainNames": ["Learning Technology"],
+      "industryNames": ["Education & Training"],
+      "subCompetencies": ["LMS Platform Administration & Integration", "Immersive Educational Content Design", "Asynchronous Instructional Video Production"]
+    },
+    {
+      "name": "Psychometric Validity Assessment Evaluation",
+      "type": "technical",
+      "domainNames": ["Assessment & Evaluation"],
+      "industryNames": ["Education & Training"],
+      "subCompetencies": ["Psychometric Validity Testing", "Formative Learner Analytics Tracking", "Rubric Architecture Development"]
+    },
+    {
+      "name": "Student Lifecycle Support Coordination",
+      "type": "technical",
+      "domainNames": ["Student Services"],
+      "industryNames": ["Education & Training"],
+      "subCompetencies": ["Academic Guidance & Career Mapping", "Student Crisis Intervention Coordination", "Campus Residential Life Engagement Operations"]
+    },
+    {
+      "name": "Corporate Training Capabilities Auditing",
+      "type": "technical",
+      "domainNames": ["Corporate Training"],
+      "industryNames": ["Education & Training"],
+      "subCompetencies": ["Enterprise Skill Capability Gap Auditing", "Executive Leadership Program Design", "Training ROI Financial Attribution"]
+    },
+    {
+      "name": "Lean Cellular Manufacturing Operations",
+      "type": "technical",
+      "domainNames": ["Production Operations"],
+      "industryNames": ["Manufacturing"],
+      "subCompetencies": ["Lean Cellular Manufacturing Orchestration", "Overall Equipment Effectiveness Optimization", "Capacity Constraint Balancing"]
+    },
+    {
+      "name": "Statistical Process Quality Elimination",
+      "type": "technical",
+      "domainNames": ["Industrial Engineering"],
+      "industryNames": ["Manufacturing"],
+      "subCompetencies": ["Statistical Process Control Implementation", "Six Sigma Root Cause Elimination", "Failure Mode & Effects Analysis"]
+    },
+    {
+      "name": "Predictive Mechanical Reliability Analysis",
+      "type": "technical",
+      "domainNames": ["Maintenance & Reliability"],
+      "industryNames": ["Manufacturing"],
+      "subCompetencies": ["Predictive Vibration & Thermal Analysis", "Total Productive Maintenance Deployment", "Precision Machinery Lubrication Management"]
+    },
+    {
+      "name": "Strategic Global Procurement Sourcing",
+      "type": "technical",
+      "domainNames": ["Procurement & Vendor Management"],
+      "industryNames": ["Manufacturing"],
+      "subCompetencies": ["Strategic Global Sourcing Mechanics", "Supplier Performance SLA Governance", "Total Cost of Ownership Formulation"]
+    },
+    {
+      "name": "Industrial Hazard Risk Mitigation",
+      "type": "technical",
+      "domainNames": ["Health, Safety & Environment"],
+      "industryNames": ["Manufacturing"],
+      "subCompetencies": ["Hazard Identification & Risk Assessment", "OSHA Compliance Recordkeeping Protocols", "Hazardous Material Lockout/Tagout Systems"]
+    },
+    {
+      "name": "PLC Industrial Robotic Configuration",
+      "type": "technical",
+      "domainNames": ["Manufacturing Automation"],
+      "industryNames": ["Manufacturing"],
+      "subCompetencies": ["PLC & SCADA systems Programming", "Robotic Kinematics Configuration", "Industrial IoT Sensor Mesh Deployment"]
+    },
+    {
+      "name": "Assortment Capital Retail Optimization",
+      "type": "technical",
+      "domainNames": ["Merchandising"],
+      "industryNames": ["Retail & E-Commerce"],
+      "subCompetencies": ["Assortment Breadth & Depth Calibration", "Inventory Turn Optimization Analytics", "Markdown Lifecycle Strategy Planning"]
+    },
+    {
+      "name": "Planogram Compliance Store Layout",
+      "type": "technical",
+      "domainNames": ["Store Operations"],
+      "industryNames": ["Retail & E-Commerce"],
+      "subCompetencies": ["Planogram Compliance & Auditing", "Foot-Traffic Heatmap Pathing", "In-Store Shrinkage Prevention Tactics"]
+    },
+    {
+      "name": "Omnichannel Fulfillment Funnel Optimization",
+      "type": "technical",
+      "domainNames": ["E-Commerce Operations"],
+      "industryNames": ["Retail & E-Commerce"],
+      "subCompetencies": ["Omnichannel Order Fulfillment Routing", "Last-Mile Delivery Cost Mitigation", "E-Commerce Conversion Funnel Design"]
+    },
+    {
+      "name": "Programmatic Attribution Audience Retargeting",
+      "type": "technical",
+      "domainNames": ["Digital Marketing"],
+      "industryNames": ["Retail & E-Commerce"],
+      "subCompetencies": ["Programmatic Bidding Algorithm Control", "Customer Lifetime Value Attribution Models", "Retargeting & Audience Segmentation Frameworks"]
+    },
+    {
+      "name": "Voice-of-Customer Effort Minimization",
+      "type": "technical",
+      "domainNames": ["Customer Experience"],
+      "industryNames": ["Retail & E-Commerce"],
+      "subCompetencies": ["Omnichannel Voice-of-Customer Capture", "Customer Effort Score Minimization", "Loyalty Program Engagement Architectures"]
+    },
+    {
+      "name": "Gross Margin Category Negotiation",
+      "type": "technical",
+      "domainNames": ["Category Management"],
+      "industryNames": ["Retail & E-Commerce"],
+      "subCompetencies": ["Gross Margin Return on Investment Modeling", "Private Label Portfolio Scaling", "Vendor Allowance & Rebate Negotiation"]
+    },
+    {
+      "name": "Corporate Valuation Operating Architecture",
+      "type": "technical",
+      "domainNames": ["Strategy Consulting"],
+      "industryNames": ["Management Consulting"],
+      "subCompetencies": ["Corporate Valuation & Market Entry Strategy", "Operating Model Design Blueprints", "Hypothesis-Driven Problem Solving Frameworks"]
+    },
+    {
+      "name": "Value Stream Process Rationalization",
+      "type": "technical",
+      "domainNames": ["Operations Consulting"],
+      "industryNames": ["Management Consulting"],
+      "subCompetencies": ["Value Stream Mapping & Process Design", "SGA Overhead Cost Rationalization", "Supply Chain Network Footprint Design"]
+    },
+    {
+      "name": "HR Service Delivery Strategic Forecasting",
+      "type": "technical",
+      "domainNames": ["Human Capital Consulting"],
+      "industryNames": ["Management Consulting"],
+      "subCompetencies": ["HR Service Delivery Model Redesign", "Strategic Workforce Demand Forecasting", "Total Rewards Alignment Strategy"]
+    },
+    {
+      "name": "IT Investment Blueprint Selection",
+      "type": "technical",
+      "domainNames": ["Technology Consulting"],
+      "industryNames": ["Management Consulting"],
+      "subCompetencies": ["IT Investment Business Case Formulation", "Enterprise Software Vendor Selection Frameworks", "Digital Transformation Roadmap Sequencing"]
+    },
+    {
+      "name": "Stakeholder Resistance Mitigation Architecture",
+      "type": "technical",
+      "domainNames": ["Change Management Consulting"],
+      "industryNames": ["Management Consulting"],
+      "subCompetencies": ["Stakeholder Resistance Risk Mapping", "Change Agent Network Activation", "Post-Go-Live Behavior Anchor Protocols"]
+    },
+    {
+      "name": "IP Routing Network Virtualization",
+      "type": "technical",
+      "domainNames": ["Network Engineering"],
+      "industryNames": ["Telecommunications"],
+      "subCompetencies": ["IP Routing & Core Network Architecture", "MPLS & SD-WAN Network Configuration", "Network Function Virtualization Deployment"]
+    },
+    {
+      "name": "NOC Operational Capacity Management",
+      "type": "technical",
+      "domainNames": ["Telecom Operations"],
+      "industryNames": ["Telecommunications"],
+      "subCompetencies": ["NOC Operations & Incident Escalation", "Mean Time to Repair Optimization Metrics", "Capacity Management & Traffic Shaping Engineering"]
+    },
+    {
+      "name": "Radio Frequency Signal Calibration",
+      "type": "technical",
+      "domainNames": ["Radio Access Networks"],
+      "industryNames": ["Telecommunications"],
+      "subCompetencies": ["Link Budget Calculation & RF Design", "5G New Radio Cell Site Optimization", "Spectrum Interference Detection Analytics"]
+    },
+    {
+      "name": "FTTH Optical Infrastructure Layouts",
+      "type": "technical",
+      "domainNames": ["Fiber & Broadband Services"],
+      "industryNames": ["Telecommunications"],
+      "subCompetencies": ["GPON & FTTH Architecture Engineering", "Optical Time-Domain Reflectometer Testing", "Outside Plant Civil Engineering Layouts"]
+    },
+    {
+      "name": "ARPU Optimization Churn Interconnect",
+      "type": "technical",
+      "domainNames": ["Telecom Product & Pricing"],
+      "industryNames": ["Telecommunications"],
+      "subCompetencies": ["ARPU Optimization Pricing Modeling", "Subscriber Churn Predictive Modeling", "Wholesale Roaming Interconnect Settlement Mechanics"]
+    },
+    {
+      "name": "Supercritical Plant Combustion Engineering",
+      "type": "technical",
+      "domainNames": ["Power Generation"],
+      "industryNames": ["Energy & Utilities"],
+      "subCompetencies": ["Supercritical Boiler Combustion Optimization", "Nuclear Reactor Core Neutronics Controls", "Turbine Lifecycle Maintenance Scheduling"]
+    },
+    {
+      "name": "Substation Automated Grid Engineering",
+      "type": "technical",
+      "domainNames": ["Transmission & Distribution"],
+      "industryNames": ["Energy & Utilities"],
+      "subCompetencies": ["Substation Automation & Protection Design", "High-Voltage DC Transmission Grid Engineering", "Grid Reactive Power Compensation Management"]
+    },
+    {
+      "name": "Photovoltaic Wind Storage Engineering",
+      "type": "technical",
+      "domainNames": ["Renewable Energy"],
+      "industryNames": ["Energy & Utilities"],
+      "subCompetencies": ["Photovoltaic Inverter Station Engineering", "Wind Turbine Pitch Control Maintenance", "Battery Energy Storage Integration Dynamics"]
+    },
+    {
+      "name": "Directional Well Drilling Refining Tuning",
+      "type": "technical",
+      "domainNames": ["Oil & Gas Operations"],
+      "industryNames": ["Energy & Utilities"],
+      "subCompetencies": ["Directional Well Drilling Trajectory Control", "Subsea Production Manifold Engineering", "Refinery Fluid Catalytic Cracking Tuning"]
+    },
+    {
+      "name": "Biological Wastewater Hydraulic Modeling",
+      "type": "technical",
+      "domainNames": ["Water & Wastewater Utilities"],
+      "energyNames": ["Energy & Utilities"],
+      "subCompetencies": ["Biological Nutrient Removal System Control", "Water Distribution Hydraulic Modeling", "SCADA Water Quality Isolation Protocols"]
+    },
+    {
+      "name": "Wholesale Day-Ahead Risk Hedging",
+      "type": "technical",
+      "domainNames": ["Energy Trading & Markets"],
+      "industryNames": ["Energy & Utilities"],
+      "subCompetencies": ["Day-Ahead Wholesale Power Market Bidding", "Financial Transmission Rights Risk Hedging", "PPA Structural Term Negotiation"]
+    },
+    {
+      "name": "Non-Linear Post Production Engineering",
+      "type": "technical",
+      "domainNames": ["Content Production"],
+      "industryNames": ["Media, Entertainment & Gaming"],
+      "subCompetencies": ["Non-Linear Video Editing Workflow Design", "Color Grading & LUT Implementation Mechanics", "Multi-Track Audio Mastering & Compression"]
+    },
+    {
+      "name": "Investigative Public Precedent Verification",
+      "type": "technical",
+      "domainNames": ["Journalism & Editorial"],
+      "industryNames": ["Media, Entertainment & Gaming"],
+      "subCompetencies": ["Investigative Public Records Discovery Pathways", "Defamation Libel Legal Risk Verification", "Real-Time Newsroom Wire Curation"]
+    },
+    {
+      "name": "IP Video Signal Streaming Engineering",
+      "type": "technical",
+      "domainNames": ["Broadcast Operations"],
+      "industryNames": ["Media, Entertainment & Gaming"],
+      "subCompetencies": ["IP Video Contribution Routing Platforms", "Master Control Room Signal Switch Over", "Over-The-Top Streaming Transcoding Frameworks"]
+    },
+    {
+      "name": "Real-Time GPU Code Optimization",
+      "type": "technical",
+      "domainNames": ["Gaming Development"],
+      "industryNames": ["Media, Entertainment & Gaming"],
+      "subCompetencies": ["Real-Time C++ Game Loop Optimization", "Shader Development & HLSL Programming", "Skeletal Rigging & Character Mesh Weighting"]
+    },
+    {
+      "name": "Programmatic Creative Graph Profiling",
+      "type": "technical",
+      "domainNames": ["Advertising & Brand Communications"],
+      "industryNames": ["Media, Entertainment & Gaming"],
+      "subCompetencies": ["Real-Time Programmatic Bidding Floor Optimizations", "Contextual First-Party Audience Graph Profiling", "Dynamic Creative Optimization Iteration Systems"]
+    },
+    {
+      "name": "BIM Parametric Structural Architecture",
+      "type": "technical",
+      "domainNames": ["Architecture & Design"],
+      "industryNames": ["Construction & Real Estate"],
+      "subCompetencies": ["Building Information Modeling Lifecycle Management", "Parametric Generative Façade Design Frameworks", "Adaptive Adaptive Reuse Spatial Planning"]
+    },
+    {
+      "name": "Geotechnical Finite Structural Engineering",
+      "type": "technical",
+      "domainNames": ["Civil Engineering"],
+      "industryNames": ["Construction & Real Estate"],
+      "subCompetencies": ["Geotechnical Subsurface Foundation Engineering", "Finite Element Structural Analysis Modeling", "Reinforced Concrete Post-Tensioning Specifications"]
+    },
+    {
+      "name": "Earned Critical Subcontractor Scheduling",
+      "type": "technical",
+      "domainNames": ["Project Controls"],
+      "industryNames": ["Construction & Real Estate"],
+      "subCompetencies": ["Earned Value Management Project Tracking", "Critical Path Method Schedule Optimizations", "Subcontractor Scope Interdependency Coordination"]
+    },
+    {
+      "name": "Lean Construction Field Logging",
+      "type": "technical",
+      "domainNames": ["Site Construction Management"],
+      "industryNames": ["Construction & Real Estate"],
+      "subCompetencies": ["Lean Construction Pull-Planning Frameworks", "Prograph Field Layout Calibration Instruments", "Daily Site Quality Logging Standards"]
+    },
+    {
+      "name": "Pro Forma Zoning Tenant Improvement",
+      "type": "technical",
+      "domainNames": ["Real Estate Development"],
+      "industryNames": ["Construction & Real Estate"],
+      "subCompetencies": ["Pro Forma Cash Flow IRR Modeling", "Municipal Zoning Variance Navigation Strategy", "Commercial Tenant Improvement Scope Negotiation"]
+    },
+    {
+      "name": "BMS HVAC Life Safety Systems",
+      "type": "technical",
+      "domainNames": ["Facilities Management"],
+      "industryNames": ["Construction & Real Estate"],
+      "subCompetencies": ["BMS Direct Digital Control Tuning", "Chilled Water Plant Energy Balancing", "NFPA Life Safety Asset Maintenance"]
+    },
+    {
+      "name": "Property Management System Upsell Protocols",
+      "type": "technical",
+      "domainNames": ["Hotel Operations"],
+      "industryNames": ["Hospitality, Travel & Tourism"],
+      "subCompetencies": ["Property Management System Core Configuration", "Front Desk Upsell Conversion Execution", "VIP Guest Guest Profile Personalization Protocols"]
+    },
+    {
+      "name": "HACCP Culinary Production Optimization",
+      "type": "technical",
+      "domainNames": ["Food & Beverage Operations"],
+      "industryNames": ["Hospitality, Travel & Tourism"],
+      "subCompetencies": ["HACCP Thermal Control Compliance Audits", "Beverage Pour Cost Optimization Analytics", "Kitchen Kitchen Ticket Throughput Engineering"]
+    },
+    {
+      "name": "GDS Distribution Channel Package Mechanics",
+      "type": "technical",
+      "domainNames": ["Travel Operations"],
+      "industryNames": ["Hospitality, Travel & Tourism"],
+      "subCompetencies": ["GDS Distribution Channel Optimization Models", "Consortium Corporate Rate Contract Negotiations", "Inbound Tour Packaging Profit Mechanics"]
+    },
+    {
+      "name": "AV Power Load Layout Architecture",
+      "type": "technical",
+      "domainNames": ["Event Management"],
+      "industryNames": ["Hospitality, Travel & Tourism"],
+      "subCompetencies": ["B2B Exhibition Floor Layout Configurations", "AV Power Load Distribution Mapping", "Event Management Contingency Evacuation Scenario Execution"]
+    },
+    {
+      "name": "Dynamic Opaque Displacement Analysis",
+      "type": "technical",
+      "domainNames": ["Revenue Management"],
+      "industryNames": ["Hospitality, Travel & Tourism"],
+      "subCompetencies": ["Dynamic Elastic Room Rate Configuration", "Opaque Channel Inventory Liquidation Tactics", "Group Booking Displacement Financial Analysis"]
+    },
+    {
+      "name": "Precision Variable Seeding Crop Protection",
+      "type": "technical",
+      "domainNames": ["Crop Production"],
+      "industryNames": ["Agriculture, Food & Forestry"],
+      "subCompetencies": ["Precision Variable-Rate Seeding Calibrations", "Integrated Pest Management Field Scopes", "Subsurface Drip Irrigation Scheduling Metrics"]
+    },
+    {
+      "name": "Total Mixed Livestock Bio Telemetry",
+      "type": "technical",
+      "domainNames": ["Animal Husbandry"],
+      "industryNames": ["Agriculture, Food & Forestry"],
+      "subCompetencies": ["Total Mixed Ration Feed Formulations", "Livestock Bio-Telemetry Telemetry Interpretation", "Automated Milking Parlor Throughput Controls"]
+    },
+    {
+      "name": "Aseptic Thermal Atmosphere Food Validation",
+      "type": "technical",
+      "domainNames": ["Food Processing"],
+      "industryNames": ["Agriculture, Food & Forestry"],
+      "subCompetencies": ["Aseptic Thermal Processing Thermal Control", "Modified Atmosphere Packaging Gas Balancing", "Food Retort Sterilization Validation Standards"]
+    },
+    {
+      "name": "Continuous Forest Inventory Retention Architecture",
+      "type": "technical",
+      "domainNames": ["Forestry Management"],
+      "industryNames": ["Agriculture, Food & Forestry"],
+      "subCompetencies": ["Continuous Forest Inventory Growth Projections", "Variable Retention Logging Spatial Plan Models", "Wildfire Fuel Mitigation Silviculture Layouts"]
+    },
+    {
+      "name": "Hyperspectral Remote Edge IoT Mesh",
+      "type": "technical",
+      "domainNames": ["AgriTech"],
+      "industryNames": ["Agriculture, Food & Forestry"],
+      "subCompetencies": ["Hyperspectral Crop Stress Remote Sensing", "Autonomous Drone Flight Trajectory Pathing", "Agricultural IoT Edge Connectivity Mesh Architecture"]
+    },
+    {
+      "name": "Computational Fluid Composite Structural Engineering",
+      "type": "technical",
+      "domainNames": ["Aerospace Engineering"],
+      "industryNames": ["Aerospace & Defense"],
+      "subCompetencies": ["Computational Fluid Dynamics Wing Profiling", "Carbon-Fiber Composite Autoclave Curing Specs", "Damage Tolerance Structural Fatigue Analysis"]
+    },
+    {
+      "name": "ARINC Avionic Laser Calibration",
+      "type": "technical",
+      "domainNames": ["Avionics"],
+      "industryNames": ["Aerospace & Defense"],
+      "subCompetencies": ["ARINC 429 Data Bus Protocol Configuration", "Inertial Reference System Alignment Calibrations", "Synthetic Aperture Radar Processing Logic"]
+    },
+    {
+      "name": "MIL-STD Secure Battlefield Network Configuration",
+      "type": "technical",
+      "domainNames": ["Defense Systems"],
+      "industryNames": ["Aerospace & Defense"],
+      "subCompetencies": ["MIL-STD-810H Environmental Testing Engineering", "Jam-Resistant Tactical Data Link Networks", "Phased Array Active Radar Calibration"]
+    },
+    {
+      "name": "ETOPS Low Visibility Payload Management",
+      "type": "technical",
+      "domainNames": ["Flight Operations"],
+      "industryNames": ["Aerospace & Defense"],
+      "subCompetencies": ["ETOPS Fuel Emergency Flight Management", "CAT III Autoland Approach Monitoring Protocols", "Weight & Balance Payload Center Management"]
+    },
+    {
+      "name": "Orbital Delta-V Space Propulsion Shielding",
+      "type": "technical",
+      "domainNames": ["Space Systems"],
+      "industryNames": ["Aerospace & Defense"],
+      "subCompetencies": ["Orbital Trajectory Delta-V Formulation", "Spacecraft Hydrazine Propulsion Valve Integration", "Satellite Thermal Radiation Shield Assembly"]
+    },
+    {
+      "name": "Cross-Border Antitrust Shareholder Structuring",
+      "type": "technical",
+      "domainNames": ["Corporate Law"],
+      "industryNames": ["Legal Services"],
+      "subCompetencies": ["Cross-Border M&A Due Diligence Scopes", "Antitrust Hart-Scott-Rodino Valuation Filing Strategy", "Shareholder Rights Agreement Carve-Out Formatting"]
+    },
+    {
+      "name": "Electronic Discovery Precedent Appellate Synthesis",
+      "type": "technical",
+      "domainNames": ["Litigation & Dispute Resolution"],
+      "industryNames": ["Legal Services"],
+      "subCompetencies": ["Electronic Discovery EDRM Lifecycle Workflows", "Deposition Interrogatory Line-of-Questioning Design", "Appellate Brief Jurisdictional Precedent Syntheses"]
+    },
+    {
+      "name": "Patent Markman Claim Licensing Frameworks",
+      "type": "technical",
+      "domainNames": ["Intellectual Property Law"],
+      "industryNames": ["Legal Services"],
+      "subCompetencies": ["Patent Claim Construction Markman Frameworks", "FRAND Licensing Terms Fair Market Metrics", "Trademark Infringement Confusion Analysis Indices"]
+    },
+    {
+      "name": "Master Services Lifecycle Management Automation",
+      "type": "technical",
+      "domainNames": ["Contract Management"],
+      "industryNames": ["Legal Services"],
+      "subCompetencies": ["Master Services Agreement Risk Allocations", "Contract Lifecycle Management Automation Workflows", "Force Majeure Clause Trigger Verifications"]
+    },
+    {
+      "name": "Legal Department SLA Outside Counsel Management",
+      "type": "technical",
+      "domainNames": ["Legal Operations"],
+      "industryNames": ["Legal Services"],
+      "subCompetencies": ["Legal Department Spend Alternative Fee Metrics", "Outside Counsel SLA Compliance Scorecards", "Matter Intake Workflow Automation Paths"]
+    },
+    {
+      "name": "Legislative Regulatory Stakeholder Authorization Alignment",
+      "type": "technical",
+      "domainNames": ["Policy Development"],
+      "industryNames": ["Public Administration & Government"],
+      "subCompetencies": ["Legislative Draft Regulatory Impact Projections", "Public Stakeholder Testimony Synthesis Frameworks", "Statutory Authorization Intent Alignments"]
+    },
+    {
+      "name": "Municipal Fund Balance Debt Auditing",
+      "type": "technical",
+      "domainNames": ["Public Finance"],
+      "industryNames": ["Public Administration & Government"],
+      "subCompetencies": ["Municipal Fund Balance Encumbrance Accounting", "Capital Improvement Plan Debt Service Profiles", "Government Grant Audit Compliance Assurances"]
+    },
+    {
+      "name": "Transit Oriented Spatial GIS Demolition Models",
+      "type": "technical",
+      "domainNames": ["Urban Planning"],
+      "industryNames": ["Public Administration & Government"],
+      "subCompetencies": ["Transit-Oriented Development Spatial Zoning Models", "GIS Urban Canopy Impervious Surface Vectors", "Blight Remediation Condemnation Title Frameworks"]
+    },
+    {
+      "name": "Multi-Channel Citizen ADA Accessibility Provision",
+      "type": "technical",
+      "domainNames": ["Citizen Services"],
+      "industryNames": ["Public Administration & Government"],
+      "subCompetencies": ["Multi-Channel Citizen Service Intake Routing", "ADA Public Facility Accessibility Compliance", "Digital Divide Broadband Subsidy Allocations"]
+    },
+    {
+      "name": "Administrative Ex Parte Environmental Enforcement Actions",
+      "type": "technical",
+      "domainNames": ["Regulatory Enforcement"],
+      "industryNames": ["Public Administration & Government"],
+      "subCompetencies": ["Administrative Warrant Ex Parte Probable Cause", "Title 42 Environmental Enforcement Actions", "Evidentiary Chain-of-Custody Field Standards"]
+    },
+    {
+      "name": "Theory of Change Social Program Architecture",
+      "type": "technical",
+      "domainNames": ["Program Management"],
+      "industryNames": ["Non-Profit & Social Impact"],
+      "subCompetencies": ["Theory of Change Logic Model Architectures", "Beneficiary Feedback Verification Loop Models", "Cross-Sector Collaborative Governance Compacts"]
+    },
+    {
+      "name": "Major Donor CRM Endowment Campaign Framing",
+      "type": "technical",
+      "domainNames": ["Fundraising & Donor Relations"],
+      "industryNames": ["Non-Profit & Social Impact"],
+      "subCompetencies": ["Major Donor CRM Pipeline Funnel Strategies", "Planned Giving Endowment Annuity Formats", "Charitable Capital Campaign Milestone Framing"]
+    },
+    {
+      "name": "Uniform Guidance Drawdown Auditable Ledger Compliance",
+      "type": "technical",
+      "domainNames": ["Grant Management"],
+      "industryNames": ["Non-Profit & Social Impact"],
+      "subCompetencies": ["Uniform Guidance 2 CFR 200 Allocation Compliance", "Federal Drawdown Auditable Ledger Verifications", "Sub-Recipient Monitoring Risk Assessment Metrics"]
+    },
+    {
+      "name": "Trauma Informed Action Research Coalition Mobilization",
+      "type": "technical",
+      "domainNames": ["Community Engagement"],
+      "industryNames": ["Non-Profit & Social Impact"],
+      "subCompetencies": ["Trauma-Informed Community Organizing Frameworks", "Participatory Action Research Local Group Dynamics", "Grassroots Coalition Platform Mobilization Models"]
+    },
+    {
+      "name": "Social Return Evaluation Control Assurances",
+      "type": "technical",
+      "domainNames": ["Impact Measurement"],
+      "industryNames": ["Non-Profit & Social Impact"],
+      "subCompetencies": ["Social Return on Investment Calculation Formulations", "Randomized Control Trial Social Program Assurances", "Qualitative Coding Matrix Narrative Analyticals"]
+    },
+    {
+      "name": "Cross-Dock Drayage Intermodal Fleet Scheduling",
+      "type": "technical",
+      "domainNames": ["Logistics Operations"],
+      "industryNames": ["Transportation, Logistics & Supply Chain"],
+      "subCompetencies": ["Hub-and-Spoke Cross-Dock Routing Schedules", "Intermodal Container Drayage Drayage Coordination", "TMS Carrier Capacity Allocation Optimizations"]
+    },
+    {
+      "name": "ASRS WMS Directed Cycle Counting Configuration",
+      "type": "technical",
+      "domainNames": ["Warehouse Management"],
+      "industryNames": ["Transportation, Logistics & Supply Chain"],
+      "subCompetencies": ["ASRS High-Density Inventory Configurations", "WMS Directed-Picking Path Optimization Steps", "Cycle-Counting Statistical Reconciliation Systems"]
+    },
+    {
+      "name": "Telematics Fleet Safety Optimization Metrics",
+      "type": "technical",
+      "domainNames": ["Fleet Management"],
+      "industryNames": ["Transportation, Logistics & Supply Chain"],
+      "subCompetencies": ["Telematics Route Optimization Scheduling", "Preventative Fleet Maintenance Diagnostic Metrics", "FMCSA Hours-of-Service ELD Compliance Auditing"]
+    },
+    {
+      "name": "Multi-Echelon CPFR Bill of Materials Alignment",
+      "type": "technical",
+      "domainNames": ["Supply Chain Planning"],
+      "industryNames": ["Transportation, Logistics & Supply Chain"],
+      "subCompetencies": ["SOP Multi-Echelon Inventory Safety Allocations", "Collaborative CPFR Supplier Demand Alignment", "Bill of Materials Lead-Time Constraints"]
+    },
+    {
+      "name": "Landed Cost Tariff Code Reefer Monitoring",
+      "type": "technical",
+      "domainNames": ["Freight Forwarding"],
+      "industryNames": ["Transportation, Logistics & Supply Chain"],
+      "subCompetencies": ["Landed-Cost Ocean Freight Rate Negotiations", "Customs Harmonized System Code Classifications", "Cold-Chain Reefer Temperature Log Assurances"]
+    },
+    {
+      "name": "NVH Sensor Fusion Crash Simulation Safety",
+      "type": "technical",
+      "domainNames": ["Vehicle Engineering"],
+      "industryNames": ["Automotive & Mobility"],
+      "subCompetencies": ["NVH NVH Damping Simulation Engineering", "ADAS Radar-Camera Sensor Fusion Calibrations", "Bi-Material Crash Simulation Safety Analytics"]
+    },
+    {
+      "name": "Li-Ion Powertrain Regenerative Transition Control",
+      "type": "technical",
+      "domainNames": ["Electric Mobility"],
+      "industryNames": ["Automotive & Mobility"],
+      "subCompetencies": ["Li-Ion Battery Thermal Runaway Insulations", "800V Powertrain Inverter Switching Frequency Tuning", "Regenerative Braking Torque Transition Controls"]
+    },
+    {
+      "name": "BIW Cataphoretic AGV Material Delivery Sequencing",
+      "type": "technical",
+      "domainNames": ["Automotive Manufacturing"],
+      "industryNames": ["Automotive & Mobility"],
+      "subCompetencies": ["BIW Stamping Tolerance Quality Matrices", "Automotive Cataphoretic E-Coat Corrosion Barriers", "Factory AGV Material Delivery Sequencing"]
+    },
+    {
+      "name": "OBD-II CAN-Bus Flat Rate Core Evaluation",
+      "type": "technical",
+      "domainNames": ["Aftermarket Service"],
+      "industryNames": ["Automotive & Mobility"],
+      "subCompetencies": ["OEM Proprietary OBD-II CAN-Bus Interrogations", "Warranty Flat-Rate Labor Repair Estimations", "Remanufactured Component Core Core Evaluation Standards"]
+    },
+    {
+      "name": "Micro-Mobility MaaS Ride-Share Dispatch Engine Logistics",
+      "type": "technical",
+      "domainNames": ["Mobility Platforms"],
+      "industryNames": ["Automotive & Mobility"],
+      "subCompetencies": ["Micro-Mobility Geofencing Precision Coordinates", "MaaS Multi-Modal API Fare Integrations", "Dynamic Ride-Share Dispatch Match Engine Logistics"]
+    },
+    {
+      "name": "Compassionate Patient Care",
+      "type": "behavioral",
+      "domainNames": ["Clinical Care", "Nursing & Patient Support"],
+      "industryNames": ["Healthcare & Life Sciences"],
+      "subCompetencies": ["Active Listening", "Empathy and Compassion", "Conflict De-escalation"]
+    },
+    {
+      "name": "Empathetic Learner Guidance",
+      "type": "behavioral",
+      "domainNames": ["Teaching & Instruction", "Student Services", "Corporate Training"],
+      "industryNames": ["Education & Training"],
+      "subCompetencies": ["Instructional Clarity", "Patience and Encouragement", "Constructive Feedback Delivery"]
+    },
+    {
+      "name": "Strategic Client Advisory Influence",
+      "type": "behavioral",
+      "domainNames": ["Strategy Consulting", "Operations Consulting", "Human Capital Consulting", "Technology Consulting", "Change Management Consulting"],
+      "industryNames": ["Management Consulting"],
+      "subCompetencies": ["Cross-Functional Collaboration", "Negotiation and Persuasion", "Stakeholder Relationship Management"]
+    }
+  ]
+}

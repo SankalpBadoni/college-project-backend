@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 
 const subCompetencySchema = new mongoose.Schema(
   {
-    name: { type: String, required: true, trim: true },
+    name: { type: String, required: true, trim: true, unique: true },
     description: { type: String, trim: true },
   },
-  { _id: true } // We keep _id here in case you want to tag sub-competencies later
+  { timestamps: true }
 );
 
 // 1. Industry Schema
@@ -28,18 +28,19 @@ const domainSchema = new mongoose.Schema(
 // 3. Competency Schema
 const competencySchema = new mongoose.Schema(
   {
-    name: { type: String, required: true, trim: true }, // e.g., "Data Visualization"
+    name: { type: String, required: true, trim: true, unique: true }, // e.g., "Data Visualization"
     type: { type: String, enum: ["technical", "behavioral"], required: true },
     
-    // Parent references
-    domain: { type: mongoose.Schema.Types.ObjectId, ref: "Domain", required: true },
-    industry: { type: mongoose.Schema.Types.ObjectId, ref: "Industry", required: true },
+    // Parent references (Many-to-Many)
+    domains: [{ type: mongoose.Schema.Types.ObjectId, ref: "Domain", required: true }],
+    industries: [{ type: mongoose.Schema.Types.ObjectId, ref: "Industry" }],
     
-    subCompetencies: { type: [subCompetencySchema], default: [] }
+    subCompetencies: [{ type: mongoose.Schema.Types.ObjectId, ref: "SubCompetency", default: [] }]
   },
   { timestamps: true }
 );
 
+export const SubCompetency = mongoose.model("SubCompetency", subCompetencySchema);
 export const Industry = mongoose.model("Industry", industrySchema);
 export const Domain = mongoose.model("Domain", domainSchema);
 export const Competency = mongoose.model("Competency", competencySchema);
