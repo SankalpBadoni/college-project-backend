@@ -60,6 +60,7 @@ const programSchema = new mongoose.Schema(
     startDate: { type: Date },
     applicationDeadline: { type: Date },
     durationHours: { type: Number, default: 0, min: 0 },
+    durationWeeks: { type: Number, default: 0, min: 0 },
     maxStudents: { type: Number, default: 100, min: 1 },
     creditCost: { type: Number, default: 0, min: 0 },
     priceInr: { type: Number, default: 0, min: 0 },
