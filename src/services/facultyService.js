@@ -7,6 +7,18 @@ import LiveClassSession from "../models/LiveClassSession.js";
 import Assessment from "../models/Assessment.js";
 import AssessmentScore from "../models/AssessmentScore.js";
 import FacultyRating from "../models/FacultyRating.js";
+import LiveProject from "../models/LiveProject.js";
+
+const recalculateProgramType = async (programId) => {
+  const program = await Program.findById(programId);
+  if (!program || program.type === "assessment") return;
+  const hasLiveMaterial = await CourseMaterial.exists({
+    program: programId,
+    fileType: { $in: ["live_class", "live_course"] }
+  });
+  program.type = hasLiveMaterial ? "live_course" : "course";
+  await program.save();
+};
 
 const allowedFacultyFields = ["fullName", "email", "phone", "gender", "professionalProfile", "profile", "coursesOffered", "isApproved", "approvedAt"];
 
@@ -43,7 +55,7 @@ export const getFacultyDashboard = async (facultyId) => {
     .sort({ createdAt: -1 })
     .limit(10);
 
-  const [materialsCount, modulesCount, liveClassesCount, assessmentsCount, upcomingLiveClasses, ratings] = await Promise.all([
+  const [materialsCount, modulesCount, liveClassesCount, assessmentsCount, upcomingLiveClasses, ratings, liveProjectsCount] = await Promise.all([
     CourseMaterial.countDocuments({ faculty: facultyId }),
     CourseModule.countDocuments({ faculty: facultyId }),
     LiveClassSession.countDocuments({ faculty: facultyId, status: { $ne: "cancelled" } }),
@@ -52,7 +64,8 @@ export const getFacultyDashboard = async (facultyId) => {
       .populate("program", "title type")
       .sort({ startAt: 1 })
       .limit(10),
-    FacultyRating.find({ faculty: facultyId }).populate("student", "fullName email")
+    FacultyRating.find({ faculty: facultyId }).populate("student", "fullName email"),
+    LiveProject.countDocuments({ createdBy: facultyId, creatorRole: "faculty" })
   ]);
 
   const ratingCount = ratings.length;
@@ -74,8 +87,8 @@ export const getFacultyDashboard = async (facultyId) => {
         }
       : null,
     stats: {
-      courses: programs.filter((program) => program.type === "course").length,
-      liveProjects: programs.filter((program) => program.type === "live_project").length,
+      courses: programs.filter((program) => program.type === "course" || program.type === "live_course").length,
+      liveProjects: liveProjectsCount,
       materials: materialsCount,
       modules: modulesCount,
       liveClasses: liveClassesCount,
@@ -96,24 +109,25 @@ export const updateFacultyProfile = async (facultyId, updates) => {
 };
 
 export const createCourse = async (facultyId, payload) => {
-  return Program.create({
+  const program = await Program.create({
     faculty: facultyId,
-    type: payload.type || "course",
+    type: "course",
     status: payload.status || "published",
     ...pick(payload, [
       "title", "description", "industry", "domain", "competencies", "preferredJobTags", "minYearEligible", 
-      "maxYearEligible", "startDate", "applicationDeadline", "durationHours", "maxStudents",
+      "maxYearEligible", "startDate", "endDate", "applicationDeadline", "durationHours", "maxStudents",
       "creditCost", "priceInr", "courseOverview", "courseIntroduction", "courseProgress", "certification",
       "coverImageUrl"
     ])
   });
+  await recalculateProgramType(program._id);
+  return program;
 };
 
 export const updateCourseOverview = async (facultyId, programId, updates) => {
   const payload = pick(updates, [
     "title",
     "description",
-    "type",
     "courseOverview",
     "courseIntroduction",
     "courseProgress",
@@ -123,6 +137,7 @@ export const updateCourseOverview = async (facultyId, programId, updates) => {
     "minYearEligible",
     "maxYearEligible",
     "startDate",
+    "endDate",
     "applicationDeadline",
     "durationHours",
     "maxStudents",
@@ -133,10 +148,15 @@ export const updateCourseOverview = async (facultyId, programId, updates) => {
     "coverImageUrl"
   ]);
 
-  return Program.findOneAndUpdate({ _id: programId, faculty: facultyId }, payload, {
+  const course = await Program.findOneAndUpdate({ _id: programId, faculty: facultyId }, payload, {
     new: true,
     runValidators: true
   }).populate("faculty employer linkedJobs");
+
+  if (course) {
+    await recalculateProgramType(course._id);
+  }
+  return course;
 };
 
 export const getCourseStructure = async (facultyId, programId) => {
@@ -170,8 +190,13 @@ export const getCourseStructure = async (facultyId, programId) => {
   };
 };
 
-export const createCourseMaterial = async (facultyId, payload) =>
-  CourseMaterial.create({ faculty: facultyId, ...payload });
+export const createCourseMaterial = async (facultyId, payload) => {
+  const material = await CourseMaterial.create({ faculty: facultyId, ...payload });
+  if (material.program) {
+    await recalculateProgramType(material.program);
+  }
+  return material;
+};
 
 export const getCourseMaterialById = async (facultyId, materialId) =>
   CourseMaterial.findOne({ _id: materialId, faculty: facultyId }).populate("program", "title type");
@@ -185,14 +210,24 @@ export const listCourseMaterials = async (facultyId, filters = {}) => {
   return CourseMaterial.find(query).populate("program", "title type").sort({ createdAt: -1 });
 };
 
-export const updateCourseMaterial = async (facultyId, materialId, updates) =>
-  CourseMaterial.findOneAndUpdate({ _id: materialId, faculty: facultyId }, updates, { new: true, runValidators: true }).populate(
+export const updateCourseMaterial = async (facultyId, materialId, updates) => {
+  const material = await CourseMaterial.findOneAndUpdate({ _id: materialId, faculty: facultyId }, updates, { new: true, runValidators: true }).populate(
     "program",
     "title type"
   );
+  if (material && material.program) {
+    await recalculateProgramType(material.program._id || material.program);
+  }
+  return material;
+};
 
-export const deleteCourseMaterial = async (facultyId, materialId) =>
-  CourseMaterial.findOneAndDelete({ _id: materialId, faculty: facultyId });
+export const deleteCourseMaterial = async (facultyId, materialId) => {
+  const material = await CourseMaterial.findOneAndDelete({ _id: materialId, faculty: facultyId });
+  if (material && material.program) {
+    await recalculateProgramType(material.program);
+  }
+  return material;
+};
 
 export const createCourseModule = async (facultyId, payload) =>
   CourseModule.create({ faculty: facultyId, ...payload });
