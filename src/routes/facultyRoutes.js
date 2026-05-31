@@ -19,6 +19,7 @@ import {
   submitRating,
   updateCourseOverviewItem,
   createCourseItem,
+  deleteCourseItem,
   updateAssessmentItem,
   updateLiveClass,
   updateMaterial,
@@ -37,6 +38,7 @@ router.patch("/me", protectFaculty, updateMe);
 router.post("/me/courses", protectFaculty, createCourseItem);
 router.patch("/me/courses/:programId/overview", protectFaculty, updateCourseOverviewItem);
 router.get("/me/courses/:programId/structure", protectFaculty, getCourseStructureItem);
+router.delete("/me/courses/:programId", protectFaculty, deleteCourseItem);
 
 router.post("/me/upload", protectFaculty, uploadGenericFile, uploadGenericFileController);
 router.post("/me/materials", protectFaculty, uploadCourseMaterialFile, createMaterial);

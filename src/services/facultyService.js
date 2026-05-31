@@ -8,6 +8,7 @@ import Assessment from "../models/Assessment.js";
 import AssessmentScore from "../models/AssessmentScore.js";
 import FacultyRating from "../models/FacultyRating.js";
 import LiveProject from "../models/LiveProject.js";
+import { deleteFileFromS3 } from "../utils/aws.js";
 
 const recalculateProgramType = async (programId) => {
   const program = await Program.findById(programId);
@@ -335,4 +336,36 @@ export const submitFacultyRating = async (facultyId, payload) => {
   await recalculateFacultyRatingSummary(facultyId);
 
   return rating;
+};
+
+export const deleteCourse = async (facultyId, programId) => {
+  const program = await Program.findOne({ _id: programId, faculty: facultyId });
+  if (!program) {
+    return null;
+  }
+
+  // Get all materials first to delete their S3 files
+  const materials = await CourseMaterial.find({ program: programId });
+  for (const material of materials) {
+    if (material.fileUrl) {
+      await deleteFileFromS3(material.fileUrl).catch(() => {});
+    }
+    if (material.visualElements?.thumbnailUrl) {
+      await deleteFileFromS3(material.visualElements.thumbnailUrl).catch(() => {});
+    }
+  }
+
+  // Delete modules and materials from database
+  await CourseModule.deleteMany({ program: programId });
+  await CourseMaterial.deleteMany({ program: programId });
+
+  // Delete course cover image from S3 if present
+  if (program.coverImageUrl) {
+    await deleteFileFromS3(program.coverImageUrl).catch(() => {});
+  }
+
+  // Delete the program itself
+  await Program.findByIdAndDelete(programId);
+
+  return program;
 };

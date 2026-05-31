@@ -22,7 +22,8 @@ import {
   updateFacultyProfile,
   updateLiveClassSession,
   upsertAssessmentScore,
-  createCourse
+  createCourse,
+  deleteCourse
 } from "../services/facultyService.js";
 import { deleteFileFromS3, inferMaterialTypeFromMimeType, uploadBufferToS3 } from "../utils/aws.js";
 
@@ -353,6 +354,18 @@ export const uploadGenericFileController = async (req, res, next) => {
     });
 
     return res.json({ fileUrl: uploadResult.fileUrl });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const deleteCourseItem = async (req, res, next) => {
+  try {
+    const course = await deleteCourse(req.faculty._id, req.params.programId);
+    if (!course) {
+      return res.status(404).json({ message: "Course not found" });
+    }
+    return res.json({ message: "Course deleted successfully" });
   } catch (error) {
     return next(error);
   }
