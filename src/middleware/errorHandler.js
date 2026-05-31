@@ -10,11 +10,13 @@ export const errorHandler = (err, req, res, next) => {
   const isValidationUploadError = hasUploadErrorCode || err?.message?.includes("Unsupported file type");
 
   const statusCode =
-    res.statusCode === 200
+    err.statusCode ||
+    err.status ||
+    (res.statusCode === 200
       ? isValidationUploadError
         ? 400
         : 500
-      : res.statusCode;
+      : res.statusCode);
 
   res.status(statusCode).json({
     message: err.message,

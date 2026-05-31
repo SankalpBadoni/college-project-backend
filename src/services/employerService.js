@@ -1,4 +1,6 @@
 import Employer from "../models/Employer.js";
+import bcrypt from "bcryptjs";
+
 import JobPosting from "../models/JobPosting.js";
 import Program from "../models/Program.js";
 import Student from "../models/Student.js";
@@ -15,7 +17,8 @@ const allowedEmployerFields = [
   "industry",
   "about",
   "isApproved",
-  "approvedAt"
+  "approvedAt",
+  "password"
 ];
 
 const pick = (source, keys) =>
@@ -121,8 +124,29 @@ export const getEmployerDashboard = async (employerId) => {
 };
 
 export const updateEmployerProfile = async (employerId, updates) => {
+  if (updates.contactPerson?.email) {
+    const email = updates.contactPerson.email.toLowerCase().trim();
+    updates.contactPerson.email = email;
+    const exists = await Employer.findOne({ "contactPerson.email": email, _id: { $ne: employerId } });
+    if (exists) {
+      const error = new Error("Email is already taken by another employer");
+      error.statusCode = 400;
+      throw error;
+    }
+  }
+
   const payload = pick(updates, allowedEmployerFields);
-  return Employer.findByIdAndUpdate(employerId, payload, { new: true, runValidators: true });
+
+  if (payload.password) {
+    if (payload.password.length < 6) {
+      const error = new Error("Password must be at least 6 characters long");
+      error.statusCode = 400;
+      throw error;
+    }
+    payload.password = await bcrypt.hash(payload.password, 10);
+  }
+
+  return Employer.findByIdAndUpdate(employerId, payload, { new: true, runValidators: true }).select("-password");
 };
 
 export const createJobPosting = async (employerId, payload) => {

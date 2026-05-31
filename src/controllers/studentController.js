@@ -1,12 +1,20 @@
 import Student from "../models/Student.js";
+import bcrypt from "bcryptjs";
+
 
 export const getMyProfile = async (req, res, next) => {
   try {
     const student = await Student.findById(req.student._id)
       .select("-password")
       .populate("careerTestLatestAttempt")
-      .populate("cartItems.program")
-      .populate("favoriteItems.program");
+      .populate({
+        path: "cartItems.program",
+        populate: { path: "competencies", select: "name" }
+      })
+      .populate({
+        path: "favoriteItems.program",
+        populate: { path: "competencies", select: "name" }
+      });
 
     return res.json(student);
   } catch (error) {
@@ -16,10 +24,22 @@ export const getMyProfile = async (req, res, next) => {
 
 export const updateMyProfile = async (req, res, next) => {
   try {
-    const updates = req.body;
+    const updates = { ...req.body };
+
+    if (updates.email) {
+      const email = updates.email.toLowerCase().trim();
+      updates.email = email;
+      const exists = await Student.findOne({ email, _id: { $ne: req.student._id } });
+      if (exists) {
+        return res.status(400).json({ message: "Email is already taken by another student" });
+      }
+    }
 
     if (updates.password) {
-      delete updates.password;
+      if (updates.password.length < 6) {
+        return res.status(400).json({ message: "Password must be at least 6 characters long" });
+      }
+      updates.password = await bcrypt.hash(updates.password, 10);
     }
 
     const student = await Student.findByIdAndUpdate(req.student._id, updates, {

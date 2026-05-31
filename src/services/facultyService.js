@@ -1,4 +1,6 @@
 import Faculty from "../models/Faculty.js";
+import bcrypt from "bcryptjs";
+
 import Program from "../models/Program.js";
 import Enrollment from "../models/Enrollment.js";
 import CourseMaterial from "../models/CourseMaterial.js";
@@ -21,7 +23,7 @@ const recalculateProgramType = async (programId) => {
   await program.save();
 };
 
-const allowedFacultyFields = ["fullName", "email", "phone", "gender", "professionalProfile", "profile", "coursesOffered", "isApproved", "approvedAt"];
+const allowedFacultyFields = ["fullName", "email", "phone", "gender", "professionalProfile", "profile", "coursesOffered", "isApproved", "approvedAt", "password"];
 
 const pick = (source, keys) =>
   keys.reduce((accumulator, key) => {
@@ -105,7 +107,28 @@ export const getFacultyDashboard = async (facultyId) => {
 };
 
 export const updateFacultyProfile = async (facultyId, updates) => {
+  if (updates.email) {
+    const email = updates.email.toLowerCase().trim();
+    updates.email = email;
+    const exists = await Faculty.findOne({ email, _id: { $ne: facultyId } });
+    if (exists) {
+      const error = new Error("Email is already taken by another faculty member");
+      error.statusCode = 400;
+      throw error;
+    }
+  }
+
   const payload = pick(updates, allowedFacultyFields);
+
+  if (payload.password) {
+    if (payload.password.length < 6) {
+      const error = new Error("Password must be at least 6 characters long");
+      error.statusCode = 400;
+      throw error;
+    }
+    payload.password = await bcrypt.hash(payload.password, 10);
+  }
+
   return Faculty.findByIdAndUpdate(facultyId, payload, { new: true, runValidators: true }).select("-password");
 };
 

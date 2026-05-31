@@ -5,7 +5,10 @@ import Student from "../models/Student.js";
 export const listMyRecommendations = async (req, res, next) => {
   try {
     const recommendations = await Recommendation.find({ recipientStudent: req.student._id })
-      .populate("program")
+      .populate({
+        path: "program",
+        populate: { path: "competencies", select: "name" }
+      })
       .populate("sourceStudent", "fullName")
       .populate("sourceFaculty", "fullName")
       .sort({ createdAt: -1 });
@@ -60,7 +63,11 @@ export const generateSystemRecommendations = async (req, res, next) => {
       delete query.$or;
     }
 
-    const programs = await Program.find(query).limit(10);
+    const programs = await Program.find(query)
+      .populate("faculty", "fullName bio expertise experienceYears completedPrograms")
+      .populate("industry", "name")
+      .populate("competencies", "name")
+      .limit(10);
 
     const docs = [];
     for (const program of programs) {

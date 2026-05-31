@@ -5,7 +5,10 @@ export const getFavorites = async (req, res, next) => {
   try {
     const student = await Student.findById(req.student._id)
       .select("favoriteItems")
-      .populate("favoriteItems.program");
+      .populate({
+        path: "favoriteItems.program",
+        populate: { path: "competencies", select: "name" }
+      });
 
     return res.json({
       student: req.student._id,
@@ -34,7 +37,10 @@ export const addToFavorites = async (req, res, next) => {
       await student.save();
     }
 
-    await student.populate("favoriteItems.program");
+    await student.populate({
+      path: "favoriteItems.program",
+      populate: { path: "competencies", select: "name" }
+    });
     return res.json({
       message: "Program added to favorites",
       favorite: { student: student._id, items: student.favoriteItems }
@@ -56,7 +62,10 @@ export const removeFromFavorites = async (req, res, next) => {
       (item) => String(item.program) !== String(programId)
     );
     await student.save();
-    await student.populate("favoriteItems.program");
+    await student.populate({
+      path: "favoriteItems.program",
+      populate: { path: "competencies", select: "name" }
+    });
 
     return res.json({
       message: "Program removed from favorites",

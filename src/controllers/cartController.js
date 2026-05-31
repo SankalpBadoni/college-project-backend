@@ -5,7 +5,10 @@ export const getCart = async (req, res, next) => {
   try {
     const student = await Student.findById(req.student._id)
       .select("cartItems")
-      .populate("cartItems.program");
+      .populate({
+        path: "cartItems.program",
+        populate: { path: "competencies", select: "name" }
+      });
 
     return res.json({
       student: req.student._id,
@@ -34,7 +37,10 @@ export const addToCart = async (req, res, next) => {
       await student.save();
     }
 
-    await student.populate("cartItems.program");
+    await student.populate({
+      path: "cartItems.program",
+      populate: { path: "competencies", select: "name" }
+    });
     return res.json({
       message: "Program added to cart",
       cart: { student: student._id, items: student.cartItems }
@@ -54,7 +60,10 @@ export const removeFromCart = async (req, res, next) => {
 
     student.cartItems = student.cartItems.filter((item) => String(item.program) !== String(programId));
     await student.save();
-    await student.populate("cartItems.program");
+    await student.populate({
+      path: "cartItems.program",
+      populate: { path: "competencies", select: "name" }
+    });
 
     return res.json({
       message: "Program removed from cart",

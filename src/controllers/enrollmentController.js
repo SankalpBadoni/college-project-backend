@@ -82,7 +82,10 @@ export const getMyEnrollments = async (req, res, next) => {
     const enrollments = await Enrollment.find({ student: req.student._id })
       .populate({
         path: "program",
-        populate: { path: "faculty", select: "fullName bio experienceYears" }
+        populate: [
+          { path: "faculty", select: "fullName bio experienceYears" },
+          { path: "competencies", select: "name" }
+        ]
       })
       .sort({ createdAt: -1 });
 
