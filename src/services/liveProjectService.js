@@ -42,6 +42,11 @@ const toArray = (value) => {
   return [parsed];
 };
 
+const normalizeMilestone = (milestone) => ({
+  ...milestone,
+  competencies: toArray(milestone?.competencies)
+});
+
 const populateProjectQuery = (query) =>
   query
     .populate("createdBy", "fullName companyName email profile logoUrl")
@@ -50,6 +55,7 @@ const populateProjectQuery = (query) =>
     .populate("enrolledStudents.student", "fullName email profile")
     .populate("groups.leader", "fullName email profile")
     .populate("groups.members", "fullName email profile")
+    .populate("milestones.competencies", "name type")
     .populate("milestones.submissions.studentId", "fullName email profile");
 
 const populateProjectDocument = async (document) =>
@@ -60,13 +66,14 @@ const populateProjectDocument = async (document) =>
     { path: "enrolledStudents.student", select: "fullName email profile" },
     { path: "groups.leader", select: "fullName email profile" },
     { path: "groups.members", select: "fullName email profile" },
+    { path: "milestones.competencies", select: "name type" },
     { path: "milestones.submissions.studentId", select: "fullName email profile" }
   ]);
 
 const buildProjectPayload = (payload, creatorRole, creatorId) => ({
   title: payload.title,
   shortDescription: payload.shortDescription,
-  fullDescription: payload.fullDescription,
+  fullDescription: payload.fullDescription || payload.shortDescription || payload.title || "Live project description",
   bannerImage: payload.bannerImage,
   createdBy: creatorId,
   createdByModel: creatorRole === "faculty" ? "Faculty" : "Employer",
@@ -82,7 +89,7 @@ const buildProjectPayload = (payload, creatorRole, creatorId) => ({
   allowGroup: payload.allowGroup ?? true,
   allowIndividual: payload.allowIndividual ?? true,
   maxEnrollments: payload.maxEnrollments || 100,
-  milestones: toArray(payload.milestones),
+  milestones: toArray(payload.milestones).map(normalizeMilestone),
   evaluationCriteria: toArray(payload.evaluationCriteria),
   prerequisites: toArray(payload.prerequisites),
   toolsRequired: toArray(payload.toolsRequired),
@@ -351,7 +358,7 @@ export const updateLiveProjectRecord = async (user, userRole, projectId, updates
   }
 
   if (payload.milestones !== undefined) {
-    payload.milestones = toArray(payload.milestones);
+    payload.milestones = toArray(payload.milestones).map(normalizeMilestone);
   }
 
   if (payload.evaluationCriteria !== undefined) {
@@ -468,6 +475,7 @@ export const addMilestoneToLiveProject = async (user, userRole, projectId, paylo
     description: payload.description,
     dueDate: payload.dueDate,
     deliverable: payload.deliverable,
+    competencies: toArray(payload.competencies),
     submissions: []
   });
 
@@ -493,6 +501,12 @@ export const submitLiveProjectMilestone = async (studentId, projectId, milestone
     demoLink: payload.demoLink,
     notes: payload.notes,
     files: toArray(payload.files),
+    competencyScores: toArray(payload.competencyScores).map((item) => ({
+      competency: item.competency,
+      name: item.name,
+      score: Number(item.score || 0),
+      feedback: item.feedback
+    })),
     score: payload.score || 0,
     feedback: payload.feedback,
     status: payload.status || "submitted"
@@ -521,9 +535,19 @@ export const reviewLiveProjectSubmission = async (facultyId, submissionId, paylo
   project.milestones.forEach((milestone) => {
     const submission = milestone.submissions.id(submissionId);
     if (submission) {
+      const competencyScores = toArray(payload.competencyScores).map((item) => ({
+        competency: item.competency,
+        name: item.name,
+        score: Number(item.score || 0),
+        feedback: item.feedback
+      }));
       submission.score = payload.score ?? submission.score;
       submission.feedback = payload.feedback ?? submission.feedback;
       submission.status = payload.status || "reviewed";
+      submission.competencyScores = competencyScores.length > 0 ? competencyScores : submission.competencyScores || [];
+      if (competencyScores.length > 0 && payload.score === undefined) {
+        submission.score = Math.round(competencyScores.reduce((sum, item) => sum + Number(item.score || 0), 0) / competencyScores.length);
+      }
       targetSubmission = submission;
     }
   });

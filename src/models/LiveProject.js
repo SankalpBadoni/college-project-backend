@@ -8,6 +8,15 @@ const submissionSchema = new mongoose.Schema(
     demoLink: { type: String, trim: true },
     notes: { type: String, trim: true },
     files: [{ type: String, trim: true }],
+    competencyScores: [
+      {
+        competency: { type: mongoose.Schema.Types.ObjectId, ref: "Competency" },
+        name: { type: String, trim: true },
+        fulfilled: { type: Boolean, default: false },
+        score: { type: Number, default: 0, min: 0, max: 100 },
+        feedback: { type: String, trim: true }
+      }
+    ],
     submittedAt: { type: Date, default: Date.now },
     score: { type: Number, default: 0, min: 0 },
     feedback: { type: String, trim: true },
@@ -22,6 +31,7 @@ const milestoneSchema = new mongoose.Schema(
     description: { type: String, trim: true },
     dueDate: { type: Date, required: true },
     deliverable: { type: String, trim: true },
+    competencies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Competency", default: [] }],
     submissions: { type: [submissionSchema], default: [] }
   },
   { _id: true }
