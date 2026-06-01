@@ -9,7 +9,7 @@ const courseMaterialSchema = new mongoose.Schema(
     description: { type: String, trim: true },
     moduleName: { type: String, trim: true },
     fileUrl: { type: String, required: true, trim: true },
-    fileType: { type: String, enum: ["pdf", "ppt", "video", "link", "doc", "slides", "infographic_static", "infographic_animated", "assessment", "quiz", "assignment", "live_project", "live_class", "youtube", "other"], default: "other" },
+    fileType: { type: String, enum: ["pdf", "ppt", "video", "link", "doc", "slides", "infographic_static", "infographic_animated", "assessment", "quiz", "assignment", "live_project", "live_class", "youtube", "article", "other"], default: "other" },
     phase: { type: String, enum: ["pre", "mid", "post", "ongoing"], default: "mid" },
     materialKind: { type: String, enum: ["ppt", "pdf", "infographic_static", "infographic_animated", "video", "live_project", "assessment", "quiz", "assignment", "notes", "live_class", "other"], default: "other" },
     assetStyle: { type: String, enum: ["static", "animated", "interactive", "document", "video", "live", "live_class"], default: "document" },
