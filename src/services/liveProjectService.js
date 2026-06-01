@@ -521,14 +521,14 @@ export const submitLiveProjectMilestone = async (studentId, projectId, milestone
   return populateProjectDocument(project);
 };
 
-export const reviewLiveProjectSubmission = async (facultyId, submissionId, payload) => {
+export const reviewLiveProjectSubmission = async (reviewerId, reviewerRole, submissionId, payload) => {
   const project = await LiveProject.findOne({ "milestones.submissions._id": submissionId });
   if (!project) {
     return null;
   }
 
-  if (project.creatorRole !== "faculty" || String(project.createdBy) !== String(facultyId)) {
-    throw new Error("Only the faculty creator can review submissions");
+  if (String(project.createdBy) !== String(reviewerId) || project.creatorRole !== reviewerRole) {
+    throw new Error("Only the project creator can review submissions");
   }
 
   let targetSubmission = null;

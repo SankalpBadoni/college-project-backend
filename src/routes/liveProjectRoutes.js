@@ -12,7 +12,7 @@ import {
 	submitMilestone,
 	updateLiveProject
 } from "../controllers/liveProjectController.js";
-import { protectAccount, protectFaculty, protectStudent } from "../middleware/auth.js";
+import { protectAccount, protectStudent } from "../middleware/auth.js";
 
 const router = Router();
 
@@ -29,6 +29,6 @@ router.post("/:id/apply", protectStudent, applyToLiveProject);
 router.post("/:id/join-group", protectStudent, joinGroup);
 router.post("/:id/milestone", protectAccount, addMilestone);
 router.post("/:id/submit/:milestoneId", protectStudent, submitMilestone);
-router.post("/review/:submissionId", protectFaculty, reviewSubmission);
+router.post("/review/:submissionId", protectAccount, reviewSubmission);
 
 export default router;

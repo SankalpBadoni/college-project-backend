@@ -112,7 +112,7 @@ export const submitMilestone = async (req, res, next) => {
 
 export const reviewSubmission = async (req, res, next) => {
   try {
-    const project = await reviewLiveProjectSubmission(req.faculty._id, req.params.submissionId, req.body);
+    const project = await reviewLiveProjectSubmission(req.user._id, req.userRole, req.params.submissionId, req.body);
     return sendProjectResponse(res, project, 200, "Submission reviewed");
   } catch (error) {
     return next(error);
