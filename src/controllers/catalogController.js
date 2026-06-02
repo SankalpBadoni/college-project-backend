@@ -63,7 +63,7 @@ export const getProgramDetails = async (req, res, next) => {
     });
 
     let courseStructure = null;
-    if (program.type === "course") {
+    if (program.type === "course" || program.type === "live_course") {
       const [modules, materials] = await Promise.all([
         CourseModule.find({ program: program._id }).sort({ order: 1, createdAt: 1 }),
         CourseMaterial.find({ program: program._id }).sort({ createdAt: 1 })

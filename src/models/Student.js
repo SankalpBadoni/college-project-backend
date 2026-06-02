@@ -43,6 +43,7 @@ const studentSchema = new mongoose.Schema(
       careerIcon: { type: String, default: "💼" },
       dreamJobUrl: { type: String, default: "" }
     },
+    profilePicture: { type: String, trim: true },
     credits: { type: Number, default: 0, min: 0 },
     preferredJobs: { type: [preferredJobSchema], default: [] },
     favoriteItems: { type: [studentProgramItemSchema], default: [] },

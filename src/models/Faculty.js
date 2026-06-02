@@ -22,6 +22,7 @@ const facultySchema = new mongoose.Schema(
     phone: { type: String, required: true, trim: true },
     gender: { type: String, enum: ["Male", "Female", "Other"], required: true },
     role: { type: String, default: "faculty", enum: ["faculty"] },
+    profilePicture: { type: String, trim: true },
     
     professionalProfile: {
       describesBest: { type: String, required: true },

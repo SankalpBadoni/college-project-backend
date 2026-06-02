@@ -352,7 +352,7 @@ export const uploadGenericFileController = async (req, res, next) => {
       return res.status(400).json({ message: "No file uploaded" });
     }
 
-    const userId = req.faculty?._id || req.employer?._id || req.user?._id || 'anonymous';
+    const userId = req.student?._id || req.faculty?._id || req.employer?._id || req.user?._id || 'anonymous';
     const uploadResult = await uploadBufferToS3({
       buffer: req.file.buffer,
       originalName: req.file.originalname,

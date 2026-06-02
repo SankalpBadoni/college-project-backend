@@ -23,7 +23,7 @@ const recalculateProgramType = async (programId) => {
   await program.save();
 };
 
-const allowedFacultyFields = ["fullName", "email", "phone", "gender", "professionalProfile", "profile", "coursesOffered", "isApproved", "approvedAt", "password"];
+const allowedFacultyFields = ["fullName", "email", "phone", "gender", "professionalProfile", "profile", "coursesOffered", "isApproved", "approvedAt", "password", "profilePicture"];
 
 const pick = (source, keys) =>
   keys.reduce((accumulator, key) => {
@@ -86,7 +86,8 @@ export const getFacultyDashboard = async (facultyId) => {
           gender: faculty.gender,
           profile: faculty.profile,
           professionalProfile: faculty.professionalProfile,
-          ratingSummary: faculty.ratingSummary
+          ratingSummary: faculty.ratingSummary,
+          profilePicture: faculty.profilePicture
         }
       : null,
     stats: {

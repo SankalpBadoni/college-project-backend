@@ -3,6 +3,7 @@ import Student from "../models/Student.js";
 import generateToken from "../utils/token.js";
 import Faculty from "../models/Faculty.js";
 import Employer from "../models/Employer.js";
+import { uploadBase64ToS3 } from "../utils/aws.js";
 
 const sanitizeEmail = (email) => email?.toLowerCase().trim();
 
@@ -27,7 +28,7 @@ const loginWithModel = async (res, model, findQuery, password, responseKey, resp
 
 export const registerStudent = async (req, res, next) => {
   try {
-    const { fullName, email, password, phone, profile, preferredJobs = [], strengths, weaknesses } = req.body;
+    const { fullName, email, password, phone, profile, preferredJobs = [], strengths, weaknesses, profilePicture } = req.body;
 
     if (!profile?.collegeId || !profile?.studentId) {
       return res.status(400).json({ message: "collegeId and studentId are mandatory" });
@@ -38,6 +39,11 @@ export const registerStudent = async (req, res, next) => {
       return res.status(400).json({ message: "Student already registered with this email" });
     }
 
+    let s3ProfilePicture = "";
+    if (profilePicture) {
+      s3ProfilePicture = await uploadBase64ToS3(profilePicture, "students/avatars");
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const student = await Student.create({
       fullName,
@@ -45,6 +51,7 @@ export const registerStudent = async (req, res, next) => {
       password: hashedPassword,
       phone,
       profile,
+      profilePicture: s3ProfilePicture,
       preferredJobs,
       strengths: strengths || {},
       weaknesses: weaknesses || {}
@@ -59,7 +66,8 @@ export const registerStudent = async (req, res, next) => {
         email: student.email,
         profile: student.profile,
         preferredJobs: student.preferredJobs,
-        credits: student.credits
+        credits: student.credits,
+        profilePicture: student.profilePicture
       }
     });
   } catch (error) {
@@ -82,7 +90,8 @@ export const loginStudent = async (req, res, next) => {
         email: student.email,
         profile: student.profile,
         preferredJobs: student.preferredJobs,
-        credits: student.credits
+        credits: student.credits,
+        profilePicture: student.profilePicture
       })
     );
   } catch (error) {
@@ -92,11 +101,16 @@ export const loginStudent = async (req, res, next) => {
 
 export const registerFaculty = async (req, res, next) => {
   try {
-    const { fullName, email, password, phone, gender, professionalProfile, coursesOffered } = req.body;
+    const { fullName, email, password, phone, gender, professionalProfile, coursesOffered, profilePicture } = req.body;
 
     const exists = await Faculty.findOne({ email: sanitizeEmail(email) });
     if (exists) {
       return res.status(400).json({ message: "Faculty already registered with this email" });
+    }
+
+    let s3ProfilePicture = "";
+    if (profilePicture) {
+      s3ProfilePicture = await uploadBase64ToS3(profilePicture, "faculty/avatars");
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -108,6 +122,7 @@ export const registerFaculty = async (req, res, next) => {
       gender,
       professionalProfile,
       coursesOffered,
+      profilePicture: s3ProfilePicture,
       isApproved: false
     });
 
@@ -119,7 +134,8 @@ export const registerFaculty = async (req, res, next) => {
         fullName: faculty.fullName,
         email: faculty.email,
         role: faculty.role,
-        isApproved: faculty.isApproved
+        isApproved: faculty.isApproved,
+        profilePicture: faculty.profilePicture
       }
     });
   } catch (error) {
@@ -136,6 +152,11 @@ export const registerEmployer = async (req, res, next) => {
       return res.status(400).json({ message: "Employer already registered with this email" });
     }
 
+    let s3LogoUrl = "";
+    if (logoUrl) {
+      s3LogoUrl = await uploadBase64ToS3(logoUrl, "employers/logos");
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const employer = await Employer.create({
       companyName,
@@ -146,7 +167,7 @@ export const registerEmployer = async (req, res, next) => {
         email: sanitizeEmail(contactPerson?.email)
       },
       password: hashedPassword,
-      logoUrl,
+      logoUrl: s3LogoUrl || logoUrl,
       isApproved: false
     });
 
@@ -182,7 +203,8 @@ export const loginFaculty = async (req, res, next) => {
         fullName: faculty.fullName,
         email: faculty.email,
         role: faculty.role,
-        isApproved: faculty.isApproved
+        isApproved: faculty.isApproved,
+        profilePicture: faculty.profilePicture
       })
     );
   } catch (error) {

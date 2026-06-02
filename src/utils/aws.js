@@ -172,4 +172,34 @@ export const deleteFileFromS3 = async (fileUrl) => {
   return true;
 };
 
+export const uploadBase64ToS3 = async (base64String, folder = "avatars") => {
+  if (!base64String || typeof base64String !== "string" || !base64String.startsWith("data:")) {
+    return base64String;
+  }
+
+  try {
+    const matches = base64String.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+    if (!matches || matches.length !== 3) {
+      return base64String;
+    }
+
+    const mimeType = matches[1];
+    const buffer = Buffer.from(matches[2], "base64");
+    const extension = extensionByMimeType[mimeType] || ".png";
+    const originalName = `upload-${Date.now()}${extension}`;
+
+    const uploadResult = await uploadBufferToS3({
+      buffer,
+      originalName,
+      mimeType,
+      folder
+    });
+
+    return uploadResult.fileUrl;
+  } catch (error) {
+    console.error("Error in uploadBase64ToS3:", error);
+    return base64String;
+  }
+};
+
 export const isS3Ready = () => isAwsConfigured();
