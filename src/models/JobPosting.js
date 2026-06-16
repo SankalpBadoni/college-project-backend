@@ -93,6 +93,7 @@ const jobPostingSchema = new mongoose.Schema(
       bannerVideoUrl: { type: String, trim: true },
       accentColor: { type: String, trim: true }
     },
+    jdUrl: { type: String, trim: true },
     shortlistedStudents: [
       {
         student: { type: mongoose.Schema.Types.ObjectId, ref: "Student" },

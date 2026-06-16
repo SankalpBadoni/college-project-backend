@@ -189,6 +189,7 @@ export const createJobPosting = async (employerId, payload) => {
     shortlistingNotes: payload.shortlistingNotes,
     tagType: payload.tagType || "normal",
     visualElements: payload.visualElements || {},
+    jdUrl: payload.jdUrl,
     isActive: payload.isActive ?? true
   };
 
@@ -242,6 +243,7 @@ export const updateEmployerPosting = async (employerId, postingId, updates) => {
     "shortlistingNotes",
     "tagType",
     "visualElements",
+    "jdUrl",
     "isActive"
   ]);
 

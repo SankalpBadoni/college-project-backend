@@ -145,7 +145,7 @@ export const registerFaculty = async (req, res, next) => {
 
 export const registerEmployer = async (req, res, next) => {
   try {
-    const { companyName, divisionDept, approvingAuthority, contactPerson, password, logoUrl } = req.body;
+    const { companyName, divisionDept, approvingAuthority, contactPerson, password, logoUrl, website } = req.body;
 
     const exists = await Employer.findOne({ "contactPerson.email": sanitizeEmail(contactPerson?.email) });
     if (exists) {
@@ -168,6 +168,7 @@ export const registerEmployer = async (req, res, next) => {
       },
       password: hashedPassword,
       logoUrl: s3LogoUrl || logoUrl,
+      website,
       isApproved: false
     });
 
@@ -180,6 +181,7 @@ export const registerEmployer = async (req, res, next) => {
         contactEmail: employer.contactPerson.email,
         role: employer.role,
         logoUrl: employer.logoUrl,
+        website: employer.website,
         isApproved: employer.isApproved
       }
     });
@@ -229,6 +231,7 @@ export const loginEmployer = async (req, res, next) => {
         role: employer.role,
         tier: employer.tier,
         logoUrl: employer.logoUrl,
+        website: employer.website,
         isApproved: employer.isApproved
       })
     );

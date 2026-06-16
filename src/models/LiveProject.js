@@ -81,6 +81,7 @@ const liveProjectSchema = new mongoose.Schema(
     createdBy: { type: mongoose.Schema.Types.ObjectId, required: true, refPath: "createdByModel" },
     creatorRole: { type: String, enum: ["faculty", "employer"], required: true },
     employerLogo: { type: String, trim: true },
+    descriptionPdfUrl: { type: String, trim: true },
     companyName: { type: String, trim: true },
     hiringOpportunity: { type: Boolean, default: false },
     linkedCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Program" }],
