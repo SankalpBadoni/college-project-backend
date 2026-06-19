@@ -9,7 +9,7 @@ const assessmentQuestionSchema = new mongoose.Schema(
     },
     section: {
       type: String,
-      enum: ["strengths", "weaknesses"],
+      enum: ["strengths", "weaknesses", "communication"],
       required: true,
       index: true,
     },
