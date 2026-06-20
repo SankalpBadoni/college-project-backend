@@ -1,48 +1,52 @@
-import mongoose from "mongoose";
 import dotenv from "dotenv";
 import connectDB from "./src/config/db.js";
 import AssessmentQuestion from "./src/models/AssessmentQuestion.js";
-import { assessmentQuestions } from "./src/data/assessmentQuestionsData.js";
+
+import {
+  strengthsAssessmentQuestions,
+} from "./src/data/strengthsAssessmentQuestions.js";
+
+import {
+  weaknessQuestions,
+} from "./src/data/weaknessQuestions.js";
 
 dotenv.config();
 
 const seedAssessmentQuestions = async () => {
   try {
-    // Connect to MongoDB
     console.log("🔄 Connecting to MongoDB...");
     await connectDB();
     console.log("✅ Connected to MongoDB");
 
-    // Clear existing questions
-    console.log("🗑️ Clearing existing assessment questions...");
-    await AssessmentQuestion.deleteMany({});
-    console.log("✅ Cleared existing questions");
+    // Merge both arrays
+    const questions = [
+      ...strengthsAssessmentQuestions,
+      ...weaknessQuestions,
+    ];
 
-    // Insert new questions
-    console.log("📝 Seeding assessment questions...");
-    const insertedQuestions = await AssessmentQuestion.insertMany(
-      assessmentQuestions
-    );
+    console.log(`📝 Inserting ${questions.length} questions...`);
+
+    const insertedQuestions =
+      await AssessmentQuestion.insertMany(questions);
+
     console.log(
-      `✅ Successfully seeded ${insertedQuestions.length} questions`
+      `✅ Successfully inserted ${insertedQuestions.length} questions`
     );
 
-    // Log summary
-    console.log("\n📊 Seed Summary:");
-    const strengthQuestions = await AssessmentQuestion.countDocuments({
-      section: "strengths",
-    });
-    const weaknessQuestions = await AssessmentQuestion.countDocuments({
-      section: "weaknesses",
-    });
+    const strengthCount =
+      await AssessmentQuestion.countDocuments({
+        section: "strengths",
+      });
 
-    console.log(`   Strength Questions: ${strengthQuestions}`);
-    console.log(`   Weakness Questions: ${weaknessQuestions}`);
-    console.log(
-      `   Total Questions: ${strengthQuestions + weaknessQuestions}`
-    );
+    const weaknessCount =
+      await AssessmentQuestion.countDocuments({
+        section: "weaknesses",
+      });
 
-    console.log("\n✨ Assessment questions seeded successfully!");
+    console.log("\n📊 Summary:");
+    console.log(`   Strength Questions: ${strengthCount}`);
+    console.log(`   Weakness Questions: ${weaknessCount}`);
+    console.log(`   Total Questions: ${strengthCount + weaknessCount}`);
 
     process.exit(0);
   } catch (error) {
@@ -51,5 +55,4 @@ const seedAssessmentQuestions = async () => {
   }
 };
 
-// Run the seed
 seedAssessmentQuestions();

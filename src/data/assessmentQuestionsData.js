@@ -3,19 +3,433 @@
  * Contains all questions for both Strengths and Weaknesses sections
  */
 
-export const assessmentQuestions = [
-  // ============= STRENGTHS SECTION =============
+// export const assessmentQuestions = [
+//   // ============= STRENGTHS SECTION =============
+
+//   {
+//     questionId: 1,
+//     section: "strengths",
+//     questionText:
+//       "Which of the following best describes your professional strength?",
+//     options: [
+//       {
+//         code: "A",
+//         title: "Risk taker",
+//         description: "I readily explore new opportunities and challenges.",
+//         personality: "Butterfly",
+//       },
+//       {
+//         code: "B",
+//         title: "Flexible",
+//         description:
+//           "I adapt quickly if seniors ask me to, but the rules must be given in writing.",
+//         personality: "Dove",
+//       },
+//       {
+//         code: "C",
+//         title: "Enthusiastic",
+//         description: "I bring energy to new tasks and people.",
+//         personality: "Lion",
+//       },
+//       {
+//         code: "D",
+//         title: "Evaluator",
+//         description:
+//           "I take a lot of time to change and evaluate pros and cons before deciding.",
+//         personality: "Owl",
+//       },
+//     ],
+//   },
+//   {
+//     questionId: 2,
+//     section: "strengths",
+//     questionText: "How do you typically handle challenges at work?",
+//     options: [
+//       {
+//         code: "A",
+//         title: "I keep trying",
+//         description: "I persist even when work gets difficult.",
+//         personality: "Butterfly",
+//       },
+//       {
+//         code: "B",
+//         title: "Excited",
+//         description: "I show energy when starting new work.",
+//         personality: "Dove",
+//       },
+//       {
+//         code: "C",
+//         title: "Persuasive",
+//         description: "I influence others to consider my viewpoint.",
+//         personality: "Lion",
+//       },
+//       {
+//         code: "D",
+//         title: "Peaceful",
+//         description: "I stay calm during workplace disagreements.",
+//         personality: "Owl",
+//       },
+//     ],
+//   },
+//   {
+//     questionId: 3,
+//     section: "strengths",
+//     questionText: "What is your relationship with rules and guidelines?",
+//     options: [
+//       {
+//         code: "A",
+//         title: "Submissive to rules",
+//         description: "I follow rules and advice from seniors exactly.",
+//         personality: "Butterfly",
+//       },
+//       {
+//         code: "B",
+//         title: "Self-sacrificing",
+//         description: "I put team needs ahead of mine.",
+//         personality: "Dove",
+//       },
+//       {
+//         code: "C",
+//         title: "Sociable",
+//         description: "I enjoy interacting with colleagues and clients.",
+//         personality: "Lion",
+//       },
+//       {
+//         code: "D",
+//         title: "Strong-willed",
+//         description: "I firmly pursue what I believe is right.",
+//         personality: "Owl",
+//       },
+//     ],
+//   },
+//   {
+//     questionId: 4,
+//     section: "strengths",
+//     questionText: "How would colleagues describe your work approach?",
+//     options: [
+//       {
+//         code: "A",
+//         title: "Considerate",
+//         description: "I respect others' feelings while working together.",
+//         personality: "Butterfly",
+//       },
+//       {
+//         code: "B",
+//         title: "Controlled",
+//         description: "I manage my emotions in work situations.",
+//         personality: "Dove",
+//       },
+//       {
+//         code: "C",
+//         title: "Competitive",
+//         description: "I strive to perform better than others.",
+//         personality: "Lion",
+//       },
+//       {
+//         code: "D",
+//         title: "Convincing",
+//         description: "I explain ideas clearly to gain agreement.",
+//         personality: "Owl",
+//       },
+//     ],
+//   },
+//   {
+//     questionId: 5,
+//     section: "strengths",
+//     questionText: "How do you maintain personal integrity?",
+//     options: [
+//       {
+//         code: "A",
+//         title: "Humble",
+//         description: "I stay grounded even after success.",
+//         personality: "Butterfly",
+//       },
+//       {
+//         code: "B",
+//         title: "Optimistic",
+//         description: "I usually expect positive outcomes.",
+//         personality: "Dove",
+//       },
+//       {
+//         code: "C",
+//         title: "Outspoken",
+//         description: "I openly express my thoughts and opinions.",
+//         personality: "Lion",
+//       },
+//       {
+//         code: "D",
+//         title: "Systematic",
+//         description: "I follow organized methods to complete work.",
+//         personality: "Owl",
+//       },
+//     ],
+//   },
+//   {
+//     questionId: 6,
+//     section: "strengths",
+//     questionText: "What is your natural work pace?",
+//     options: [
+//       {
+//         code: "A",
+//         title: "Patient",
+//         description: "I remain calm while waiting for results.",
+//         personality: "Butterfly",
+//       },
+//       {
+//         code: "B",
+//         title: "Friendly",
+//         description: "I easily connect with people around me.",
+//         personality: "Dove",
+//       },
+//       {
+//         code: "C",
+//         title: "Confident",
+//         description: "I trust my decisions and abilities.",
+//         personality: "Lion",
+//       },
+//       {
+//         code: "D",
+//         title: "Careful",
+//         description: "I pay attention to details before acting.",
+//         personality: "Owl",
+//       },
+//     ],
+//   },
+//   {
+//     questionId: 7,
+//     section: "strengths",
+//     questionText: "How would you characterize your reliability?",
+//     options: [
+//       {
+//         code: "A",
+//         title: "Dependable",
+//         description: "People can rely on me to complete tasks.",
+//         personality: "Butterfly",
+//       },
+//       {
+//         code: "B",
+//         title: "Helpful",
+//         description: "I enjoy supporting others in their work.",
+//         personality: "Dove",
+//       },
+//       {
+//         code: "C",
+//         title: "Ambitious",
+//         description: "I continuously aim for bigger achievements.",
+//         personality: "Lion",
+//       },
+//       {
+//         code: "D",
+//         title: "Analytical",
+//         description: "I carefully analyze situations before deciding.",
+//         personality: "Owl",
+//       },
+//     ],
+//   },
+//   {
+//     questionId: 8,
+//     section: "strengths",
+//     questionText: "What drives your professional commitment?",
+//     options: [
+//       {
+//         code: "A",
+//         title: "Loyal",
+//         description: "I stay committed to my team and goals.",
+//         personality: "Butterfly",
+//       },
+//       {
+//         code: "B",
+//         title: "Supportive",
+//         description: "I encourage and motivate others.",
+//         personality: "Dove",
+//       },
+//       {
+//         code: "C",
+//         title: "Decisive",
+//         description: "I make decisions quickly and confidently.",
+//         personality: "Lion",
+//       },
+//       {
+//         code: "D",
+//         title: "Logical",
+//         description: "I rely on logic and facts while working.",
+//         personality: "Owl",
+//       },
+//     ],
+//   },
+
+//   // ============= WEAKNESSES SECTION =============
+
+//   {
+//     questionId: 1,
+//     section: "weaknesses",
+//     questionText: "Which of the following sometimes challenges you?",
+//     options: [
+//       {
+//         code: "A",
+//         title: "Indecisive",
+//         description: "I struggle to make quick decisions.",
+//         personality: "Butterfly",
+//       },
+//       {
+//         code: "B",
+//         title: "Too Emotional",
+//         description: "My emotions sometimes affect my judgment.",
+//         personality: "Dove",
+//       },
+//       {
+//         code: "C",
+//         title: "Dominating",
+//         description: "I can become overly controlling in teams.",
+//         personality: "Lion",
+//       },
+//       {
+//         code: "D",
+//         title: "Overthinking",
+//         description: "I spend too much time analyzing situations.",
+//         personality: "Owl",
+//       },
+//     ],
+//   },
+//   {
+//     questionId: 2,
+//     section: "weaknesses",
+//     questionText: "How do you respond to difficult interpersonal situations?",
+//     options: [
+//       {
+//         code: "A",
+//         title: "Avoids Conflict",
+//         description: "I try to escape difficult confrontations.",
+//         personality: "Butterfly",
+//       },
+//       {
+//         code: "B",
+//         title: "Overly Sensitive",
+//         description: "Criticism affects me deeply.",
+//         personality: "Dove",
+//       },
+//       {
+//         code: "C",
+//         title: "Impatient",
+//         description: "I get frustrated when things move slowly.",
+//         personality: "Lion",
+//       },
+//       {
+//         code: "D",
+//         title: "Perfectionist",
+//         description: "I expect everything to be flawless.",
+//         personality: "Owl",
+//       },
+//     ],
+//   },
+//   {
+//     questionId: 3,
+//     section: "weaknesses",
+//     questionText: "What is an area where you sometimes fall short?",
+//     options: [
+//       {
+//         code: "A",
+//         title: "Passive",
+//         description: "I sometimes hesitate to take initiative.",
+//         personality: "Butterfly",
+//       },
+//       {
+//         code: "B",
+//         title: "People Pleaser",
+//         description: "I prioritize others over myself too much.",
+//         personality: "Dove",
+//       },
+//       {
+//         code: "C",
+//         title: "Aggressive",
+//         description: "I can become too forceful in discussions.",
+//         personality: "Lion",
+//       },
+//       {
+//         code: "D",
+//         title: "Detached",
+//         description: "I sometimes appear emotionally distant.",
+//         personality: "Owl",
+//       },
+//     ],
+//   },
+//   {
+//     questionId: 4,
+//     section: "weaknesses",
+//     questionText: "How do you experience self-doubt?",
+//     options: [
+//       {
+//         code: "A",
+//         title: "Uncertain",
+//         description: "I frequently doubt my choices.",
+//         personality: "Butterfly",
+//       },
+//       {
+//         code: "B",
+//         title: "Dependent",
+//         description: "I rely too much on others for reassurance.",
+//         personality: "Dove",
+//       },
+//       {
+//         code: "C",
+//         title: "Stubborn",
+//         description: "I resist changing my opinions.",
+//         personality: "Lion",
+//       },
+//       {
+//         code: "D",
+//         title: "Critical",
+//         description: "I can be overly judgmental of mistakes.",
+//         personality: "Owl",
+//       },
+//     ],
+//   },
+//   {
+//     questionId: 5,
+//     section: "weaknesses",
+//     questionText: "What limitation sometimes holds you back?",
+//     options: [
+//       {
+//         code: "A",
+//         title: "Fearful",
+//         description: "I hesitate due to fear of failure.",
+//         personality: "Butterfly",
+//       },
+//       {
+//         code: "B",
+//         title: "Overcommitted",
+//         description: "I take on too many responsibilities.",
+//         personality: "Dove",
+//       },
+//       {
+//         code: "C",
+//         title: "Controlling",
+//         description: "I try to manage everything myself.",
+//         personality: "Lion",
+//       },
+//       {
+//         code: "D",
+//         title: "Rigid",
+//         description: "I struggle to adapt to sudden changes.",
+//         personality: "Owl",
+//       },
+//     ],
+//   },
+// ];
+export const strengthsAssessmentQuestions = [
+  // ================= STRENGTHS =================
 
   {
     questionId: 1,
     section: "strengths",
     questionText:
-      "Which of the following best describes your professional strength?",
+      "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
     options: [
       {
         code: "A",
         title: "Risk taker",
-        description: "I readily explore new opportunities and challenges.",
+        description:
+          "I readily explore new opportunities and challenges.",
         personality: "Butterfly",
       },
       {
@@ -28,7 +442,8 @@ export const assessmentQuestions = [
       {
         code: "C",
         title: "Enthusiastic",
-        description: "I bring energy to new tasks and people.",
+        description:
+          "I bring energy to new tasks and people.",
         personality: "Lion",
       },
       {
@@ -40,382 +455,1446 @@ export const assessmentQuestions = [
       },
     ],
   },
+
   {
     questionId: 2,
     section: "strengths",
-    questionText: "How do you typically handle challenges at work?",
+    questionText:
+      "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
     options: [
       {
         code: "A",
         title: "I keep trying",
-        description: "I persist even when work gets difficult.",
+        description:
+          "I persist even when work gets difficult.",
         personality: "Butterfly",
       },
       {
         code: "B",
         title: "Excited",
-        description: "I show energy when starting new work.",
+        description:
+          "I show energy when starting new work.",
         personality: "Dove",
       },
       {
         code: "C",
         title: "Persuasive",
-        description: "I influence others to consider my viewpoint.",
+        description:
+          "I influence others to consider my viewpoint.",
         personality: "Lion",
       },
       {
         code: "D",
         title: "Peaceful",
-        description: "I stay calm during workplace disagreements.",
+        description:
+          "I stay calm during workplace disagreements.",
         personality: "Owl",
       },
     ],
   },
+
   {
     questionId: 3,
     section: "strengths",
-    questionText: "What is your relationship with rules and guidelines?",
+    questionText:
+      "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
     options: [
       {
         code: "A",
         title: "Submissive to rules",
-        description: "I follow rules and advice from seniors exactly.",
+        description:
+          "I follow rules and advice from seniors exactly.",
         personality: "Butterfly",
       },
       {
         code: "B",
         title: "Self-sacrificing",
-        description: "I put team needs ahead of mine.",
+        description:
+          "I put team needs ahead of mine.",
         personality: "Dove",
       },
       {
         code: "C",
         title: "Sociable",
-        description: "I enjoy interacting with colleagues and clients.",
+        description:
+          "I enjoy interacting with colleagues and clients.",
         personality: "Lion",
       },
       {
         code: "D",
         title: "Strong-willed",
-        description: "I firmly pursue what I believe is right.",
+        description:
+          "I firmly pursue what I believe is right.",
         personality: "Owl",
       },
     ],
   },
+
   {
     questionId: 4,
     section: "strengths",
-    questionText: "How would colleagues describe your work approach?",
+    questionText:
+      "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
     options: [
       {
         code: "A",
         title: "Considerate",
-        description: "I respect others' feelings while working together.",
+        description:
+          "I respect others' feelings while working together.",
         personality: "Butterfly",
       },
       {
         code: "B",
         title: "Controlled",
-        description: "I manage my emotions in work situations.",
+        description:
+          "I manage my emotions in work situations.",
         personality: "Dove",
       },
       {
         code: "C",
         title: "Competitive",
-        description: "I strive to perform better than others.",
+        description:
+          "I strive to perform better than others.",
         personality: "Lion",
       },
       {
         code: "D",
         title: "Convincing",
-        description: "I explain ideas clearly to gain agreement.",
+        description:
+          "I explain ideas clearly to gain agreement.",
         personality: "Owl",
       },
     ],
   },
+
   {
     questionId: 5,
     section: "strengths",
-    questionText: "How do you maintain personal integrity?",
+    questionText:
+      "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
     options: [
       {
         code: "A",
-        title: "Humble",
-        description: "I stay grounded even after success.",
+        title: "Refreshing",
+        description:
+          "I bring fresh energy to routine work.",
         personality: "Butterfly",
       },
       {
         code: "B",
-        title: "Optimistic",
-        description: "I usually expect positive outcomes.",
+        title: "Respectful",
+        description:
+          "I value others' views and workplace boundaries.",
+        personality: "Dove",
+      },
+      {
+        code: "C",
+        title: "Reserved",
+        description:
+          "I speak selectively in professional situations.",
+        personality: "Lion",
+      },
+      {
+        code: "D",
+        title: "Resourceful",
+        description:
+          "I find workable solutions with available resources.",
+        personality: "Owl",
+      },
+    ],
+  },
+
+  {
+    questionId: 6,
+    section: "strengths",
+    questionText:
+      "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+    options: [
+      {
+        code: "A",
+        title: "Satisfied",
+        description:
+          "I remain content when work progresses steadily.",
+        personality: "Butterfly",
+      },
+      {
+        code: "B",
+        title: "Sensitive",
+        description:
+          "I notice others' feelings during workplace interactions.",
+        personality: "Dove",
+      },
+      {
+        code: "C",
+        title: "Self-reliant",
+        description:
+          "I prefer handling responsibilities independently at work.",
+        personality: "Lion",
+      },
+      {
+        code: "D",
+        title: "Spirited",
+        description:
+          "I approach work with enthusiasm and energy.",
+        personality: "Owl",
+      },
+    ],
+  },
+
+  {
+    questionId: 7,
+    section: "strengths",
+    questionText:
+      "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+    options: [
+      {
+        code: "A",
+        title: "Planner",
+        description:
+          "I organize tasks and think deeply before beginning important work.",
+        personality: "Butterfly",
+      },
+      {
+        code: "B",
+        title: "Patient",
+        description:
+          "I follow processes irrespective of time taken and whatever the urgency.",
+        personality: "Dove",
+      },
+      {
+        code: "C",
+        title: "Positive",
+        description:
+          "I focus on possibilities during workplace challenges.",
+        personality: "Lion",
+      },
+      {
+        code: "D",
+        title: "Promoter",
+        description:
+          "I actively encourage people toward new ideas.",
+        personality: "Owl",
+      },
+    ],
+  },
+
+  {
+    questionId: 8,
+    section: "strengths",
+    questionText:
+      "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+    options: [
+      {
+        code: "A",
+        title: "Sure",
+        description:
+          "I trust my judgment while making decisions.",
+        personality: "Butterfly",
+      },
+      {
+        code: "B",
+        title: "Spontaneous",
+        description:
+          "I act quickly when opportunities appear.",
+        personality: "Dove",
+      },
+      {
+        code: "C",
+        title: "Scheduled",
+        description:
+          "I prefer working with clear timelines and plans.",
+        personality: "Lion",
+      },
+      {
+        code: "D",
+        title: "Shy",
+        description:
+          "I take time to open up professionally.",
+        personality: "Owl",
+      },
+    ],
+  },
+
+  {
+    questionId: 9,
+    section: "strengths",
+    questionText:
+      "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+    options: [
+      {
+        code: "A",
+        title: "Orderly",
+        description:
+          "I keep work structured, neat, and organized.",
+        personality: "Butterfly",
+      },
+      {
+        code: "B",
+        title: "Obliging",
+        description:
+          "I readily help others when support is needed.",
         personality: "Dove",
       },
       {
         code: "C",
         title: "Outspoken",
-        description: "I openly express my thoughts and opinions.",
+        description:
+          "I express my views openly at work.",
         personality: "Lion",
       },
       {
         code: "D",
-        title: "Systematic",
-        description: "I follow organized methods to complete work.",
-        personality: "Owl",
-      },
-    ],
-  },
-  {
-    questionId: 6,
-    section: "strengths",
-    questionText: "What is your natural work pace?",
-    options: [
-      {
-        code: "A",
-        title: "Patient",
-        description: "I remain calm while waiting for results.",
-        personality: "Butterfly",
-      },
-      {
-        code: "B",
-        title: "Friendly",
-        description: "I easily connect with people around me.",
-        personality: "Dove",
-      },
-      {
-        code: "C",
-        title: "Confident",
-        description: "I trust my decisions and abilities.",
-        personality: "Lion",
-      },
-      {
-        code: "D",
-        title: "Careful",
-        description: "I pay attention to details before acting.",
-        personality: "Owl",
-      },
-    ],
-  },
-  {
-    questionId: 7,
-    section: "strengths",
-    questionText: "How would you characterize your reliability?",
-    options: [
-      {
-        code: "A",
-        title: "Dependable",
-        description: "People can rely on me to complete tasks.",
-        personality: "Butterfly",
-      },
-      {
-        code: "B",
-        title: "Helpful",
-        description: "I enjoy supporting others in their work.",
-        personality: "Dove",
-      },
-      {
-        code: "C",
-        title: "Ambitious",
-        description: "I continuously aim for bigger achievements.",
-        personality: "Lion",
-      },
-      {
-        code: "D",
-        title: "Analytical",
-        description: "I carefully analyze situations before deciding.",
-        personality: "Owl",
-      },
-    ],
-  },
-  {
-    questionId: 8,
-    section: "strengths",
-    questionText: "What drives your professional commitment?",
-    options: [
-      {
-        code: "A",
-        title: "Loyal",
-        description: "I stay committed to my team and goals.",
-        personality: "Butterfly",
-      },
-      {
-        code: "B",
-        title: "Supportive",
-        description: "I encourage and motivate others.",
-        personality: "Dove",
-      },
-      {
-        code: "C",
-        title: "Decisive",
-        description: "I make decisions quickly and confidently.",
-        personality: "Lion",
-      },
-      {
-        code: "D",
-        title: "Logical",
-        description: "I rely on logic and facts while working.",
+        title: "Optimistic",
+        description:
+          "I expect positive outcomes from work efforts.",
         personality: "Owl",
       },
     ],
   },
 
-  // ============= WEAKNESSES SECTION =============
+  {
+    questionId: 10,
+    section: "strengths",
+    questionText:
+      "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+    options: [
+      {
+        code: "A",
+        title: "Friendly but reserved",
+        description:
+          "I build reasonably good relationships with colleagues, but do not encourage people getting too close.",
+        personality: "Butterfly",
+      },
+      {
+        code: "B",
+        title: "Faithful",
+        description:
+          "I remain committed to people and responsibilities.",
+        personality: "Dove",
+      },
+      {
+        code: "C",
+        title: "Funny",
+        description:
+          "I use humor to lighten work situations.",
+        personality: "Lion",
+      },
+      {
+        code: "D",
+        title: "Forceful",
+        description:
+          "I push strongly for action and results.",
+        personality: "Owl",
+      },
+    ],
+  },
+  {
+  questionId: 11,
+  section: "strengths",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Daring",
+      description:
+        "I take bold steps in challenging situations.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Delightful",
+      description:
+        "I create pleasant interactions with others at work.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Diplomatic",
+      description:
+        "I handle sensitive matters tactfully and respectfully.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Detailed",
+      description:
+        "I pay close attention to small work details.",
+      personality: "Owl",
+    },
+  ],
+},
 
-  {
-    questionId: 1,
-    section: "weaknesses",
-    questionText: "Which of the following sometimes challenges you?",
-    options: [
-      {
-        code: "A",
-        title: "Indecisive",
-        description: "I struggle to make quick decisions.",
-        personality: "Butterfly",
-      },
-      {
-        code: "B",
-        title: "Too Emotional",
-        description: "My emotions sometimes affect my judgment.",
-        personality: "Dove",
-      },
-      {
-        code: "C",
-        title: "Dominating",
-        description: "I can become overly controlling in teams.",
-        personality: "Lion",
-      },
-      {
-        code: "D",
-        title: "Overthinking",
-        description: "I spend too much time analyzing situations.",
-        personality: "Owl",
-      },
-    ],
-  },
-  {
-    questionId: 2,
-    section: "weaknesses",
-    questionText: "How do you respond to difficult interpersonal situations?",
-    options: [
-      {
-        code: "A",
-        title: "Avoids Conflict",
-        description: "I try to escape difficult confrontations.",
-        personality: "Butterfly",
-      },
-      {
-        code: "B",
-        title: "Overly Sensitive",
-        description: "Criticism affects me deeply.",
-        personality: "Dove",
-      },
-      {
-        code: "C",
-        title: "Impatient",
-        description: "I get frustrated when things move slowly.",
-        personality: "Lion",
-      },
-      {
-        code: "D",
-        title: "Perfectionist",
-        description: "I expect everything to be flawless.",
-        personality: "Owl",
-      },
-    ],
-  },
-  {
-    questionId: 3,
-    section: "weaknesses",
-    questionText: "What is an area where you sometimes fall short?",
-    options: [
-      {
-        code: "A",
-        title: "Passive",
-        description: "I sometimes hesitate to take initiative.",
-        personality: "Butterfly",
-      },
-      {
-        code: "B",
-        title: "People Pleaser",
-        description: "I prioritize others over myself too much.",
-        personality: "Dove",
-      },
-      {
-        code: "C",
-        title: "Aggressive",
-        description: "I can become too forceful in discussions.",
-        personality: "Lion",
-      },
-      {
-        code: "D",
-        title: "Detached",
-        description: "I sometimes appear emotionally distant.",
-        personality: "Owl",
-      },
-    ],
-  },
-  {
-    questionId: 4,
-    section: "weaknesses",
-    questionText: "How do you experience self-doubt?",
-    options: [
-      {
-        code: "A",
-        title: "Uncertain",
-        description: "I frequently doubt my choices.",
-        personality: "Butterfly",
-      },
-      {
-        code: "B",
-        title: "Dependent",
-        description: "I rely too much on others for reassurance.",
-        personality: "Dove",
-      },
-      {
-        code: "C",
-        title: "Stubborn",
-        description: "I resist changing my opinions.",
-        personality: "Lion",
-      },
-      {
-        code: "D",
-        title: "Critical",
-        description: "I can be overly judgmental of mistakes.",
-        personality: "Owl",
-      },
-    ],
-  },
-  {
-    questionId: 5,
-    section: "weaknesses",
-    questionText: "What limitation sometimes holds you back?",
-    options: [
-      {
-        code: "A",
-        title: "Fearful",
-        description: "I hesitate due to fear of failure.",
-        personality: "Butterfly",
-      },
-      {
-        code: "B",
-        title: "Overcommitted",
-        description: "I take on too many responsibilities.",
-        personality: "Dove",
-      },
-      {
-        code: "C",
-        title: "Controlling",
-        description: "I try to manage everything myself.",
-        personality: "Lion",
-      },
-      {
-        code: "D",
-        title: "Rigid",
-        description: "I struggle to adapt to sudden changes.",
-        personality: "Owl",
-      },
-    ],
-  },
+{
+  questionId: 12,
+  section: "strengths",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Cheerful",
+      description:
+        "I maintain a pleasant mood at work.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Consistent",
+      description:
+        "I deliver steady performance across repeated tasks.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Cultured",
+      description:
+        "I behave with refinement in professional settings.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Confident",
+      description:
+        "I express my abilities and decisions with assurance.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 13,
+  section: "strengths",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Idealistic",
+      description:
+        "I pursue high standards and meaningful goals.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Independent",
+      description:
+        "I prefer making decisions without constant guidance.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Inoffensive",
+      description:
+        "I avoid causing discomfort in workplace interactions.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Inspiring",
+      description:
+        "I motivate others through my words and actions.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 14,
+  section: "strengths",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Demonstrative",
+      description:
+        "I openly express my thoughts and emotions.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Decisive",
+      description:
+        "I make clear decisions without unnecessary delay.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Dry humor",
+      description:
+        "I use subtle humor in work conversations.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Deep",
+      description:
+        "I think deeply before sharing my views.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 15,
+  section: "strengths",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Mediator",
+      description:
+        "I help resolve differences between people calmly.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Musical",
+      description:
+        "I bring rhythm and creativity to activities.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Mover",
+      description:
+        "I take initiative to get things started.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Mixes easily",
+      description:
+        "I connect comfortably with different workplace groups.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 16,
+  section: "strengths",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Thoughtful",
+      description:
+        "I consider others before taking workplace actions.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Tenacious",
+      description:
+        "I stay determined until goals are achieved.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Talker",
+      description:
+        "I communicate actively in workplace conversations.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Tolerant",
+      description:
+        "I accept different views and working styles.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 17,
+  section: "strengths",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Listener",
+      description:
+        "I give full attention when others speak.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Loyal",
+      description:
+        "I stand by my team and commitments.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Leader",
+      description:
+        "I guide others toward shared work goals.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Lively",
+      description:
+        "I bring energy to team interactions.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 18,
+  section: "strengths",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Contented",
+      description:
+        "I feel satisfied with steady work progress.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Chief",
+      description:
+        "I naturally take charge in group situations.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Chart maker",
+      description:
+        "I organize information through plans and visuals.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Cute",
+      description:
+        "I come across as warm and approachable.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 19,
+  section: "strengths",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Perfectionist",
+      description:
+        "I strive for accuracy and high standards.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Pleasant",
+      description:
+        "I maintain agreeable interactions with colleagues and clients.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Productive",
+      description:
+        "I complete meaningful work efficiently and consistently.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Popular",
+      description:
+        "I am easily liked by workplace peers.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 20,
+  section: "strengths",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Bouncy",
+      description:
+        "I bring lively energy to daily work.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Bold",
+      description:
+        "I speak and act with professional courage.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Behaved yet with suppressed emotions",
+      description:
+        "I follow expected workplace conduct and discipline.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Balanced",
+      description:
+        "I stay steady across different work situations.",
+      personality: "Owl",
+    },
+  ],
+},
 ];
+
+export const weaknessQuestions = [
+  // ================= WEAKNESSES =================
+
+{
+  questionId: 1,
+  section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Blank and expressionless",
+      description: "I may show little visible expression at work.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Bashful",
+      description: "I feel shy in unfamiliar work situations.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Brassy",
+      description: "I may appear overly bold or outspoken.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Bossy",
+      description: "I tend to direct others forcefully.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 2,
+  section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Undisciplined",
+      description: "I struggle to follow routines and structure.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Unsympathetic",
+      description: "I may overlook others' feelings at work.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Unenthusiastic",
+      description:
+        "I show limited enthusiasm or take time to show energy for new work.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Unforgiving",
+      description:
+        "I find it hard to move past mistakes or forgive others.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 3,
+  section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Reticent",
+      description:
+        "I avoid sharing thoughts unless asked directly.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Resentful",
+      description:
+        "I may hold frustration about workplace issues.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Resistant",
+      description:
+        "I push back against changes or instructions.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Repetitious",
+      description:
+        "I may repeat points more than needed.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 4,
+  section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Fussy",
+      description:
+        "I get deeply involved and think about small work details.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Fearful",
+      description:
+        "I hesitate because I worry about risks and remaining correct or accurate.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Forgetful",
+      description:
+        "I may miss details or follow-ups sometimes.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Frank and Blunt",
+      description:
+        "I express my views directly and honestly and think of the big picture.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 5,
+  section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Impatient",
+      description:
+        "I want tasks completed without unnecessary delay.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Insecure",
+      description:
+        "I sometimes doubt my abilities in challenging situations.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Indecisive",
+      description:
+        "I take time to make clear decisions and may delay action.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Interrupts",
+      description:
+        "I may speak before others finish explaining.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 6,
+  section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Unaccepted",
+      description:
+        "I find it sometimes difficult to gain workplace acceptance.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Uninvolved",
+      description:
+        "I stay detached from group activities.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Unpredictable",
+      description:
+        "My responses may vary across similar situations.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Unaffectionate and task-oriented",
+      description:
+        "I focus heavily on tasks and show limited warmth.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 7,
+  section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Headstrong",
+      description:
+        "I take quick decisions and push my view despite disagreement.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Haphazard",
+      description:
+        "I approach work without enough organization.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Hard to please",
+      description:
+        "I expect very high standards from others.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Hesitant",
+      description:
+        "I pause before taking action or decisions.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 8,
+  section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Plain",
+      description:
+        "I keep my workplace style simple and direct.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Pessimistic",
+      description:
+        "I often feel that the worst outcome may happen.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Proud",
+      description:
+        "I value my achievements and abilities strongly.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Permissive",
+      description:
+        "I allow others considerable freedom at work.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 9,
+  section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Angered easily",
+      description:
+        "I may react strongly when frustrated at work.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Aimless",
+      description:
+        "I may lack clear direction in tasks.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Argumentative",
+      description:
+        "I often challenge others' views during discussions.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Alienated",
+      description:
+        "I may feel disconnected from workplace groups.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 10,
+  section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Naive",
+      description:
+        "I may trust situations without enough questioning.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Negative attitude",
+      description:
+        "I focus more on problems than possibilities.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Nervy",
+      description:
+        "I may act boldly despite workplace pressure.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Nonchalant",
+      description:
+        "I appear casual even in serious situations.",
+      personality: "Owl",
+    },
+  ],
+},
+{
+  questionId: 11,
+  section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Withdrawn",
+      description:
+        "I tend to keep to myself in workplace interactions.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Worrier",
+      description:
+        "I spend considerable time thinking about possible problems.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Workaholic",
+      description:
+        "I may focus excessively on work responsibilities.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Willful",
+      description:
+        "I strongly prefer doing things my own way.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 12,
+  section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Too sensitive",
+      description:
+        "I take feedback and criticism personally.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Timid",
+      description:
+        "I hesitate to speak up in difficult situations.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Temperamental",
+      description:
+        "My mood can influence how I react at work.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Tactless",
+      description:
+        "I may communicate without considering others' feelings.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 13,
+  section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Suspicious",
+      description:
+        "I question motives before trusting people.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Stubborn",
+      description:
+        "I resist changing my opinion once formed.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Show-off",
+      description:
+        "I sometimes draw attention to my achievements.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Self-righteous",
+      description:
+        "I strongly believe my approach is the correct one.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 14,
+  section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Slow to act",
+      description:
+        "I take longer than others before making decisions.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Shy",
+      description:
+        "I feel uncomfortable being the center of attention.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Scatterbrained",
+      description:
+        "I may lose focus across multiple responsibilities.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Sarcastic",
+      description:
+        "I sometimes use sharp or ironic remarks.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 15,
+  section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Rigid",
+      description:
+        "I prefer fixed methods and routines.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Reluctant",
+      description:
+        "I hesitate before taking on new responsibilities.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Restless",
+      description:
+        "I become bored when work lacks variety.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Reckless",
+      description:
+        "I may act before fully considering consequences.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 16,
+  section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Moody",
+      description:
+        "My emotions sometimes affect my work interactions.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Mild",
+      description:
+        "I avoid confrontation even when necessary.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Messy",
+      description:
+        "I struggle to keep work organized consistently.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Manipulative",
+      description:
+        "I may influence situations to achieve my desired outcome.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 17,
+  section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Lazy",
+      description:
+        "I sometimes delay effort on important tasks.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Loner",
+      description:
+        "I prefer working alone rather than in groups.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Loud",
+      description:
+        "I may dominate conversations unintentionally.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Judgmental",
+      description:
+        "I form strong opinions about others quickly.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 18,
+  section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Critical",
+      description:
+        "I focus heavily on mistakes and shortcomings.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Complacent",
+      description:
+        "I become comfortable and resist pushing further.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Careless",
+      description:
+        "I may overlook important details.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Controlling",
+      description:
+        "I like directing how things should be done.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 19,
+  section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Perfectionist to a fault",
+      description:
+        "I spend too much time trying to make things perfect.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Passive",
+      description:
+        "I wait for direction instead of taking initiative.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Overconfident",
+      description:
+        "I may underestimate risks because of confidence.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Opinionated",
+      description:
+        "I strongly express and defend my viewpoints.",
+      personality: "Owl",
+    },
+  ],
+},
+
+{
+  questionId: 20,
+  section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
+  options: [
+    {
+      code: "A",
+      title: "Overthinking",
+      description:
+        "I spend excessive time analyzing situations.",
+      personality: "Butterfly",
+    },
+    {
+      code: "B",
+      title: "Overly trusting",
+      description:
+        "I place trust in people too quickly.",
+      personality: "Dove",
+    },
+    {
+      code: "C",
+      title: "Overreactive",
+      description:
+        "I may respond emotionally to workplace events.",
+      personality: "Lion",
+    },
+    {
+      code: "D",
+      title: "Overbearing",
+      description:
+        "I can be too forceful when pursuing results.",
+      personality: "Owl",
+    },
+  ],
+},
+]
 
 /**
  * Assessment Questions Seed Data
