@@ -1172,7 +1172,7 @@ export const weaknessQuestions = [
       code: "A",
       title: "Blank and expressionless",
       description: "I may show little visible expression at work.",
-      personality: "Butterfly",
+      personality: "Owl",
     },
     {
       code: "B",
@@ -1184,13 +1184,13 @@ export const weaknessQuestions = [
       code: "C",
       title: "Brassy",
       description: "I may appear overly bold or outspoken.",
-      personality: "Lion",
+      personality: "Butterfly",
     },
     {
       code: "D",
       title: "Bossy",
       description: "I tend to direct others forcefully.",
-      personality: "Owl",
+      personality: "Lion",
     },
   ],
 },
@@ -1211,21 +1211,21 @@ export const weaknessQuestions = [
       code: "B",
       title: "Unsympathetic",
       description: "I may overlook others' feelings at work.",
-      personality: "Dove",
+      personality: "Lion",
     },
     {
       code: "C",
       title: "Unenthusiastic",
       description:
         "I show limited enthusiasm or take time to show energy for new work.",
-      personality: "Lion",
+      personality: "Owl",
     },
     {
       code: "D",
       title: "Unforgiving",
       description:
         "I find it hard to move past mistakes or forgive others.",
-      personality: "Owl",
+      personality: "Dove",
     },
   ],
 },
@@ -1241,7 +1241,7 @@ export const weaknessQuestions = [
       title: "Reticent",
       description:
         "I avoid sharing thoughts unless asked directly.",
-      personality: "Butterfly",
+      personality: "Owl",
     },
     {
       code: "B",
@@ -1262,7 +1262,7 @@ export const weaknessQuestions = [
       title: "Repetitious",
       description:
         "I may repeat points more than needed.",
-      personality: "Owl",
+      personality: "Butterfly",
     },
   ],
 },
@@ -1278,28 +1278,28 @@ export const weaknessQuestions = [
       title: "Fussy",
       description:
         "I get deeply involved and think about small work details.",
-      personality: "Butterfly",
+      personality: "Dove",
     },
     {
       code: "B",
       title: "Fearful",
       description:
         "I hesitate because I worry about risks and remaining correct or accurate.",
-      personality: "Dove",
+      personality: "Owl",
     },
     {
       code: "C",
       title: "Forgetful",
       description:
         "I may miss details or follow-ups sometimes.",
-      personality: "Lion",
+      personality: "Butterfly",
     },
     {
       code: "D",
       title: "Frank and Blunt",
       description:
         "I express my views directly and honestly and think of the big picture.",
-      personality: "Owl",
+      personality: "Lion",
     },
   ],
 },
@@ -1315,7 +1315,7 @@ export const weaknessQuestions = [
       title: "Impatient",
       description:
         "I want tasks completed without unnecessary delay.",
-      personality: "Butterfly",
+      personality: "Lion",
     },
     {
       code: "B",
@@ -1329,14 +1329,14 @@ export const weaknessQuestions = [
       title: "Indecisive",
       description:
         "I take time to make clear decisions and may delay action.",
-      personality: "Lion",
+      personality: "Owl",
     },
     {
       code: "D",
       title: "Interrupts",
       description:
         "I may speak before others finish explaining.",
-      personality: "Owl",
+      personality: "Butterfly",
     },
   ],
 },
@@ -1352,28 +1352,28 @@ export const weaknessQuestions = [
       title: "Unaccepted",
       description:
         "I find it sometimes difficult to gain workplace acceptance.",
-      personality: "Butterfly",
+      personality: "Dove",
     },
     {
       code: "B",
       title: "Uninvolved",
       description:
         "I stay detached from group activities.",
-      personality: "Dove",
+      personality: "Owl",
     },
     {
       code: "C",
       title: "Unpredictable",
       description:
         "My responses may vary across similar situations.",
-      personality: "Lion",
+      personality: "Butterfly",
     },
     {
       code: "D",
       title: "Unaffectionate and task-oriented",
       description:
         "I focus heavily on tasks and show limited warmth.",
-      personality: "Owl",
+      personality: "Lion",
     },
   ],
 },
@@ -1389,21 +1389,21 @@ export const weaknessQuestions = [
       title: "Headstrong",
       description:
         "I take quick decisions and push my view despite disagreement.",
-      personality: "Butterfly",
+      personality: "Lion",
     },
     {
       code: "B",
       title: "Haphazard",
       description:
         "I approach work without enough organization.",
-      personality: "Dove",
+      personality: "Butterfly",
     },
     {
       code: "C",
       title: "Hard to please",
       description:
         "I expect very high standards from others.",
-      personality: "Lion",
+      personality: "Dove",
     },
     {
       code: "D",
@@ -1426,7 +1426,7 @@ export const weaknessQuestions = [
       title: "Plain",
       description:
         "I keep my workplace style simple and direct.",
-      personality: "Butterfly",
+      personality: "Owl",
     },
     {
       code: "B",
@@ -1447,7 +1447,7 @@ export const weaknessQuestions = [
       title: "Permissive",
       description:
         "I allow others considerable freedom at work.",
-      personality: "Owl",
+      personality: "Butterfly",
     },
   ],
 },
@@ -1470,7 +1470,7 @@ export const weaknessQuestions = [
       title: "Aimless",
       description:
         "I may lack clear direction in tasks.",
-      personality: "Dove",
+      personality: "Owl",
     },
     {
       code: "C",
@@ -1484,7 +1484,7 @@ export const weaknessQuestions = [
       title: "Alienated",
       description:
         "I may feel disconnected from workplace groups.",
-      personality: "Owl",
+      personality: "Dove",
     },
   ],
 },
@@ -1536,14 +1536,14 @@ export const weaknessQuestions = [
       title: "Withdrawn",
       description:
         "I tend to keep to myself in workplace interactions.",
-      personality: "Butterfly",
+      personality: "Dove",
     },
     {
       code: "B",
       title: "Worrier",
       description:
         "I spend considerable time thinking about possible problems.",
-      personality: "Dove",
+      personality: "Owl",
     },
     {
       code: "C",
@@ -1557,7 +1557,7 @@ export const weaknessQuestions = [
       title: "Willful",
       description:
         "I strongly prefer doing things my own way.",
-      personality: "Owl",
+      personality: "Butterfly",
     },
   ],
 },
@@ -1573,325 +1573,125 @@ export const weaknessQuestions = [
       title: "Too sensitive",
       description:
         "I take feedback and criticism personally.",
-      personality: "Butterfly",
+      personality: "Dove",
     },
     {
       code: "B",
       title: "Timid",
       description:
         "I hesitate to speak up in difficult situations.",
-      personality: "Dove",
+      personality: "Owl",
     },
     {
       code: "C",
-      title: "Temperamental",
+      title: "Talkative",
       description:
-        "My mood can influence how I react at work.",
-      personality: "Lion",
+        "I speak frequently in workplace conversations.",
+      personality: "Butterfly",
     },
     {
       code: "D",
-      title: "Tactless",
+      title: "Tactless and insensitive",
       description:
         "I may communicate without considering others' feelings.",
-      personality: "Owl",
+      personality: "Lion",
     },
   ],
 },
 
+// Q13
 {
   questionId: 13,
   section: "weaknesses",
-  questionText:
-    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
   options: [
-    {
-      code: "A",
-      title: "Suspicious",
-      description:
-        "I question motives before trusting people.",
-      personality: "Butterfly",
-    },
-    {
-      code: "B",
-      title: "Stubborn",
-      description:
-        "I resist changing my opinion once formed.",
-      personality: "Dove",
-    },
-    {
-      code: "C",
-      title: "Show-off",
-      description:
-        "I sometimes draw attention to my achievements.",
-      personality: "Lion",
-    },
-    {
-      code: "D",
-      title: "Self-righteous",
-      description:
-        "I strongly believe my approach is the correct one.",
-      personality: "Owl",
-    },
+    { code: "A", title: "Doubtful", personality: "Owl" },
+    { code: "B", title: "Disorganized", personality: "Butterfly" },
+    { code: "C", title: "Domineering", personality: "Lion" },
+    { code: "D", title: "Depressed", personality: "Dove" },
   ],
 },
 
+// Q14
 {
   questionId: 14,
   section: "weaknesses",
-  questionText:
-    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
   options: [
-    {
-      code: "A",
-      title: "Slow to act",
-      description:
-        "I take longer than others before making decisions.",
-      personality: "Butterfly",
-    },
-    {
-      code: "B",
-      title: "Shy",
-      description:
-        "I feel uncomfortable being the center of attention.",
-      personality: "Dove",
-    },
-    {
-      code: "C",
-      title: "Scatterbrained",
-      description:
-        "I may lose focus across multiple responsibilities.",
-      personality: "Lion",
-    },
-    {
-      code: "D",
-      title: "Sarcastic",
-      description:
-        "I sometimes use sharp or ironic remarks.",
-      personality: "Owl",
-    },
+    { code: "A", title: "Inconsistent", personality: "Butterfly" },
+    { code: "B", title: "Introvert", personality: "Dove" },
+    { code: "C", title: "Intolerant of poor performers and lazy behavior", personality: "Lion" },
+    { code: "D", title: "Indifferent", personality: "Owl" },
   ],
 },
 
+// Q15
 {
   questionId: 15,
   section: "weaknesses",
-  questionText:
-    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
   options: [
-    {
-      code: "A",
-      title: "Rigid",
-      description:
-        "I prefer fixed methods and routines.",
-      personality: "Butterfly",
-    },
-    {
-      code: "B",
-      title: "Reluctant",
-      description:
-        "I hesitate before taking on new responsibilities.",
-      personality: "Dove",
-    },
-    {
-      code: "C",
-      title: "Restless",
-      description:
-        "I become bored when work lacks variety.",
-      personality: "Lion",
-    },
-    {
-      code: "D",
-      title: "Reckless",
-      description:
-        "I may act before fully considering consequences.",
-      personality: "Owl",
-    },
+    { code: "A", title: "Messy", personality: "Butterfly" },
+    { code: "B", title: "Moody", personality: "Dove" },
+    { code: "C", title: "Mumbles", personality: "Owl" },
+    { code: "D", title: "Manipulative", personality: "Lion" },
   ],
 },
 
+// Q16
 {
   questionId: 16,
   section: "weaknesses",
-  questionText:
-    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
   options: [
-    {
-      code: "A",
-      title: "Moody",
-      description:
-        "My emotions sometimes affect my work interactions.",
-      personality: "Butterfly",
-    },
-    {
-      code: "B",
-      title: "Mild",
-      description:
-        "I avoid confrontation even when necessary.",
-      personality: "Dove",
-    },
-    {
-      code: "C",
-      title: "Messy",
-      description:
-        "I struggle to keep work organized consistently.",
-      personality: "Lion",
-    },
-    {
-      code: "D",
-      title: "Manipulative",
-      description:
-        "I may influence situations to achieve my desired outcome.",
-      personality: "Owl",
-    },
+    { code: "A", title: "Slow", personality: "Owl" },
+    { code: "B", title: "Stubborn", personality: "Lion" },
+    { code: "C", title: "Show-off", personality: "Butterfly" },
+    { code: "D", title: "Skeptical", personality: "Dove" },
   ],
 },
 
+// Q17
 {
   questionId: 17,
   section: "weaknesses",
-  questionText:
-    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
   options: [
-    {
-      code: "A",
-      title: "Lazy",
-      description:
-        "I sometimes delay effort on important tasks.",
-      personality: "Butterfly",
-    },
-    {
-      code: "B",
-      title: "Loner",
-      description:
-        "I prefer working alone rather than in groups.",
-      personality: "Dove",
-    },
-    {
-      code: "C",
-      title: "Loud",
-      description:
-        "I may dominate conversations unintentionally.",
-      personality: "Lion",
-    },
-    {
-      code: "D",
-      title: "Judgmental",
-      description:
-        "I form strong opinions about others quickly.",
-      personality: "Owl",
-    },
+    { code: "A", title: "Loner", personality: "Dove" },
+    { code: "B", title: "Lord over others", personality: "Lion" },
+    { code: "C", title: "Lazy", personality: "Dove" },
+    { code: "D", title: "Loud", personality: "Butterfly" },
   ],
 },
 
+// Q18
 {
   questionId: 18,
   section: "weaknesses",
-  questionText:
-    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
   options: [
-    {
-      code: "A",
-      title: "Critical",
-      description:
-        "I focus heavily on mistakes and shortcomings.",
-      personality: "Butterfly",
-    },
-    {
-      code: "B",
-      title: "Complacent",
-      description:
-        "I become comfortable and resist pushing further.",
-      personality: "Dove",
-    },
-    {
-      code: "C",
-      title: "Careless",
-      description:
-        "I may overlook important details.",
-      personality: "Lion",
-    },
-    {
-      code: "D",
-      title: "Controlling",
-      description:
-        "I like directing how things should be done.",
-      personality: "Owl",
-    },
+    { code: "A", title: "Sluggish", personality: "Owl" },
+    { code: "B", title: "Suspicious", personality: "Dove" },
+    { code: "C", title: "Short-tempered", personality: "Lion" },
+    { code: "D", title: "Scatterbrained", personality: "Butterfly" },
   ],
 },
 
+// Q19
 {
   questionId: 19,
   section: "weaknesses",
-  questionText:
-    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
   options: [
-    {
-      code: "A",
-      title: "Perfectionist to a fault",
-      description:
-        "I spend too much time trying to make things perfect.",
-      personality: "Butterfly",
-    },
-    {
-      code: "B",
-      title: "Passive",
-      description:
-        "I wait for direction instead of taking initiative.",
-      personality: "Dove",
-    },
-    {
-      code: "C",
-      title: "Overconfident",
-      description:
-        "I may underestimate risks because of confidence.",
-      personality: "Lion",
-    },
-    {
-      code: "D",
-      title: "Opinionated",
-      description:
-        "I strongly express and defend my viewpoints.",
-      personality: "Owl",
-    },
+    { code: "A", title: "Revengeful", personality: "Dove" },
+    { code: "B", title: "Restless", personality: "Butterfly" },
+    { code: "C", title: "Reluctant", personality: "Owl?" },
+    { code: "D", title: "Rash", personality: "Lion" },
   ],
 },
 
+// Q20
 {
   questionId: 20,
   section: "weaknesses",
-  questionText:
-    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
   options: [
-    {
-      code: "A",
-      title: "Overthinking",
-      description:
-        "I spend excessive time analyzing situations.",
-      personality: "Butterfly",
-    },
-    {
-      code: "B",
-      title: "Overly trusting",
-      description:
-        "I place trust in people too quickly.",
-      personality: "Dove",
-    },
-    {
-      code: "C",
-      title: "Overreactive",
-      description:
-        "I may respond emotionally to workplace events.",
-      personality: "Lion",
-    },
-    {
-      code: "D",
-      title: "Overbearing",
-      description:
-        "I can be too forceful when pursuing results.",
-      personality: "Owl",
-    },
+    { code: "A", title: "Compromising", personality: "Dove" },
+    { code: "B", title: "Critical", personality: "Owl" },
+    { code: "C", title: "Crafty", personality: "Lion" },
+    { code: "D", title: "Changeable", personality: "Butterfly" },
   ],
 },
 ]
