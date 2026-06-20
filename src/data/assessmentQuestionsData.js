@@ -430,28 +430,28 @@ export const strengthsAssessmentQuestions = [
         title: "Risk taker",
         description:
           "I readily explore new opportunities and challenges.",
-        personality: "Butterfly",
+        personality: "Lion",
       },
       {
         code: "B",
         title: "Flexible",
         description:
           "I adapt quickly if seniors ask me to, but the rules must be given in writing.",
-        personality: "Dove",
+        personality: "Owl",
       },
       {
         code: "C",
         title: "Enthusiastic",
         description:
           "I bring energy to new tasks and people.",
-        personality: "Lion",
+        personality: "Butterfly",
       },
       {
         code: "D",
         title: "Evaluator",
         description:
           "I take a lot of time to change and evaluate pros and cons before deciding.",
-        personality: "Owl",
+        personality: "Dove",
       },
     ],
   },
@@ -467,14 +467,14 @@ export const strengthsAssessmentQuestions = [
         title: "I keep trying",
         description:
           "I persist even when work gets difficult.",
-        personality: "Butterfly",
+        personality: "Dove",
       },
       {
         code: "B",
         title: "Excited",
         description:
           "I show energy when starting new work.",
-        personality: "Dove",
+        personality: "Butterfly",
       },
       {
         code: "C",
@@ -504,7 +504,7 @@ export const strengthsAssessmentQuestions = [
         title: "Submissive to rules",
         description:
           "I follow rules and advice from seniors exactly.",
-        personality: "Butterfly",
+        personality: "Owl",
       },
       {
         code: "B",
@@ -518,14 +518,14 @@ export const strengthsAssessmentQuestions = [
         title: "Sociable",
         description:
           "I enjoy interacting with colleagues and clients.",
-        personality: "Lion",
+        personality: "Butterfly",
       },
       {
         code: "D",
         title: "Strong-willed",
         description:
           "I firmly pursue what I believe is right.",
-        personality: "Owl",
+        personality: "Lion",
       },
     ],
   },
@@ -541,14 +541,14 @@ export const strengthsAssessmentQuestions = [
         title: "Considerate",
         description:
           "I respect others' feelings while working together.",
-        personality: "Butterfly",
+        personality: "Dove",
       },
       {
         code: "B",
         title: "Controlled",
         description:
           "I manage my emotions in work situations.",
-        personality: "Dove",
+        personality: "Owl",
       },
       {
         code: "C",
@@ -562,7 +562,7 @@ export const strengthsAssessmentQuestions = [
         title: "Convincing",
         description:
           "I explain ideas clearly to gain agreement.",
-        personality: "Owl",
+        personality: "Butterfly",
       },
     ],
   },
@@ -592,14 +592,14 @@ export const strengthsAssessmentQuestions = [
         title: "Reserved",
         description:
           "I speak selectively in professional situations.",
-        personality: "Lion",
+        personality: "Owl",
       },
       {
         code: "D",
         title: "Resourceful",
         description:
           "I find workable solutions with available resources.",
-        personality: "Owl",
+        personality: "Lion",
       },
     ],
   },
@@ -615,7 +615,7 @@ export const strengthsAssessmentQuestions = [
         title: "Satisfied",
         description:
           "I remain content when work progresses steadily.",
-        personality: "Butterfly",
+        personality: "Owl",
       },
       {
         code: "B",
@@ -636,7 +636,7 @@ export const strengthsAssessmentQuestions = [
         title: "Spirited",
         description:
           "I approach work with enthusiasm and energy.",
-        personality: "Owl",
+        personality: "Butterfly",
       },
     ],
   },
@@ -652,14 +652,14 @@ export const strengthsAssessmentQuestions = [
         title: "Planner",
         description:
           "I organize tasks and think deeply before beginning important work.",
-        personality: "Butterfly",
+        personality: "Dove",
       },
       {
         code: "B",
         title: "Patient",
         description:
           "I follow processes irrespective of time taken and whatever the urgency.",
-        personality: "Dove",
+        personality: "Owl",
       },
       {
         code: "C",
@@ -673,7 +673,7 @@ export const strengthsAssessmentQuestions = [
         title: "Promoter",
         description:
           "I actively encourage people toward new ideas.",
-        personality: "Owl",
+        personality: "Butterfly",
       },
     ],
   },
@@ -689,28 +689,28 @@ export const strengthsAssessmentQuestions = [
         title: "Sure",
         description:
           "I trust my judgment while making decisions.",
-        personality: "Butterfly",
+        personality: "Lion",
       },
       {
         code: "B",
         title: "Spontaneous",
         description:
           "I act quickly when opportunities appear.",
-        personality: "Dove",
+        personality: "Butterfly",
       },
       {
         code: "C",
         title: "Scheduled",
         description:
           "I prefer working with clear timelines and plans.",
-        personality: "Lion",
+        personality: "Owl",
       },
       {
         code: "D",
         title: "Shy",
         description:
           "I take time to open up professionally.",
-        personality: "Owl",
+        personality: "Dove",
       },
     ],
   },
@@ -726,7 +726,7 @@ export const strengthsAssessmentQuestions = [
         title: "Orderly",
         description:
           "I keep work structured, neat, and organized.",
-        personality: "Butterfly",
+        personality: "Owl",
       },
       {
         code: "B",
@@ -747,7 +747,7 @@ export const strengthsAssessmentQuestions = [
         title: "Optimistic",
         description:
           "I expect positive outcomes from work efforts.",
-        personality: "Owl",
+        personality: "Butterfly",
       },
     ],
   },
@@ -763,7 +763,7 @@ export const strengthsAssessmentQuestions = [
         title: "Friendly but reserved",
         description:
           "I build reasonably good relationships with colleagues, but do not encourage people getting too close.",
-        personality: "Butterfly",
+        personality: "Owl",
       },
       {
         code: "B",
@@ -777,14 +777,14 @@ export const strengthsAssessmentQuestions = [
         title: "Funny",
         description:
           "I use humor to lighten work situations.",
-        personality: "Lion",
+        personality: "Butterfly",
       },
       {
         code: "D",
         title: "Forceful",
         description:
           "I push strongly for action and results.",
-        personality: "Owl",
+        personality: "Lion",
       },
     ],
   },
@@ -799,28 +799,28 @@ export const strengthsAssessmentQuestions = [
       title: "Daring",
       description:
         "I take bold steps in challenging situations.",
-      personality: "Butterfly",
+      personality: "Lion",
     },
     {
       code: "B",
       title: "Delightful",
       description:
         "I create pleasant interactions with others at work.",
-      personality: "Dove",
+      personality: "Butterfly",
     },
     {
       code: "C",
       title: "Diplomatic",
       description:
         "I handle sensitive matters tactfully and respectfully.",
-      personality: "Lion",
+      personality: "Owl",
     },
     {
       code: "D",
       title: "Detailed",
       description:
         "I pay close attention to small work details.",
-      personality: "Owl",
+      personality: "Dove",
     },
   ],
 },
@@ -843,21 +843,21 @@ export const strengthsAssessmentQuestions = [
       title: "Consistent",
       description:
         "I deliver steady performance across repeated tasks.",
-      personality: "Dove",
+      personality: "Owl",
     },
     {
       code: "C",
       title: "Cultured",
       description:
         "I behave with refinement in professional settings.",
-      personality: "Lion",
+      personality: "Dove",
     },
     {
       code: "D",
       title: "Confident",
       description:
         "I express my abilities and decisions with assurance.",
-      personality: "Owl",
+      personality: "Lion",
     },
   ],
 },
@@ -873,28 +873,28 @@ export const strengthsAssessmentQuestions = [
       title: "Idealistic",
       description:
         "I pursue high standards and meaningful goals.",
-      personality: "Butterfly",
+      personality: "Dove",
     },
     {
       code: "B",
       title: "Independent",
       description:
         "I prefer making decisions without constant guidance.",
-      personality: "Dove",
+      personality: "Lion",
     },
     {
       code: "C",
       title: "Inoffensive",
       description:
         "I avoid causing discomfort in workplace interactions.",
-      personality: "Lion",
+      personality: "Owl",
     },
     {
       code: "D",
       title: "Inspiring",
       description:
         "I motivate others through my words and actions.",
-      personality: "Owl",
+      personality: "Butterfly",
     },
   ],
 },
@@ -917,21 +917,21 @@ export const strengthsAssessmentQuestions = [
       title: "Decisive",
       description:
         "I make clear decisions without unnecessary delay.",
-      personality: "Dove",
+      personality: "Lion",
     },
     {
       code: "C",
       title: "Dry humor",
       description:
         "I use subtle humor in work conversations.",
-      personality: "Lion",
+      personality: "Owl",
     },
     {
       code: "D",
       title: "Deep",
       description:
         "I think deeply before sharing my views.",
-      personality: "Owl",
+      personality: "Dove",
     },
   ],
 },
@@ -947,7 +947,7 @@ export const strengthsAssessmentQuestions = [
       title: "Mediator",
       description:
         "I help resolve differences between people calmly.",
-      personality: "Butterfly",
+      personality: "Owl",
     },
     {
       code: "B",
@@ -968,7 +968,7 @@ export const strengthsAssessmentQuestions = [
       title: "Mixes easily",
       description:
         "I connect comfortably with different workplace groups.",
-      personality: "Owl",
+      personality: "Butterfly",
     },
   ],
 },
@@ -984,21 +984,21 @@ export const strengthsAssessmentQuestions = [
       title: "Thoughtful",
       description:
         "I consider others before taking workplace actions.",
-      personality: "Butterfly",
+      personality: "Dove",
     },
     {
       code: "B",
       title: "Tenacious",
       description:
         "I stay determined until goals are achieved.",
-      personality: "Dove",
+      personality: "Lion",
     },
     {
       code: "C",
       title: "Talker",
       description:
         "I communicate actively in workplace conversations.",
-      personality: "Lion",
+      personality: "Butterfly",
     },
     {
       code: "D",
@@ -1021,7 +1021,7 @@ export const strengthsAssessmentQuestions = [
       title: "Listener",
       description:
         "I give full attention when others speak.",
-      personality: "Butterfly",
+      personality: "Owl",
     },
     {
       code: "B",
@@ -1042,7 +1042,7 @@ export const strengthsAssessmentQuestions = [
       title: "Lively",
       description:
         "I bring energy to team interactions.",
-      personality: "Owl",
+      personality: "Butterfly",
     },
   ],
 },
@@ -1058,28 +1058,28 @@ export const strengthsAssessmentQuestions = [
       title: "Contented",
       description:
         "I feel satisfied with steady work progress.",
-      personality: "Butterfly",
+      personality: "Owl",
     },
     {
       code: "B",
       title: "Chief",
       description:
         "I naturally take charge in group situations.",
-      personality: "Dove",
+      personality: "Lion",
     },
     {
       code: "C",
       title: "Chart maker",
       description:
         "I organize information through plans and visuals.",
-      personality: "Lion",
+      personality: "Dove",
     },
     {
       code: "D",
       title: "Cute",
       description:
         "I come across as warm and approachable.",
-      personality: "Owl",
+      personality: "Butterfly",
     },
   ],
 },
@@ -1095,14 +1095,14 @@ export const strengthsAssessmentQuestions = [
       title: "Perfectionist",
       description:
         "I strive for accuracy and high standards.",
-      personality: "Butterfly",
+      personality: "Dove",
     },
     {
       code: "B",
       title: "Pleasant",
       description:
         "I maintain agreeable interactions with colleagues and clients.",
-      personality: "Dove",
+      personality: "Owl",
     },
     {
       code: "C",
@@ -1116,7 +1116,7 @@ export const strengthsAssessmentQuestions = [
       title: "Popular",
       description:
         "I am easily liked by workplace peers.",
-      personality: "Owl",
+      personality: "Butterfly",
     },
   ],
 },
@@ -1139,14 +1139,14 @@ export const strengthsAssessmentQuestions = [
       title: "Bold",
       description:
         "I speak and act with professional courage.",
-      personality: "Dove",
+      personality: "Lion",
     },
     {
       code: "C",
       title: "Behaved yet with suppressed emotions",
       description:
         "I follow expected workplace conduct and discipline.",
-      personality: "Lion",
+      personality: "Dove",
     },
     {
       code: "D",
