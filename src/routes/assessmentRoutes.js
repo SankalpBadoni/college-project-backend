@@ -1,5 +1,7 @@
 import express from "express";
 import * as assessmentController from "../controllers/assessmentController.js";
+import * as applicantAssessmentController from "../controllers/applicantAssessmentController.js";
+import * as employerAssessmentController from "../controllers/employerAssessmentController.js";
 import { protectAccount as protect } from "../middleware/auth.js";
 import {
   validateAssessmentSubmission,
@@ -86,3 +88,17 @@ router.get(
 );
 
 export default router;
+
+/**
+ * Applicant (Public) Routes for Employer Assessments
+ */
+router.get("/applicant/drive/:tokenNo", applicantAssessmentController.getDriveByToken);
+router.post("/applicant/register", applicantAssessmentController.registerApplicant);
+router.post("/applicant/submit", applicantAssessmentController.submitAssessment);
+
+/**
+ * Employer Routes for managing Assessment Drives
+ */
+router.post("/employer/drives", protect, employerAssessmentController.createDrive);
+router.get("/employer/drives", protect, employerAssessmentController.getDrives);
+router.get("/employer/drives/:id", protect, employerAssessmentController.getDriveDetails);
