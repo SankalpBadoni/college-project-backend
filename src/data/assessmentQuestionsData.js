@@ -1603,6 +1603,8 @@ export const weaknessQuestions = [
 {
   questionId: 13,
   section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
   options: [
     { code: "A", title: "Doubtful", personality: "Owl" },
     { code: "B", title: "Disorganized", personality: "Butterfly" },
@@ -1615,6 +1617,8 @@ export const weaknessQuestions = [
 {
   questionId: 14,
   section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
   options: [
     { code: "A", title: "Inconsistent", personality: "Butterfly" },
     { code: "B", title: "Introvert", personality: "Dove" },
@@ -1627,6 +1631,8 @@ export const weaknessQuestions = [
 {
   questionId: 15,
   section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
   options: [
     { code: "A", title: "Messy", personality: "Butterfly" },
     { code: "B", title: "Moody", personality: "Dove" },
@@ -1639,6 +1645,8 @@ export const weaknessQuestions = [
 {
   questionId: 16,
   section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
   options: [
     { code: "A", title: "Slow", personality: "Owl" },
     { code: "B", title: "Stubborn", personality: "Lion" },
@@ -1651,6 +1659,8 @@ export const weaknessQuestions = [
 {
   questionId: 17,
   section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
   options: [
     { code: "A", title: "Loner", personality: "Dove" },
     { code: "B", title: "Lord over others", personality: "Lion" },
@@ -1663,6 +1673,8 @@ export const weaknessQuestions = [
 {
   questionId: 18,
   section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
   options: [
     { code: "A", title: "Sluggish", personality: "Owl" },
     { code: "B", title: "Suspicious", personality: "Dove" },
@@ -1675,10 +1687,12 @@ export const weaknessQuestions = [
 {
   questionId: 19,
   section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
   options: [
     { code: "A", title: "Revengeful", personality: "Dove" },
     { code: "B", title: "Restless", personality: "Butterfly" },
-    { code: "C", title: "Reluctant", personality: "Owl?" },
+    { code: "C", title: "Reluctant", personality: "Owl" },
     { code: "D", title: "Rash", personality: "Lion" },
   ],
 },
@@ -1687,6 +1701,8 @@ export const weaknessQuestions = [
 {
   questionId: 20,
   section: "weaknesses",
+  questionText:
+    "Which behavior/choice am I most likely to consciously or unconsciously demonstrate?",
   options: [
     { code: "A", title: "Compromising", personality: "Dove" },
     { code: "B", title: "Critical", personality: "Owl" },

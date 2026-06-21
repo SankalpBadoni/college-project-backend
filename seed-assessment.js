@@ -4,11 +4,8 @@ import AssessmentQuestion from "./src/models/AssessmentQuestion.js";
 
 import {
   strengthsAssessmentQuestions,
-} from "./src/data/strengthsAssessmentQuestions.js";
-
-import {
   weaknessQuestions,
-} from "./src/data/weaknessQuestions.js";
+} from "./src/data/assessmentQuestionsData.js";
 
 dotenv.config();
 
@@ -17,6 +14,12 @@ const seedAssessmentQuestions = async () => {
     console.log("🔄 Connecting to MongoDB...");
     await connectDB();
     console.log("✅ Connected to MongoDB");
+
+    console.log("🧹 Clearing existing strengths and weaknesses questions...");
+    await AssessmentQuestion.deleteMany({
+      section: { $in: ["strengths", "weaknesses"] },
+    });
+    console.log("✅ Cleared existing questions");
 
     // Merge both arrays
     const questions = [
