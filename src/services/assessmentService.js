@@ -37,6 +37,7 @@ const groupQuestionsBySection = (questions) => {
   const grouped = {
     strengths: [],
     weaknesses: [],
+    communication: [],
   };
 
   questions.forEach((question) => {
@@ -44,6 +45,8 @@ const groupQuestionsBySection = (questions) => {
       grouped.strengths.push(question);
     } else if (question.section === ASSESSMENT_SECTIONS.WEAKNESSES) {
       grouped.weaknesses.push(question);
+    } else if (question.section === ASSESSMENT_SECTIONS.COMMUNICATION || question.section === "communication") {
+      grouped.communication.push(question);
     }
   });
 
@@ -108,11 +111,12 @@ export const getAssessmentResponseById = async (responseId) => {
 /**
  * Get user's latest assessment response
  * @param {String} userId - User ID
+ * @param {String} assessmentType - Assessment type (career-profiler or communication)
  * @returns {Promise<Object>} Latest assessment response
  */
-export const getUserLatestResponse = async (userId) => {
+export const getUserLatestResponse = async (userId, assessmentType = "career-profiler") => {
   try {
-    const response = await AssessmentResponse.findOne({ userId })
+    const response = await AssessmentResponse.findOne({ userId, assessmentType })
       .sort({ createdAt: -1 })
       .populate("userId", "firstName lastName email")
       .lean();
@@ -128,11 +132,12 @@ export const getUserLatestResponse = async (userId) => {
  * Get all user assessment responses
  * @param {String} userId - User ID
  * @param {Number} limit - Limit results
+ * @param {String} assessmentType - Assessment type
  * @returns {Promise<Array>} Assessment responses
  */
-export const getUserResponses = async (userId, limit = 10) => {
+export const getUserResponses = async (userId, limit = 10, assessmentType = "career-profiler") => {
   try {
-    const responses = await AssessmentResponse.find({ userId })
+    const responses = await AssessmentResponse.find({ userId, assessmentType })
       .sort({ createdAt: -1 })
       .limit(limit)
       .select("dominantType secondaryType scores percentages createdAt")
@@ -249,12 +254,14 @@ export const getAssessmentStatistics = async () => {
 /**
  * Check if user has already completed assessment
  * @param {String} userId - User ID
+ * @param {String} assessmentType - Assessment type
  * @returns {Promise<Boolean>} True if completed
  */
-export const hasUserCompletedAssessment = async (userId) => {
+export const hasUserCompletedAssessment = async (userId, assessmentType = "career-profiler") => {
   try {
     const response = await AssessmentResponse.findOne({
       userId,
+      assessmentType,
       status: "completed",
     });
 
@@ -273,8 +280,9 @@ export const hasUserCompletedAssessment = async (userId) => {
  */
 export const createOrUpdateResponse = async (userId, responseData) => {
   try {
-    // Check if user has existing response
-    const existing = await AssessmentResponse.findOne({ userId });
+    // Check if user has existing response for this assessmentType
+    const assessmentType = responseData.assessmentType || "career-profiler";
+    const existing = await AssessmentResponse.findOne({ userId, assessmentType });
 
     if (existing) {
       // Update existing

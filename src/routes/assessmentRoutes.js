@@ -87,8 +87,6 @@ router.get(
   assessmentController.getUsersByPersonality
 );
 
-export default router;
-
 /**
  * Applicant (Public) Routes for Employer Assessments
  */
@@ -102,3 +100,5 @@ router.post("/applicant/submit", applicantAssessmentController.submitAssessment)
 router.post("/employer/drives", protect, employerAssessmentController.createDrive);
 router.get("/employer/drives", protect, employerAssessmentController.getDrives);
 router.get("/employer/drives/:id", protect, employerAssessmentController.getDriveDetails);
+
+export default router;

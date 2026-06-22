@@ -61,6 +61,11 @@ const studentSchema = new mongoose.Schema(
       dominantType: { type: String, enum: ["Butterfly", "Dove", "Lion", "Owl"] },
       secondaryType: { type: String, enum: ["Butterfly", "Dove", "Lion", "Owl"] },
       completedAt: { type: Date }
+    },
+    communicationResult: {
+      dominantType: { type: String, enum: ["Butterfly", "Dove", "Lion", "Owl"] },
+      secondaryType: { type: String, enum: ["Butterfly", "Dove", "Lion", "Owl"] },
+      completedAt: { type: Date }
     }
   },
   { timestamps: true }

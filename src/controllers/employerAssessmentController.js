@@ -35,7 +35,11 @@ export const createDrive = async (req, res, next) => {
 // @access  Private (Employer)
 export const getDrives = async (req, res, next) => {
   try {
-    const drives = await AssessmentDrive.find({ employerId: req.user._id }).sort({ createdAt: -1 });
+    const query = { employerId: req.user._id };
+    if (req.query.assessmentId) {
+      query.assessmentId = req.query.assessmentId;
+    }
+    const drives = await AssessmentDrive.find(query).sort({ createdAt: -1 });
     
     // Attach progress info to each drive
     const drivesWithStats = await Promise.all(
@@ -90,7 +94,7 @@ export const getDriveDetails = async (req, res, next) => {
           name: applicantMap[e].name,
           phone: applicantMap[e].phone,
           status: applicantMap[e].status, // "started" or "completed"
-          optionCounts: applicantMap[e].optionCounts,
+          categoryCounts: applicantMap[e].categoryCounts,
           createdAt: applicantMap[e].createdAt
         };
       } else {
@@ -99,7 +103,7 @@ export const getDriveDetails = async (req, res, next) => {
           name: null,
           phone: null,
           status: "pending",
-          optionCounts: null,
+          categoryCounts: null,
           createdAt: null
         };
       }

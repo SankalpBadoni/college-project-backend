@@ -45,7 +45,7 @@ export const getAssessmentQuestions = async (req, res, next) => {
  */
 export const submitAssessment = async (req, res, next) => {
   try {
-    const { userId, strengthResponses, weaknessResponses } = req.body;
+    const { userId, strengthResponses, weaknessResponses, assessmentType = "career-profiler" } = req.body;
 
     // Calculate scores
     const scores = calculateScores(strengthResponses, weaknessResponses);
@@ -86,11 +86,12 @@ export const submitAssessment = async (req, res, next) => {
         combinedAnalysis: analysis.blendedProfile.description,
       },
       status: "completed",
+      assessmentType,
     };
 
     // Check if this is the student's FIRST assessment (for credits)
     const isFirstAssessment =
-      !(await assessmentService.hasUserCompletedAssessment(userId));
+      !(await assessmentService.hasUserCompletedAssessment(userId, assessmentType));
 
     // Save to database
     const savedResponse = await assessmentService.createOrUpdateResponse(
@@ -122,13 +123,21 @@ export const submitAssessment = async (req, res, next) => {
       })
       .filter(Boolean);
 
-    const studentUpdatePayload = {
-      assessmentResult: {
+    const studentUpdatePayload = {};
+
+    if (assessmentType === "communication") {
+      studentUpdatePayload.communicationResult = {
         dominantType: dominantInfo.dominantType,
         secondaryType: dominantInfo.secondaryType,
         completedAt: new Date()
-      }
-    };
+      };
+    } else {
+      studentUpdatePayload.assessmentResult = {
+        dominantType: dominantInfo.dominantType,
+        secondaryType: dominantInfo.secondaryType,
+        completedAt: new Date()
+      };
+    }
 
     if (competencyArray.length > 0) {
       studentUpdatePayload.competency = competencyArray;
@@ -186,6 +195,7 @@ export const submitAssessment = async (req, res, next) => {
 export const getAssessmentResults = async (req, res, next) => {
   try {
     const { userId } = req.params;
+    const { assessmentType = "career-profiler" } = req.query;
 
     // Check authorization (user can only access their own results)
     if (req.user.id !== userId && req.user.role !== "admin") {
@@ -195,7 +205,7 @@ export const getAssessmentResults = async (req, res, next) => {
       });
     }
 
-    const response = await assessmentService.getUserLatestResponse(userId);
+    const response = await assessmentService.getUserLatestResponse(userId, assessmentType);
 
     if (!response) {
       return res.status(404).json({
@@ -263,7 +273,7 @@ export const getAssessmentResults = async (req, res, next) => {
 export const getAssessmentHistory = async (req, res, next) => {
   try {
     const { userId } = req.params;
-    const { limit = 10 } = req.query;
+    const { limit = 10, assessmentType = "career-profiler" } = req.query;
 
     // Check authorization
     if (req.user.id !== userId && req.user.role !== "admin") {
@@ -273,7 +283,7 @@ export const getAssessmentHistory = async (req, res, next) => {
       });
     }
 
-    const responses = await assessmentService.getUserResponses(userId, limit);
+    const responses = await assessmentService.getUserResponses(userId, limit, assessmentType);
 
     res.status(200).json({
       success: true,
@@ -319,6 +329,7 @@ export const getAssessmentStatistics = async (req, res, next) => {
 export const checkAssessmentCompletion = async (req, res, next) => {
   try {
     const { userId } = req.params;
+    const { assessmentType = "career-profiler" } = req.query;
 
     // Check authorization
     if (req.user.id !== userId && req.user.role !== "admin") {
@@ -329,7 +340,7 @@ export const checkAssessmentCompletion = async (req, res, next) => {
     }
 
     const completed =
-      await assessmentService.hasUserCompletedAssessment(userId);
+      await assessmentService.hasUserCompletedAssessment(userId, assessmentType);
 
     res.status(200).json({
       success: true,

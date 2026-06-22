@@ -39,11 +39,11 @@ const applicantAssessmentSchema = new mongoose.Schema(
         },
       },
     ],
-    optionCounts: {
-      A: { type: Number, default: 0 },
-      B: { type: Number, default: 0 },
-      C: { type: Number, default: 0 },
-      D: { type: Number, default: 0 },
+    categoryCounts: {
+      Lion: { type: Number, default: 0 },
+      Owl: { type: Number, default: 0 },
+      Dove: { type: Number, default: 0 },
+      Butterfly: { type: Number, default: 0 },
     },
     status: {
       type: String,

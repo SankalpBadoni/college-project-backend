@@ -1,5 +1,6 @@
 import AssessmentDrive from "../models/AssessmentDrive.js";
 import ApplicantAssessment from "../models/ApplicantAssessment.js";
+import AssessmentQuestion from "../models/AssessmentQuestion.js";
 
 // @desc    Get drive details by tokenNo (public route for applicant)
 // @route   GET /api/assessment/applicant/drive/:tokenNo
@@ -97,18 +98,30 @@ export const submitAssessment = async (req, res, next) => {
       return res.status(400).json({ success: false, message: "Assessment already submitted" });
     }
 
-    // Count options
-    const counts = { A: 0, B: 0, C: 0, D: 0 };
+    // Fetch all questions to map options to personalities
+    const questions = await AssessmentQuestion.find({});
+    const questionsMap = {};
+    questions.forEach((q) => {
+      questionsMap[`${q.section}-${q.questionId}`] = q;
+    });
+
+    // Count options by personality category
+    const categoryCounts = { Lion: 0, Owl: 0, Dove: 0, Butterfly: 0 };
+    
     if (responses && Array.isArray(responses)) {
       responses.forEach((r) => {
-        if (counts[r.selected] !== undefined) {
-          counts[r.selected]++;
+        const q = questionsMap[`${r.section}-${r.questionId}`];
+        if (q) {
+          const option = q.options.find((o) => o.code === r.selected);
+          if (option && categoryCounts[option.personality] !== undefined) {
+            categoryCounts[option.personality]++;
+          }
         }
       });
     }
 
     applicant.responses = responses;
-    applicant.optionCounts = counts;
+    applicant.categoryCounts = categoryCounts;
     applicant.status = "completed";
 
     await applicant.save();

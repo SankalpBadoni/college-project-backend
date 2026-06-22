@@ -8,6 +8,11 @@ const assessmentResponseSchema = new mongoose.Schema(
       required: true,
       index: true,
     },
+    assessmentType: {
+      type: String,
+      enum: ["career-profiler", "communication"],
+      default: "career-profiler",
+    },
     strengthResponses: [
       {
         questionId: {

@@ -21,6 +21,7 @@ export const ASSESSMENT_CONFIG = {
 export const ASSESSMENT_SECTIONS = {
   STRENGTHS: "strengths",
   WEAKNESSES: "weaknesses",
+  COMMUNICATION: "communication",
 };
 
 export const VALIDATION_RULES = {
