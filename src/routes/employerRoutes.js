@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   createLiveProject,
   createPosting,
+  closePosting,
   deletePosting,
   getDashboard,
   getPosting,
@@ -30,6 +31,7 @@ router.get("/jobs", protectEmployer, listPostings);
 router.get("/jobs/:jobPostingId", protectEmployer, getPosting);
 router.get("/jobs/:jobPostingId/structure", protectEmployer, getJobStructureItem);
 router.patch("/jobs/:jobPostingId", protectEmployer, updatePosting);
+router.patch("/jobs/:jobPostingId/close", protectEmployer, closePosting);
 router.delete("/jobs/:jobPostingId", protectEmployer, deletePosting);
 router.post("/jobs/:jobPostingId/candidates", protectEmployer, listCandidates);
 router.post("/jobs/:jobPostingId/shortlist", protectEmployer, shortlistCandidates);

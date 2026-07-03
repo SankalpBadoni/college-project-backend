@@ -1,6 +1,7 @@
 import {
   createEmployerLiveProject,
   createJobPosting,
+  closeEmployerPosting,
   deleteEmployerPosting,
   findEmployerCandidates,
   getEmployerDashboard,
@@ -89,6 +90,19 @@ export const updatePosting = async (req, res, next) => {
     }
 
     return res.json({ message: "Posting updated", posting });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const closePosting = async (req, res, next) => {
+  try {
+    const posting = await closeEmployerPosting(req.employer._id, req.params.jobPostingId);
+    if (!posting) {
+      return res.status(404).json({ message: "Posting not found" });
+    }
+
+    return res.json({ message: "Posting closed", posting });
   } catch (error) {
     return next(error);
   }

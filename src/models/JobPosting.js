@@ -86,6 +86,8 @@ const jobPostingSchema = new mongoose.Schema(
     linkedPrograms: [{ type: mongoose.Schema.Types.ObjectId, ref: "Program" }],
     preferredCourses: [{ type: mongoose.Schema.Types.ObjectId, ref: "Program" }],
     shortlistingNotes: { type: String, trim: true },
+    status: { type: String, enum: ["open", "closed"], default: "open" },
+    closedAt: { type: Date },
     tagType: { type: String, enum: ["normal", "employer_preferred", "hot_job_linked", "exclusive"], default: "normal" },
     visualElements: {
       coverImageUrl: { type: String, trim: true },

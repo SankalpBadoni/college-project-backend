@@ -19,6 +19,7 @@ export const listJobPostings = async (req, res, next) => {
     const now = new Date();
     const postings = await JobPosting.find({
       isActive: true,
+      status: "open",
       $or: [{ deadline: { $exists: false } }, { deadline: null }, { deadline: { $gte: now } }]
     })
       .populate("linkedPrograms preferredCourses requiredCompetencyLinks preferredCompetencyLinks", "title type name")
@@ -32,7 +33,7 @@ export const listJobPostings = async (req, res, next) => {
 
 export const getJobById = async (req, res, next) => {
   try {
-    const job = await JobPosting.findById(req.params.id)
+    const job = await JobPosting.findOne({ _id: req.params.id, isActive: true, status: "open" })
       .populate("employer", "companyName profileImage")
       .populate("requiredCompetencyLinks preferredCompetencyLinks linkedPrograms", "title type name");
     
@@ -50,7 +51,7 @@ export const applyToJob = async (req, res, next) => {
     const { jobPostingId, coverLetter } = req.body;
     const job = await JobPosting.findById(jobPostingId);
 
-    if (!job || !job.isActive) {
+    if (!job || !job.isActive || job.status !== "open") {
       return res.status(404).json({ message: "Job posting not found" });
     }
 
@@ -76,7 +77,7 @@ export const applyToJob = async (req, res, next) => {
 export const listMyJobApplications = async (req, res, next) => {
   try {
     const applications = await JobApplication.find({ student: req.student._id })
-      .populate("jobPosting")
+      .populate("jobPosting", "title companyName postingType employmentType location workMode status isActive deadline applicationDeadline")
       .sort({ createdAt: -1 });
 
     return res.json(applications);

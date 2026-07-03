@@ -2,6 +2,8 @@ import Employer from "../models/Employer.js";
 import bcrypt from "bcryptjs";
 
 import JobPosting from "../models/JobPosting.js";
+import JobApplication from "../models/JobApplication.js";
+import Notification from "../models/Notification.js";
 import Program from "../models/Program.js";
 import Student from "../models/Student.js";
 import Enrollment from "../models/Enrollment.js";
@@ -190,7 +192,8 @@ export const createJobPosting = async (employerId, payload) => {
     tagType: payload.tagType || "normal",
     visualElements: payload.visualElements || {},
     jdUrl: payload.jdUrl,
-    isActive: payload.isActive ?? true
+    isActive: payload.isActive ?? true,
+    status: "open"
   };
 
   return JobPosting.create(safePayload);
@@ -243,8 +246,7 @@ export const updateEmployerPosting = async (employerId, postingId, updates) => {
     "shortlistingNotes",
     "tagType",
     "visualElements",
-    "jdUrl",
-    "isActive"
+    "jdUrl"
   ]);
 
   return JobPosting.findOneAndUpdate({ _id: postingId, employer: employerId }, payload, {
@@ -252,6 +254,13 @@ export const updateEmployerPosting = async (employerId, postingId, updates) => {
     runValidators: true
   }).populate("linkedPrograms preferredCourses shortlistedStudents.student");
 };
+
+export const closeEmployerPosting = async (employerId, postingId) =>
+  JobPosting.findOneAndUpdate(
+    { _id: postingId, employer: employerId },
+    { status: "closed", isActive: false, closedAt: new Date() },
+    { new: true, runValidators: true }
+  ).populate("linkedPrograms preferredCourses shortlistedStudents.student");
 
 export const deleteEmployerPosting = async (employerId, postingId) =>
   JobPosting.findOneAndDelete({ _id: postingId, employer: employerId });
@@ -355,11 +364,12 @@ export const shortlistEmployerCandidates = async (employerId, postingId, student
     return null;
   }
 
+  const targetStudentIds = normalizeIds(studentIds);
   const shortlistedMap = new Map(
     (posting.shortlistedStudents || []).map((item) => [String(item.student), item])
   );
 
-  normalizeIds(studentIds).forEach((studentId) => {
+  targetStudentIds.forEach((studentId) => {
     shortlistedMap.set(String(studentId), {
       student: studentId,
       note: note || posting.shortlistingNotes || "Shortlisted from employer dashboard",
@@ -369,6 +379,55 @@ export const shortlistEmployerCandidates = async (employerId, postingId, student
 
   posting.shortlistedStudents = Array.from(shortlistedMap.values());
   await posting.save();
+
+  const applications = targetStudentIds.length
+    ? await JobApplication.find({ jobPosting: posting._id, student: { $in: targetStudentIds } })
+    : [];
+
+  const applicationMap = new Map(applications.map((application) => [String(application.student), application]));
+
+  await Promise.all(
+    targetStudentIds.map(async (studentId) => {
+      const application = applicationMap.get(String(studentId));
+
+      if (application) {
+        application.status = "shortlisted";
+        await application.save();
+      }
+
+      await Notification.findOneAndUpdate(
+        {
+          student: studentId,
+          type: "job_shortlist",
+          jobPosting: posting._id
+        },
+        {
+          student: studentId,
+          jobPosting: posting._id,
+          jobApplication: application?._id,
+          senderEmployer: employerId,
+          type: "job_shortlist",
+          title: `Shortlisted for ${posting.title || "job posting"}`,
+          message: `You have been shortlisted for ${posting.title || "a job posting"} at ${posting.companyName || "the employer"}.`,
+          read: false,
+          response: undefined,
+          responseAt: undefined,
+          metadata: {
+            jobPostingId: String(posting._id),
+            jobApplicationId: application?._id ? String(application._id) : undefined,
+            employerId: String(employerId),
+            note: note || posting.shortlistingNotes || "Shortlisted from employer dashboard"
+          }
+        },
+        {
+          upsert: true,
+          new: true,
+          setDefaultsOnInsert: true,
+          runValidators: true
+        }
+      );
+    })
+  );
 
   return posting.populate("linkedPrograms preferredCourses shortlistedStudents.student");
 };

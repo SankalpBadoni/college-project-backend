@@ -1,9 +1,13 @@
 import Notification from "../models/Notification.js";
 import Enrollment from "../models/Enrollment.js";
+import JobApplication from "../models/JobApplication.js";
 
 export const listNotifications = async (req, res, next) => {
   try {
-    const notifications = await Notification.find({ student: req.student._id }).sort({ createdAt: -1 });
+    const notifications = await Notification.find({ student: req.student._id })
+      .populate("jobPosting", "title companyName postingType employmentType location workMode status isActive")
+      .populate("jobApplication", "status createdAt updatedAt")
+      .sort({ createdAt: -1 });
     return res.json(notifications);
   } catch (error) {
     return next(error);
@@ -23,6 +27,52 @@ export const markAsRead = async (req, res, next) => {
     }
 
     return res.json({ message: "Notification marked as read", notification });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const respondToNotification = async (req, res, next) => {
+  try {
+    const response = String(req.body.response || "").toLowerCase().trim();
+    const acceptedResponses = new Set(["accepted", "accept"]);
+    const rejectedResponses = new Set(["rejected", "reject"]);
+
+    if (!acceptedResponses.has(response) && !rejectedResponses.has(response)) {
+      return res.status(400).json({ message: "Response must be accepted or rejected" });
+    }
+
+    const notification = await Notification.findOne({
+      _id: req.params.notificationId,
+      student: req.student._id,
+      type: "job_shortlist"
+    });
+
+    if (!notification) {
+      return res.status(404).json({ message: "Notification not found" });
+    }
+
+    notification.response = acceptedResponses.has(response) ? "accepted" : "rejected";
+    notification.responseAt = new Date();
+    notification.read = true;
+    await notification.save();
+
+    const jobApplication = notification.jobApplication
+      ? await JobApplication.findById(notification.jobApplication)
+      : await JobApplication.findOne({ student: req.student._id, jobPosting: notification.jobPosting || notification.metadata?.jobPostingId });
+
+    if (jobApplication) {
+      jobApplication.status = acceptedResponses.has(response) ? "shortlisted" : "rejected";
+      await jobApplication.save();
+      notification.jobApplication = jobApplication._id;
+      await notification.save();
+    }
+
+    return res.json({
+      message: "Notification response saved",
+      notification,
+      jobApplication: jobApplication || null
+    });
   } catch (error) {
     return next(error);
   }
