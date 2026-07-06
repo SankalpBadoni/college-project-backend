@@ -1,6 +1,7 @@
 import Notification from "../models/Notification.js";
 import Enrollment from "../models/Enrollment.js";
 import JobApplication from "../models/JobApplication.js";
+import JobPosting from "../models/JobPosting.js";
 
 export const listNotifications = async (req, res, next) => {
   try {
@@ -45,14 +46,17 @@ export const respondToNotification = async (req, res, next) => {
     const notification = await Notification.findOne({
       _id: req.params.notificationId,
       student: req.student._id,
-      type: "job_shortlist"
+      type: { $in: ["job_shortlist", "job_offer"] }
     });
 
     if (!notification) {
       return res.status(404).json({ message: "Notification not found" });
     }
 
-    notification.response = acceptedResponses.has(response) ? "accepted" : "rejected";
+    const isOffer = notification.type === "job_offer";
+    const isAccepted = acceptedResponses.has(response);
+
+    notification.response = isAccepted ? "accepted" : "rejected";
     notification.responseAt = new Date();
     notification.read = true;
     await notification.save();
@@ -62,10 +66,68 @@ export const respondToNotification = async (req, res, next) => {
       : await JobApplication.findOne({ student: req.student._id, jobPosting: notification.jobPosting || notification.metadata?.jobPostingId });
 
     if (jobApplication) {
-      jobApplication.status = acceptedResponses.has(response) ? "shortlisted" : "rejected";
+      if (isOffer) {
+        jobApplication.status = isAccepted ? "hired" : "rejected";
+      } else {
+        jobApplication.status = isAccepted ? "shortlisted" : "rejected";
+      }
       await jobApplication.save();
       notification.jobApplication = jobApplication._id;
       await notification.save();
+    }
+
+    const postingId = notification.jobPosting || notification.metadata?.jobPostingId;
+    let jobPosting = null;
+    if (postingId) {
+      jobPosting = await JobPosting.findById(postingId);
+      if (jobPosting) {
+        const shortlistedMap = new Map(
+          (jobPosting.shortlistedStudents || []).map((item) => [String(item.student), item])
+        );
+        const existing = shortlistedMap.get(String(req.student._id));
+        if (existing) {
+          if (isOffer) {
+            existing.status = isAccepted ? "hired" : "rejected";
+          } else {
+            existing.status = isAccepted ? "interview_scheduled" : "rejected";
+          }
+          shortlistedMap.set(String(req.student._id), existing);
+          jobPosting.shortlistedStudents = Array.from(shortlistedMap.values());
+          await jobPosting.save();
+        }
+
+        const employerId = notification.senderEmployer || notification.metadata?.employerId || jobPosting.employer;
+        if (employerId) {
+          const studentName = `${req.student.firstName || ""} ${req.student.lastName || ""}`.trim() || "Student";
+          let titleText = `Candidate Response: ${jobPosting.title || "Job Posting"}`;
+          let messageText = `${studentName} has ${isAccepted ? "accepted the interview scheduled" : "rejected the interview/shortlist invitation"} for ${jobPosting.title || "the position"}.`;
+
+          if (isOffer) {
+            titleText = isAccepted ? `🎉 Offer Accepted: ${jobPosting.title}` : `❌ Offer Declined: ${jobPosting.title}`;
+            messageText = isAccepted
+              ? `🎉 ${studentName} accepted your hiring offer for ${jobPosting.title} and is ready to join!`
+              : `${studentName} declined your hiring offer for ${jobPosting.title}.`;
+          }
+
+          await Notification.create({
+            recipientType: "employer",
+            recipientEmployer: employerId,
+            student: req.student._id,
+            jobPosting: jobPosting._id,
+            jobApplication: jobApplication?._id,
+            type: "general",
+            title: titleText,
+            message: messageText,
+            read: false,
+            metadata: {
+              studentId: String(req.student._id),
+              jobPostingId: String(jobPosting._id),
+              response: isAccepted ? "accepted" : "rejected",
+              isOffer
+            }
+          });
+        }
+      }
     }
 
     return res.json({

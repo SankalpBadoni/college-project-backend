@@ -99,6 +99,16 @@ export const getEmployerDashboard = async (employerId) => {
   );
 
   const shortlistedStudents = postings.reduce((count, posting) => count + (posting.shortlistedStudents?.length || 0), 0);
+  const totalApplicants = await JobApplication.countDocuments({ jobPosting: { $in: postings.map(p => p._id) } });
+
+  const recentPostings = await Promise.all(
+    postings.slice(0, 10).map(async (posting) => {
+      const count = await JobApplication.countDocuments({ jobPosting: posting._id });
+      const obj = posting.toObject();
+      obj.applicantsCount = count;
+      return obj;
+    })
+  );
 
   return {
     employer: employer
@@ -117,10 +127,11 @@ export const getEmployerDashboard = async (employerId) => {
       internships: postingCountByType.internship,
       liveProjects: liveProjects.length,
       shortlistedStudents,
+      totalApplicants,
       urgentPostings: postings.filter((posting) => posting.isUrgent).length,
       premiumEmployer: employer?.tier === "premium"
     },
-    recentPostings: postings.slice(0, 10),
+    recentPostings,
     liveProjects
   };
 };
@@ -199,15 +210,31 @@ export const createJobPosting = async (employerId, payload) => {
   return JobPosting.create(safePayload);
 };
 
-export const listEmployerPostings = async (employerId) =>
-  JobPosting.find({ employer: employerId })
+export const listEmployerPostings = async (employerId) => {
+  const postings = await JobPosting.find({ employer: employerId })
     .populate("linkedPrograms preferredCourses shortlistedStudents.student")
     .sort({ createdAt: -1 });
 
-export const getEmployerPosting = async (employerId, postingId) =>
-  JobPosting.findOne({ _id: postingId, employer: employerId }).populate(
+  return Promise.all(
+    postings.map(async (posting) => {
+      const count = await JobApplication.countDocuments({ jobPosting: posting._id });
+      const obj = posting.toObject();
+      obj.applicantsCount = count;
+      return obj;
+    })
+  );
+};
+
+export const getEmployerPosting = async (employerId, postingId) => {
+  const posting = await JobPosting.findOne({ _id: postingId, employer: employerId }).populate(
     "linkedPrograms preferredCourses shortlistedStudents.student"
   );
+  if (!posting) return null;
+  const count = await JobApplication.countDocuments({ jobPosting: posting._id });
+  const obj = posting.toObject();
+  obj.applicantsCount = count;
+  return obj;
+};
 
 export const updateEmployerPosting = async (employerId, postingId, updates) => {
   const payload = pick(updates, [
@@ -311,10 +338,60 @@ export const findEmployerCandidates = async (employerId, postingId, filters = {}
     .sort({ createdAt: -1 })
     .limit(filters.limit || 100);
 
+  const applications = await JobApplication.find({ jobPosting: posting._id });
+  const appMap = new Map(applications.map((app) => [String(app.student), app]));
+  const shortlistedMap = new Map((posting.shortlistedStudents || []).map((item) => [String(item.student), item]));
+
+  const studentIdSet = new Set(students.map((s) => String(s._id)));
+  const missingApplicantIds = applications
+    .map((app) => String(app.student))
+    .filter((id) => !studentIdSet.has(id));
+
+  let allStudents = [...students];
+  if (missingApplicantIds.length > 0) {
+    const extraStudents = await Student.find({ _id: { $in: missingApplicantIds } }).select("-password");
+    allStudents = [...extraStudents, ...allStudents];
+  }
+
+  const formatStatus = (rawStatus, hasApp) => {
+    if (rawStatus === "shortlisted") return "Shortlisted";
+    if (rawStatus === "under_review") return "Under Review";
+    if (rawStatus === "interview_scheduled") return "Interview Scheduled";
+    if (rawStatus === "offered") return "Offered";
+    if (rawStatus === "hired" || rawStatus === "placed" || rawStatus === "accepted") return "Hired";
+    if (rawStatus === "rejected") return "Rejected";
+    if (rawStatus === "applied" || hasApp) return "Applied";
+    return "Candidate";
+  };
+
+  const enrichedStudents = allStudents.map((student) => {
+    const studentObj = student.toObject ? student.toObject() : student;
+    const app = appMap.get(String(student._id));
+    const shortlistInfo = shortlistedMap.get(String(student._id));
+    const rawStatus = shortlistInfo?.status || app?.status || (app ? "applied" : "candidate");
+
+    return {
+      ...studentObj,
+      id: String(student._id),
+      name: `${studentObj.firstName || ""} ${studentObj.lastName || ""}`.trim() || studentObj.fullName || "Student",
+      email: studentObj.email || "",
+      phone: studentObj.phone || "",
+      applicationStatus: rawStatus,
+      status: formatStatus(rawStatus, Boolean(app)),
+      resumeUrl: app?.coverLetter || "",
+      coverLetter: app?.coverLetter || "",
+      appliedAt: app?.createdAt || null,
+      note: shortlistInfo?.note || "",
+      shortlistingNote: shortlistInfo?.note || "",
+      interviewDetails: shortlistInfo?.interviewDetails || null,
+      shortlistedAt: shortlistInfo?.shortlistedAt || null
+    };
+  });
+
   return {
     posting,
-    count: students.length,
-    students
+    count: enrichedStudents.length,
+    students: enrichedStudents
   };
 };
 
@@ -357,8 +434,8 @@ export const getJobStructure = async (employerId, postingId) => {
   };
 };
 
-export const shortlistEmployerCandidates = async (employerId, postingId, studentIds = [], note) => {
-  const posting = await getEmployerPosting(employerId, postingId);
+export const shortlistEmployerCandidates = async (employerId, postingId, studentIds = [], note, status = "shortlisted", interviewDetails = {}) => {
+  const posting = await JobPosting.findOne({ _id: postingId, employer: employerId });
 
   if (!posting) {
     return null;
@@ -370,10 +447,15 @@ export const shortlistEmployerCandidates = async (employerId, postingId, student
   );
 
   targetStudentIds.forEach((studentId) => {
+    const rawExisting = shortlistedMap.get(String(studentId)) || {};
+    const existing = rawExisting.toObject ? rawExisting.toObject() : rawExisting;
     shortlistedMap.set(String(studentId), {
+      ...existing,
       student: studentId,
-      note: note || posting.shortlistingNotes || "Shortlisted from employer dashboard",
-      shortlistedAt: new Date()
+      note: note !== undefined ? note : (existing.note || posting.shortlistingNotes || "Shortlisted from employer dashboard"),
+      status: status || existing.status || "shortlisted",
+      interviewDetails: Object.keys(interviewDetails || {}).length ? interviewDetails : (existing.interviewDetails || {}),
+      shortlistedAt: existing.shortlistedAt || new Date()
     });
   });
 
@@ -391,7 +473,11 @@ export const shortlistEmployerCandidates = async (employerId, postingId, student
       const application = applicationMap.get(String(studentId));
 
       if (application) {
-        application.status = "shortlisted";
+        if (status === "rejected") {
+          application.status = "rejected";
+        } else {
+          application.status = "shortlisted";
+        }
         await application.save();
       }
 
@@ -402,6 +488,7 @@ export const shortlistEmployerCandidates = async (employerId, postingId, student
           jobPosting: posting._id
         },
         {
+          recipientType: "student",
           student: studentId,
           jobPosting: posting._id,
           jobApplication: application?._id,
@@ -416,7 +503,9 @@ export const shortlistEmployerCandidates = async (employerId, postingId, student
             jobPostingId: String(posting._id),
             jobApplicationId: application?._id ? String(application._id) : undefined,
             employerId: String(employerId),
-            note: note || posting.shortlistingNotes || "Shortlisted from employer dashboard"
+            note: note !== undefined ? note : (posting.shortlistingNotes || "Shortlisted from employer dashboard"),
+            status: status || "shortlisted",
+            interviewDetails: interviewDetails || {}
           }
         },
         {
@@ -430,4 +519,144 @@ export const shortlistEmployerCandidates = async (employerId, postingId, student
   );
 
   return posting.populate("linkedPrograms preferredCourses shortlistedStudents.student");
+};
+
+export const updateCandidateStatus = async (employerId, postingId, studentId, status, note, interviewDetails = {}) => {
+  const posting = await JobPosting.findOne({ _id: postingId, employer: employerId });
+  if (!posting) return null;
+
+  const shortlistedMap = new Map(
+    (posting.shortlistedStudents || []).map((item) => [String(item.student), item])
+  );
+  const rawExisting = shortlistedMap.get(String(studentId)) || {};
+  const existing = rawExisting.toObject ? rawExisting.toObject() : rawExisting;
+
+  shortlistedMap.set(String(studentId), {
+    ...existing,
+    student: studentId,
+    note: note !== undefined ? note : existing.note,
+    status: status || existing.status || "shortlisted",
+    interviewDetails: Object.keys(interviewDetails || {}).length ? interviewDetails : (existing.interviewDetails || {}),
+    shortlistedAt: existing.shortlistedAt || new Date()
+  });
+
+  posting.shortlistedStudents = Array.from(shortlistedMap.values());
+  await posting.save();
+
+  const application = await JobApplication.findOne({ jobPosting: posting._id, student: studentId });
+  if (application) {
+    if (status === "rejected" || status === "Rejected") {
+      application.status = "rejected";
+    } else if (status === "offered" || status === "Offered") {
+      application.status = "offered";
+    } else if (status === "hired" || status === "Hired" || status === "placed") {
+      application.status = "hired";
+    } else if (["shortlisted", "under_review", "interview_scheduled", "accepted", "Shortlisted", "Under Review", "Interview Scheduled", "Accepted"].includes(status)) {
+      application.status = "shortlisted";
+    }
+    await application.save();
+  }
+
+  const normStatus = status?.toLowerCase() || "";
+  if (normStatus === "rejected") {
+    await Notification.create({
+      recipientType: "student",
+      student: studentId,
+      jobPosting: posting._id,
+      jobApplication: application?._id,
+      senderEmployer: employerId,
+      type: "general",
+      title: `Application Update for ${posting.title || "job posting"}`,
+      message: `Thank you for your interest in ${posting.title} at ${posting.companyName}. After careful review, we have decided not to proceed with your application at this time.`,
+      read: false
+    });
+  } else if (normStatus === "offered") {
+    await Notification.findOneAndUpdate(
+      { student: studentId, type: "job_offer", jobPosting: posting._id },
+      {
+        recipientType: "student",
+        student: studentId,
+        jobPosting: posting._id,
+        jobApplication: application?._id,
+        senderEmployer: employerId,
+        type: "job_offer",
+        title: `Hiring Offer: ${posting.title || "Job Posting"}`,
+        message: `Congratulations! ${posting.companyName} has extended a hiring offer for the position of ${posting.title}. Please review and accept your joining invitation.`,
+        read: false,
+        response: undefined,
+        responseAt: undefined,
+        metadata: {
+          jobPostingId: String(posting._id),
+          jobApplicationId: application?._id ? String(application._id) : undefined,
+          employerId: String(employerId),
+          note: note !== undefined ? note : existing.note,
+          status: status,
+          offerDetails: interviewDetails || {}
+        }
+      },
+      { upsert: true, new: true, setDefaultsOnInsert: true }
+    );
+  } else if (normStatus === "interview_scheduled" || normStatus === "shortlisted") {
+    await Notification.findOneAndUpdate(
+      { student: studentId, type: "job_shortlist", jobPosting: posting._id },
+      {
+        recipientType: "student",
+        student: studentId,
+        jobPosting: posting._id,
+        jobApplication: application?._id,
+        senderEmployer: employerId,
+        type: "job_shortlist",
+        title: `Shortlisted for ${posting.title || "job posting"}`,
+        message: `You have been shortlisted for ${posting.title} at ${posting.companyName}.`,
+        read: false,
+        metadata: {
+          jobPostingId: String(posting._id),
+          jobApplicationId: application?._id ? String(application._id) : undefined,
+          employerId: String(employerId),
+          note: note !== undefined ? note : existing.note,
+          status: status,
+          interviewDetails: interviewDetails || {}
+        }
+      },
+      { upsert: true, new: true, setDefaultsOnInsert: true }
+    );
+  }
+
+  return posting.populate("linkedPrograms preferredCourses shortlistedStudents.student");
+};
+
+export const getEmployerCalendar = async (employerId) => {
+  const postings = await JobPosting.find({ employer: employerId, isActive: true })
+    .populate("shortlistedStudents.student", "firstName lastName email phone avatarUrl");
+
+  const events = [];
+  postings.forEach((posting) => {
+    (posting.shortlistedStudents || []).forEach((item) => {
+      if (
+        item.interviewDetails &&
+        item.interviewDetails.date
+      ) {
+        events.push({
+          id: `${posting._id}_${item.student?._id || Math.random()}`,
+          jobPostingId: String(posting._id),
+          jobTitle: posting.title,
+          companyName: posting.companyName,
+          studentId: item.student?._id ? String(item.student._id) : null,
+          studentName: item.student ? `${item.student.firstName || ""} ${item.student.lastName || ""}`.trim() : "Candidate",
+          studentEmail: item.student?.email || "",
+          studentPhone: item.student?.phone || "",
+          status: item.status,
+          date: item.interviewDetails.date,
+          time: item.interviewDetails.time || "10:00 AM",
+          type: item.interviewDetails.type || "online",
+          venue: item.interviewDetails.venue || "",
+          contactPerson: item.interviewDetails.contactPerson || "",
+          meetingLink: item.interviewDetails.meetingLink || "",
+          note: item.note || ""
+        });
+      }
+    });
+  });
+
+  return events;
 };

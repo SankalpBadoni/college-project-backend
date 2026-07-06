@@ -6,7 +6,7 @@ This document describes the backend functions and API endpoints that support job
 
 1. Employer job postings now support three actions:
    - Edit: update the posting fields.
-   - Close: hide the posting from the student portal while keeping it in the database as a closed posting.
+   - Close: hide the posting from the student portal while keeping it in the database as a closed posting. But still visible in the frontend for enabling later on.
    - Delete: permanently remove the posting.
 2. Students can fetch their applied jobs and see the current application status.
 3. Employers can shortlist students and automatically send a shortlist notification.

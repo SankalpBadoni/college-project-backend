@@ -9,10 +9,13 @@ import {
   getJobStructure,
   listEmployerPostings,
   shortlistEmployerCandidates,
+  updateCandidateStatus,
+  getEmployerCalendar,
   updateEmployerCourseTags,
   updateEmployerPosting,
   updateEmployerProfile
 } from "../services/employerService.js";
+import Notification from "../models/Notification.js";
 
 export const getDashboard = async (req, res, next) => {
   try {
@@ -158,12 +161,89 @@ export const listCandidates = async (req, res, next) => {
 
 export const shortlistCandidates = async (req, res, next) => {
   try {
-    const posting = await shortlistEmployerCandidates(req.employer._id, req.params.jobPostingId, req.body.studentIds || [], req.body.note);
+    const posting = await shortlistEmployerCandidates(
+      req.employer._id,
+      req.params.jobPostingId,
+      req.body.studentIds || [],
+      req.body.note,
+      req.body.status,
+      req.body.interviewDetails
+    );
     if (!posting) {
       return res.status(404).json({ message: "Posting not found" });
     }
 
     return res.json({ message: "Students shortlisted", posting });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const updateCandidateStatusItem = async (req, res, next) => {
+  try {
+    const posting = await updateCandidateStatus(
+      req.employer._id,
+      req.params.jobPostingId,
+      req.params.studentId,
+      req.body.status,
+      req.body.note,
+      req.body.interviewDetails
+    );
+    if (!posting) {
+      return res.status(404).json({ message: "Posting or candidate not found" });
+    }
+
+    return res.json({ message: "Candidate status updated", posting });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const getCalendar = async (req, res, next) => {
+  try {
+    const events = await getEmployerCalendar(req.employer._id);
+    return res.json(events);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const listEmployerNotifications = async (req, res, next) => {
+  try {
+    const notifications = await Notification.find({
+      $or: [
+        { recipientEmployer: req.employer._id },
+        { senderEmployer: req.employer._id, recipientType: "employer" }
+      ]
+    })
+      .populate("student", "firstName lastName email avatarUrl")
+      .populate("jobPosting", "title companyName postingType")
+      .sort({ createdAt: -1 });
+    return res.json(notifications);
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const markEmployerNotificationRead = async (req, res, next) => {
+  try {
+    const notification = await Notification.findOneAndUpdate(
+      {
+        _id: req.params.notificationId,
+        $or: [
+          { recipientEmployer: req.employer._id },
+          { senderEmployer: req.employer._id, recipientType: "employer" }
+        ]
+      },
+      { read: true },
+      { new: true }
+    );
+
+    if (!notification) {
+      return res.status(404).json({ message: "Notification not found" });
+    }
+
+    return res.json({ message: "Notification marked as read", notification });
   } catch (error) {
     return next(error);
   }

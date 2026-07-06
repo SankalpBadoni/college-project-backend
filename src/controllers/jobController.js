@@ -77,7 +77,7 @@ export const applyToJob = async (req, res, next) => {
 export const listMyJobApplications = async (req, res, next) => {
   try {
     const applications = await JobApplication.find({ student: req.student._id })
-      .populate("jobPosting", "title companyName postingType employmentType location workMode status isActive deadline applicationDeadline")
+      .populate("jobPosting", "title companyName postingType employmentType location workMode status isActive deadline applicationDeadline shortlistedStudents")
       .sort({ createdAt: -1 });
 
     return res.json(applications);

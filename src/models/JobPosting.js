@@ -100,6 +100,19 @@ const jobPostingSchema = new mongoose.Schema(
       {
         student: { type: mongoose.Schema.Types.ObjectId, ref: "Student" },
         note: { type: String, trim: true },
+        status: {
+          type: String,
+          enum: ["applied", "under_review", "shortlisted", "interview_scheduled", "offered", "hired", "accepted", "rejected"],
+          default: "shortlisted"
+        },
+        interviewDetails: {
+          date: { type: String, trim: true },
+          time: { type: String, trim: true },
+          type: { type: String, enum: ["online", "on-site", "Online", "On-site", ""], default: "" },
+          venue: { type: String, trim: true },
+          contactPerson: { type: String, trim: true },
+          meetingLink: { type: String, trim: true }
+        },
         shortlistedAt: { type: Date, default: Date.now }
       }
     ],
