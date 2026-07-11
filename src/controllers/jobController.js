@@ -49,6 +49,12 @@ export const getJobById = async (req, res, next) => {
 export const applyToJob = async (req, res, next) => {
   try {
     const { jobPostingId, coverLetter } = req.body;
+    
+    // Add validation for ObjectId to prevent 500 CastError
+    if (!jobPostingId || !jobPostingId.match(/^[0-9a-fA-F]{24}$/)) {
+      return res.status(400).json({ message: "Invalid job posting ID" });
+    }
+
     const job = await JobPosting.findById(jobPostingId);
 
     if (!job || !job.isActive || job.status !== "open") {
