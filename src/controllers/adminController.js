@@ -7,6 +7,8 @@ import Employer from "../models/Employer.js";
 import Program from "../models/Program.js";
 import Enrollment from "../models/Enrollment.js";
 import MailCampaign from "../models/MailCampaign.js";
+import JobPosting from "../models/JobPosting.js";
+import LiveProject from "../models/LiveProject.js";
 
 // Helper to sanitize email
 const sanitizeEmail = (email) => email?.toLowerCase().trim();
@@ -508,6 +510,80 @@ export const updatePlatformSettings = async (req, res, next) => {
   try {
     const settings = req.body;
     res.json({ message: "Platform settings updated successfully", settings });
+  } catch (error) {
+    return next(error);
+  }
+};
+
+export const getTrackersData = async (req, res, next) => {
+  try {
+    const employers = await Employer.find({ isApproved: true });
+    
+    // Get Jobs and Internships
+    const jobPostings = await JobPosting.find({ isActive: true });
+    
+    // Get Live Projects
+    const liveProjects = await LiveProject.find({ status: { $in: ["open", "ongoing"] } });
+    
+    const internshipTracker = [];
+    const jobTracker = [];
+    const liveProjectTracker = [];
+
+    employers.forEach((emp, index) => {
+      const empId = emp._id.toString();
+      const empName = emp.companyName || `Employer ${index + 1}`;
+      
+      const empJobs = jobPostings.filter(j => j.employer?.toString() === empId && j.postingType === 'job');
+      const empInternships = jobPostings.filter(j => j.employer?.toString() === empId && j.postingType === 'internship');
+      const empLiveProjects = liveProjects.filter(lp => lp.createdBy?.toString() === empId && lp.createdByModel === 'Employer');
+
+      const calculateMetrics = (postings) => {
+        let active = 0;
+        let applications = 0;
+        let hired = 0;
+        postings.forEach(p => {
+          if (p.status === 'open' || p.isActive) active++;
+          applications += (p.shortlistedStudents?.length || p.applicants?.length || 0);
+          hired += ((p.shortlistedStudents || []).filter(s => s.status === 'hired').length);
+        });
+        return {
+          total: postings.length,
+          active,
+          applications,
+          hired
+        };
+      };
+
+      if (empInternships.length > 0) {
+        internshipTracker.push({
+          employerId: empId,
+          employerName: empName,
+          ...calculateMetrics(empInternships)
+        });
+      }
+      
+      if (empJobs.length > 0) {
+        jobTracker.push({
+          employerId: empId,
+          employerName: empName,
+          ...calculateMetrics(empJobs)
+        });
+      }
+      
+      if (empLiveProjects.length > 0) {
+        liveProjectTracker.push({
+          employerId: empId,
+          employerName: empName,
+          ...calculateMetrics(empLiveProjects)
+        });
+      }
+    });
+
+    res.json({
+      internshipTracker,
+      jobTracker,
+      liveProjectTracker
+    });
   } catch (error) {
     return next(error);
   }

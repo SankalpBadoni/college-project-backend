@@ -16,7 +16,8 @@ import {
   sendMailCampaign,
   getMailCampaignHistory,
   getPlatformSettings,
-  updatePlatformSettings
+  updatePlatformSettings,
+  getTrackersData
 } from "../controllers/adminController.js";
 
 const router = Router();
@@ -71,6 +72,12 @@ router.get("/analytics/charts", protectAdmin, getAnalyticsCharts);
 router.get("/courses", protectAdmin, getCourses);
 router.get("/enrollments", protectAdmin, getEnrollments);
 router.get("/mis-reports", protectAdmin, getMisReports);
+router.get(
+  "/trackers", 
+  protectAdmin, 
+  requireAdminRole(["employu_team"]), 
+  getTrackersData
+);
 
 // Mailer Module (All Admins can access and send campaigns)
 router.post("/mailers/send", protectAdmin, sendMailCampaign);
