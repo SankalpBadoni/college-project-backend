@@ -2,6 +2,9 @@ import Notification from "../models/Notification.js";
 import Enrollment from "../models/Enrollment.js";
 import JobApplication from "../models/JobApplication.js";
 import JobPosting from "../models/JobPosting.js";
+import Employer from "../models/Employer.js";
+import { sendEmail } from "../utils/sendEmail.js";
+import { buildEmployerResponseEmail } from "../utils/notificationEmailTemplates.js";
 
 export const listNotifications = async (req, res, next) => {
   try {
@@ -98,7 +101,7 @@ export const respondToNotification = async (req, res, next) => {
 
         const employerId = notification.senderEmployer || notification.metadata?.employerId || jobPosting.employer;
         if (employerId) {
-          const studentName = `${req.student.firstName || ""} ${req.student.lastName || ""}`.trim() || "Student";
+          const studentName = req.student.fullName || `${req.student.firstName || ""} ${req.student.lastName || ""}`.trim() || "Student";
           let titleText = `Candidate Response: ${jobPosting.title || "Job Posting"}`;
           let messageText = `${studentName} has ${isAccepted ? "accepted the interview scheduled" : "rejected the interview/shortlist invitation"} for ${jobPosting.title || "the position"}.`;
 
@@ -126,6 +129,24 @@ export const respondToNotification = async (req, res, next) => {
               isOffer
             }
           });
+
+          const employerAccount = await Employer.findById(employerId).select("companyName contactPerson.name contactPerson.email").lean();
+          if (employerAccount?.contactPerson?.email) {
+            const emailPayload = buildEmployerResponseEmail({
+              studentName,
+              posting: jobPosting,
+              isOffer,
+              isAccepted
+            });
+
+            sendEmail({
+              to: employerAccount.contactPerson.email,
+              subject: emailPayload.subject,
+              html: emailPayload.html
+            }).catch((error) => {
+              console.error("Failed to send employer response email:", error);
+            });
+          }
         }
       }
     }

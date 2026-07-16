@@ -7,6 +7,8 @@ import Notification from "../models/Notification.js";
 import Program from "../models/Program.js";
 import Student from "../models/Student.js";
 import Enrollment from "../models/Enrollment.js";
+import { sendEmail } from "../utils/sendEmail.js";
+import { buildStudentInterviewEmail, buildStudentOfferEmail } from "../utils/notificationEmailTemplates.js";
 
 const allowedEmployerFields = [
   "companyName",
@@ -536,7 +538,12 @@ export const shortlistEmployerCandidates = async (employerId, postingId, student
     ? await JobApplication.find({ jobPosting: posting._id, student: { $in: targetStudentIds } })
     : [];
 
+  const studentAccounts = targetStudentIds.length
+    ? await Student.find({ _id: { $in: targetStudentIds } }).select("fullName email").lean()
+    : [];
+
   const applicationMap = new Map(applications.map((application) => [String(application.student), application]));
+  const studentMap = new Map(studentAccounts.map((student) => [String(student._id), student]));
 
   await Promise.all(
     targetStudentIds.map(async (studentId) => {
@@ -585,6 +592,27 @@ export const shortlistEmployerCandidates = async (employerId, postingId, student
           runValidators: true
         }
       );
+
+      if (status !== "rejected") {
+        const studentAccount = studentMap.get(String(studentId));
+        if (studentAccount?.email) {
+          const emailPayload = buildStudentInterviewEmail({
+            studentName: studentAccount.fullName,
+            posting,
+            employerName: posting.companyName,
+            interviewDetails: interviewDetails || {},
+            note: note !== undefined ? note : posting.shortlistingNotes || "Shortlisted from employer"
+          });
+
+          sendEmail({
+            to: studentAccount.email,
+            subject: emailPayload.subject,
+            html: emailPayload.html
+          }).catch((error) => {
+            console.error("Failed to send student shortlist email:", error);
+          });
+        }
+      }
     })
   );
 
@@ -666,6 +694,25 @@ export const updateCandidateStatus = async (employerId, postingId, studentId, st
       },
       { upsert: true, new: true, setDefaultsOnInsert: true }
     );
+
+    const studentAccount = await Student.findById(studentId).select("fullName email").lean();
+    if (studentAccount?.email) {
+      const emailPayload = buildStudentOfferEmail({
+        studentName: studentAccount.fullName,
+        posting,
+        employerName: posting.companyName,
+        offerDetails: interviewDetails || {},
+        note: note !== undefined ? note : existing.note
+      });
+
+      sendEmail({
+        to: studentAccount.email,
+        subject: emailPayload.subject,
+        html: emailPayload.html
+      }).catch((error) => {
+        console.error("Failed to send student offer email:", error);
+      });
+    }
   } else if (normStatus === "interview_scheduled" || normStatus === "shortlisted") {
     await Notification.findOneAndUpdate(
       { student: studentId, type: "job_shortlist", jobPosting: posting._id },
@@ -690,6 +737,25 @@ export const updateCandidateStatus = async (employerId, postingId, studentId, st
       },
       { upsert: true, new: true, setDefaultsOnInsert: true }
     );
+
+    const studentAccount = await Student.findById(studentId).select("fullName email").lean();
+    if (studentAccount?.email) {
+      const emailPayload = buildStudentInterviewEmail({
+        studentName: studentAccount.fullName,
+        posting,
+        employerName: posting.companyName,
+        interviewDetails: interviewDetails || {},
+        note: note !== undefined ? note : existing.note
+      });
+
+      sendEmail({
+        to: studentAccount.email,
+        subject: emailPayload.subject,
+        html: emailPayload.html
+      }).catch((error) => {
+        console.error("Failed to send student interview email:", error);
+      });
+    }
   }
 
   return posting.populate("linkedPrograms preferredCourses shortlistedStudents.student");
