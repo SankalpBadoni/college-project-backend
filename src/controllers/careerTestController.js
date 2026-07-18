@@ -50,8 +50,25 @@ export const submitCareerTest = async (req, res, next) => {
 
 export const getMyCareerAnalysis = async (req, res, next) => {
   try {
+    const student = await Student.findById(req.student._id).populate("competency.competency");
     const attempts = await CareerTestAttempt.find({ student: req.student._id }).sort({ createdAt: -1 });
+
     if (!attempts.length) {
+      if (student && student.competency && student.competency.length > 0) {
+        const studentSpiderData = student.competency
+          .filter(c => c.competency?.name)
+          .map(c => ({
+            subject: c.competency.name,
+            score: c.score,
+            fullMark: 100
+          }));
+        return res.json({
+          latestAttempt: null,
+          strengths: [],
+          weaknesses: [],
+          spiderWebData: studentSpiderData
+        });
+      }
       return res.status(404).json({ message: "No career test attempts found" });
     }
 
@@ -66,11 +83,31 @@ export const getMyCareerAnalysis = async (req, res, next) => {
     const strong = [...entries].sort((a, b) => b[1] - a[1]).slice(0, 3);
     const weak = [...entries].sort((a, b) => a[1] - b[1]).slice(0, 3);
 
+    // Merge student.competency (e.g. ApiDev, DBMS, DataScience, WebDev, CloudDevOps, Algorithms, etc.) into spiderWebData
+    let mergedSpiderData = Array.isArray(latest.spiderWebData) ? [...latest.spiderWebData] : [];
+    if (student && student.competency && student.competency.length > 0) {
+      student.competency.forEach(c => {
+        if (!c.competency?.name) return;
+        const existingIdx = mergedSpiderData.findIndex(
+          item => item.subject?.toLowerCase() === c.competency.name.toLowerCase()
+        );
+        if (existingIdx >= 0) {
+          mergedSpiderData[existingIdx].score = c.score;
+        } else {
+          mergedSpiderData.push({
+            subject: c.competency.name,
+            score: c.score,
+            fullMark: 100
+          });
+        }
+      });
+    }
+
     return res.json({
       latestAttempt: latest,
       strengths: strong,
       weaknesses: weak,
-      spiderWebData: latest.spiderWebData
+      spiderWebData: mergedSpiderData
     });
   } catch (error) {
     return next(error);

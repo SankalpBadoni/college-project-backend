@@ -1,4 +1,5 @@
 import AssessmentResponse from "../models/AssessmentResponse.js";
+import AssessmentQuestion from "../models/AssessmentQuestion.js";
 import Student from "../models/Student.js";
 import { Competency } from "../models/Competency.js";
 import * as assessmentService from "../services/assessmentService.js";
@@ -45,7 +46,122 @@ export const getAssessmentQuestions = async (req, res, next) => {
  */
 export const submitAssessment = async (req, res, next) => {
   try {
-    const { userId, strengthResponses, weaknessResponses, assessmentType = "career-profiler" } = req.body;
+    const { userId, assessmentType = "career-profiler" } = req.body;
+
+    // ══════════════════════════════════════════════
+    // ──── TECHNICAL ASSESSMENT BRANCH ────
+    // ══════════════════════════════════════════════
+    if (assessmentType === "technical") {
+      const { technicalResponses } = req.body;
+
+      // 1. Fetch all active technical questions
+      const techQuestions = await AssessmentQuestion.find({
+        section: "technical",
+        isActive: true,
+      }).lean();
+
+      // Build a lookup map: questionId → question
+      const questionMap = {};
+      techQuestions.forEach((q) => {
+        questionMap[q.questionId] = q;
+      });
+
+      // 2. Grade responses and group by competencyTag
+      const segmentStats = {}; // { "API Development": { correct: 0, total: 0 } }
+
+      technicalResponses.forEach((r) => {
+        const q = questionMap[r.questionId];
+        if (!q) return;
+
+        const tag = q.competencyTag || "Unknown";
+        if (!segmentStats[tag]) {
+          segmentStats[tag] = { correct: 0, total: 0 };
+        }
+        segmentStats[tag].total++;
+
+        if (q.correctAnswer && r.selected.toUpperCase() === q.correctAnswer.toUpperCase()) {
+          segmentStats[tag].correct++;
+        }
+      });
+
+      // 3. Calculate percentage for each segment
+      const technicalScoresMap = {};
+      const competencyScoresArr = [];
+
+      for (const [tag, stats] of Object.entries(segmentStats)) {
+        const pct = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+        technicalScoresMap[tag] = pct;
+        competencyScoresArr.push({ name: tag, score: pct });
+      }
+
+      // 4. Check if this is the student's FIRST technical assessment (for credits)
+      const isFirstAssessment =
+        !(await assessmentService.hasUserCompletedAssessment(userId, "technical"));
+
+      // 5. Save to AssessmentResponse
+      const responseData = {
+        userId,
+        assessmentType: "technical",
+        technicalResponses,
+        technicalScores: technicalScoresMap,
+        status: "completed",
+      };
+
+      const savedResponse = await assessmentService.createOrUpdateResponse(
+        userId,
+        responseData
+      );
+
+      // 6. Award 1000 credits on FIRST technical assessment
+      let creditsAwarded = 0;
+      if (isFirstAssessment) {
+        await Student.findByIdAndUpdate(userId, { $inc: { credits: 1000 } });
+        creditsAwarded = 1000;
+      }
+
+      // 7. Merge competency scores into student.competency (non-destructive)
+      const competencyNames = competencyScoresArr.map((c) => c.name);
+      const competencyDocs = await Competency.find({
+        name: { $in: competencyNames },
+      }).lean();
+
+      for (const cs of competencyScoresArr) {
+        const doc = competencyDocs.find((d) => d.name === cs.name);
+        if (!doc) continue;
+
+        // Try to update existing competency entry
+        const updateResult = await Student.updateOne(
+          { _id: userId, "competency.competency": doc._id },
+          { $set: { "competency.$.score": cs.score, "competency.$.lastUpdated": new Date() } }
+        );
+
+        // If no existing entry matched, push a new one
+        if (updateResult.matchedCount === 0) {
+          await Student.updateOne(
+            { _id: userId },
+            { $push: { competency: { competency: doc._id, score: cs.score, lastUpdated: new Date() } } }
+          );
+        }
+      }
+
+      // 8. Return structured response
+      return res.status(200).json({
+        success: true,
+        message: "Technical assessment submitted successfully",
+        data: {
+          assessmentId: savedResponse._id,
+          technicalScores: technicalScoresMap,
+          competencyScores: competencyScoresArr,
+          creditsAwarded,
+          submittedAt: savedResponse.createdAt,
+        },
+      });
+    }
+
+    // ══════════════════════════════════════════════
+    // ──── BEHAVIORAL / COMMUNICATION BRANCH ────
+    // ══════════════════════════════════════════════
+    const { strengthResponses, weaknessResponses } = req.body;
 
     // Calculate scores
     const scores = calculateScores(strengthResponses, weaknessResponses);
@@ -115,14 +231,6 @@ export const submitAssessment = async (req, res, next) => {
       name: { $in: competencyNames },
     }).lean();
 
-    const competencyArray = competencyScores
-      .map((cs) => {
-        const doc = competencyDocs.find((d) => d.name === cs.name);
-        if (!doc) return null;
-        return { competency: doc._id, score: cs.score, lastUpdated: new Date() };
-      })
-      .filter(Boolean);
-
     const studentUpdatePayload = {};
 
     if (assessmentType === "communication") {
@@ -139,11 +247,25 @@ export const submitAssessment = async (req, res, next) => {
       };
     }
 
-    if (competencyArray.length > 0) {
-      studentUpdatePayload.competency = competencyArray;
-    }
-
     await Student.findByIdAndUpdate(userId, studentUpdatePayload);
+
+    // Merge competency scores (non-destructive) instead of overwriting
+    for (const cs of competencyScores) {
+      const doc = competencyDocs.find((d) => d.name === cs.name);
+      if (!doc) continue;
+
+      const updateResult = await Student.updateOne(
+        { _id: userId, "competency.competency": doc._id },
+        { $set: { "competency.$.score": cs.score, "competency.$.lastUpdated": new Date() } }
+      );
+
+      if (updateResult.matchedCount === 0) {
+        await Student.updateOne(
+          { _id: userId },
+          { $push: { competency: { competency: doc._id, score: cs.score, lastUpdated: new Date() } } }
+        );
+      }
+    }
 
     // Generate executive summary
     const executiveSummary = generateExecutiveSummary(
@@ -220,6 +342,23 @@ export const getAssessmentResults = async (req, res, next) => {
       name: c.competency?.name || "",
       score: c.score
     })).filter(c => c.name) || [];
+
+    if (response.assessmentType === "technical" || assessmentType === "technical") {
+      const resultsData = {
+        assessmentId: response._id,
+        technicalScores: response.technicalScores || {},
+        competencyScores,
+        creditsAwarded: 0,
+        submittedAt: response.createdAt,
+        assessmentType: "technical"
+      };
+
+      return res.status(200).json({
+        success: true,
+        message: "Technical assessment results retrieved successfully",
+        data: resultsData,
+      });
+    }
 
     // Generate personality analysis on the fly
     const analysis = generatePersonalityAnalysis(

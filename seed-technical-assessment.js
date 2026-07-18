@@ -49,8 +49,8 @@ const seedTechnicalAssessment = async () => {
         comp = await Competency.create({
           name: compName,
           type: "technical",
-          domain: domain._id,
-          industry: industry._id
+          domains: [domain._id],
+          industries: [industry._id]
         });
         console.log(`      ✓ Created Competency: ${compName}`);
       } else {
@@ -68,9 +68,7 @@ const seedTechnicalAssessment = async () => {
     console.log("📝 Preparing questions...");
     const preparedQuestions = technicalAssessmentQuestions.map(q => {
       // Map personality to a dummy value or omit if schema is modified.
-      // To bypass current strict Mongoose schema validation *before* code change is applied,
-      // we can set dummy values for personality on options, but once the schema is relaxed,
-      // it won't be necessary. For safety during seeding, we structure it matching the Mongoose schema.
+      // Schema has been relaxed: personality is no longer required.
       return {
         questionId: q.questionId,
         section: q.section,
@@ -80,8 +78,7 @@ const seedTechnicalAssessment = async () => {
         options: q.options.map(opt => ({
           code: opt.code,
           title: opt.title,
-          description: opt.description,
-          personality: "Owl" // Dummy personality to satisfy strict mongoose enum validator if not relaxed
+          description: opt.description
         }))
       };
     });

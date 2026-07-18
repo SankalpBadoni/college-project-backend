@@ -38,6 +38,7 @@ const groupQuestionsBySection = (questions) => {
     strengths: [],
     weaknesses: [],
     communication: [],
+    technical: [],
   };
 
   questions.forEach((question) => {
@@ -47,6 +48,8 @@ const groupQuestionsBySection = (questions) => {
       grouped.weaknesses.push(question);
     } else if (question.section === ASSESSMENT_SECTIONS.COMMUNICATION || question.section === "communication") {
       grouped.communication.push(question);
+    } else if (question.section === ASSESSMENT_SECTIONS.TECHNICAL || question.section === "technical") {
+      grouped.technical.push(question);
     }
   });
 

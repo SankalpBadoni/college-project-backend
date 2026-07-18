@@ -10,7 +10,7 @@ const assessmentResponseSchema = new mongoose.Schema(
     },
     assessmentType: {
       type: String,
-      enum: ["career-profiler", "communication"],
+      enum: ["career-profiler", "communication", "technical"],
       default: "career-profiler",
     },
     strengthResponses: [
@@ -93,6 +93,24 @@ const assessmentResponseSchema = new mongoose.Schema(
       type: String,
       enum: ["completed", "incomplete", "pending"],
       default: "completed",
+    },
+    technicalResponses: [
+      {
+        questionId: {
+          type: Number,
+          required: true,
+        },
+        selected: {
+          type: String,
+          enum: ["A", "B", "C", "D"],
+          required: true,
+        },
+      },
+    ],
+    technicalScores: {
+      type: Map,
+      of: Number,
+      default: undefined,
     },
   },
   { timestamps: true }

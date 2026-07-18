@@ -9,7 +9,7 @@ const assessmentQuestionSchema = new mongoose.Schema(
     },
     section: {
       type: String,
-      enum: ["strengths", "weaknesses", "communication"],
+      enum: ["strengths", "weaknesses", "communication", "technical"],
       required: true,
       index: true,
     },
@@ -35,10 +35,20 @@ const assessmentQuestionSchema = new mongoose.Schema(
         personality: {
           type: String,
           enum: ["Butterfly", "Dove", "Lion", "Owl"],
-          required: true,
+          required: false,
         },
       },
     ],
+    correctAnswer: {
+      type: String,
+      enum: ["A", "B", "C", "D"],
+      required: false,
+    },
+    competencyTag: {
+      type: String,
+      required: false,
+      trim: true,
+    },
     isActive: {
       type: Boolean,
       default: true,

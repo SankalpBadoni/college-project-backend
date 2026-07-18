@@ -4,7 +4,7 @@ import { ERROR_MESSAGES, ASSESSMENT_CONFIG } from "../utils/assessmentConstants.
  * Validate assessment submission request
  */
 export const validateAssessmentSubmission = (req, res, next) => {
-  const { userId, strengthResponses, weaknessResponses } = req.body;
+  const { userId, assessmentType } = req.body;
 
   // Check required fields
   if (!userId) {
@@ -13,6 +13,65 @@ export const validateAssessmentSubmission = (req, res, next) => {
       message: "userId is required",
     });
   }
+
+  // ── Technical assessment branch ──
+  if (assessmentType === "technical") {
+    const { technicalResponses } = req.body;
+
+    if (!technicalResponses || !Array.isArray(technicalResponses)) {
+      return res.status(400).json({
+        success: false,
+        message: "technicalResponses must be an array",
+      });
+    }
+
+    if (technicalResponses.length !== 30) {
+      return res.status(400).json({
+        success: false,
+        message: "All 30 technical questions must be answered",
+        answered: technicalResponses.length,
+        required: 30,
+      });
+    }
+
+    // Validate individual responses
+    const techIds = new Set();
+    for (const response of technicalResponses) {
+      if (!response.questionId || response.questionId === undefined) {
+        return res.status(400).json({
+          success: false,
+          message: "Each response must have questionId",
+        });
+      }
+
+      if (!response.selected || !response.selected.trim()) {
+        return res.status(400).json({
+          success: false,
+          message: "Each response must have selected option (A, B, C, or D)",
+        });
+      }
+
+      if (!ASSESSMENT_CONFIG.OPTIONS.includes(response.selected.toUpperCase())) {
+        return res.status(400).json({
+          success: false,
+          message: ERROR_MESSAGES.INVALID_OPTION,
+        });
+      }
+
+      if (techIds.has(response.questionId)) {
+        return res.status(400).json({
+          success: false,
+          message: `Duplicate technical response for question ${response.questionId}`,
+        });
+      }
+      techIds.add(response.questionId);
+    }
+
+    return next();
+  }
+
+  // ── Behavioral / Communication assessment branch (existing logic) ──
+  const { strengthResponses, weaknessResponses } = req.body;
 
   if (!strengthResponses || !Array.isArray(strengthResponses)) {
     return res.status(400).json({
@@ -106,7 +165,7 @@ export const validateAssessmentSubmission = (req, res, next) => {
 export const validateQuestionsQuery = (req, res, next) => {
   const { section } = req.query;
 
-  if (section && !["strengths", "weaknesses"].includes(section)) {
+  if (section && !["strengths", "weaknesses", "communication", "technical"].includes(section)) {
     return res.status(400).json({
       success: false,
       message: ERROR_MESSAGES.INVALID_SECTION,
