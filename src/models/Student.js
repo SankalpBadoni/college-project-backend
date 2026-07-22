@@ -32,6 +32,14 @@ const studentSchema = new mongoose.Schema(
     password: { type: String, required: true, minlength: 6 },
     phone: { type: String, trim: true },
     role: { type: String, default: "student", enum: ["student"] },
+    university: {
+      universityId: { type: mongoose.Schema.Types.ObjectId, ref: "University" },
+      branchId: { type: mongoose.Schema.Types.ObjectId }
+    },
+    courseId: { type: mongoose.Schema.Types.ObjectId, ref: "UniversityDegree" },
+    departmentId: { type: mongoose.Schema.Types.ObjectId, ref: "Department" },
+    enrollmentYear: { type: Number },
+    semester: { type: Number },
     profile: {
       collegeName: { type: String, required: true, trim: true },
       collegeId: { type: String, required: true, trim: true },
@@ -70,6 +78,9 @@ const studentSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+studentSchema.index({ "university.universityId": 1 });
+studentSchema.index({ courseId: 1, departmentId: 1 });
 
 const Student = mongoose.model("Student", studentSchema);
 export default Student;

@@ -21,7 +21,14 @@ const facultySchema = new mongoose.Schema(
     password: { type: String, required: true, minlength: 6 },
     phone: { type: String, required: true, trim: true },
     gender: { type: String, enum: ["Male", "Female", "Other"], required: true },
-    role: { type: String, default: "faculty", enum: ["faculty"] },
+    role: { type: String, default: "faculty", enum: ["faculty", "professor"] },
+    university: {
+      universityId: { type: mongoose.Schema.Types.ObjectId, ref: "University" },
+      branchId: { type: mongoose.Schema.Types.ObjectId }
+    },
+    departmentId: { type: mongoose.Schema.Types.ObjectId, ref: "Department" },
+    designation: { type: String, trim: true },
+    employeeId: { type: String, trim: true },
     profilePicture: { type: String, trim: true },
     
     professionalProfile: {
@@ -50,6 +57,8 @@ const facultySchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+facultySchema.index({ "university.universityId": 1, departmentId: 1 });
 
 const Faculty = mongoose.model("Faculty", facultySchema);
 export default Faculty;

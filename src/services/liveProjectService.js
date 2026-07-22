@@ -1,4 +1,5 @@
 import LiveProject from "../models/LiveProject.js";
+import Enrollment from "../models/Enrollment.js";
 
 const pick = (source, keys) =>
   keys.reduce((accumulator, key) => {
@@ -163,17 +164,30 @@ const buildSearchQuery = ({ search, status, projectType, mode, creatorRole }) =>
     query.creatorRole = creatorRole;
   }
 
+  const linkedCourseQuery = {
+    $or: [{ linkedCourses: { $exists: false } }, { linkedCourses: { $size: 0 } }]
+  };
+
   if (search) {
     const term = String(search).trim();
     if (term) {
-      query.$or = [
-        { title: { $regex: term, $options: "i" } },
-        { shortDescription: { $regex: term, $options: "i" } },
-        { fullDescription: { $regex: term, $options: "i" } },
-        { companyName: { $regex: term, $options: "i" } },
-        { skillsRequired: { $in: [new RegExp(term, "i")] } }
+      query.$and = [
+        linkedCourseQuery,
+        {
+          $or: [
+            { title: { $regex: term, $options: "i" } },
+            { shortDescription: { $regex: term, $options: "i" } },
+            { fullDescription: { $regex: term, $options: "i" } },
+            { companyName: { $regex: term, $options: "i" } },
+            { skillsRequired: { $in: [new RegExp(term, "i")] } }
+          ]
+        }
       ];
+    } else {
+      query.$and = [linkedCourseQuery];
     }
+  } else {
+    query.$and = [linkedCourseQuery];
   }
 
   return query;
@@ -397,6 +411,18 @@ export const applyStudentToProject = async (studentId, projectId, payload = {}) 
     return null;
   }
 
+  if (project.linkedCourses && project.linkedCourses.length > 0) {
+    const isEnrolledInAnyLinkedCourse = await Enrollment.exists({
+      student: studentId,
+      program: { $in: project.linkedCourses },
+      status: { $nin: ["cancelled"] }
+    });
+
+    if (!isEnrolledInAnyLinkedCourse) {
+      throw new Error("You must be enrolled in the linked course to apply for this Competency Assessment Capstone.");
+    }
+  }
+
   const alreadyApplied = project.applicants.find((applicant) => String(applicant.student?._id || applicant.student) === String(studentId));
   if (alreadyApplied) {
     alreadyApplied.status = alreadyApplied.status || "applied";
@@ -424,6 +450,18 @@ export const joinProjectGroup = async (studentId, projectId, payload = {}) => {
   const project = await getProjectByIdOrThrow(projectId);
   if (!project) {
     return null;
+  }
+
+  if (project.linkedCourses && project.linkedCourses.length > 0) {
+    const isEnrolledInAnyLinkedCourse = await Enrollment.exists({
+      student: studentId,
+      program: { $in: project.linkedCourses },
+      status: { $nin: ["cancelled"] }
+    });
+
+    if (!isEnrolledInAnyLinkedCourse) {
+      throw new Error("You must be enrolled in the linked course to join this Competency Assessment Capstone group.");
+    }
   }
 
   if (!project.allowGroup) {

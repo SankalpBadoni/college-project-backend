@@ -101,7 +101,7 @@ export const loginStudent = async (req, res, next) => {
 
 export const registerFaculty = async (req, res, next) => {
   try {
-    const { fullName, email, password, phone, gender, professionalProfile, coursesOffered, profilePicture } = req.body;
+    const { fullName, email, password, phone, gender, professionalProfile, coursesOffered, profilePicture, isUniversityOnEmployU, university, branch, departmentId, employeeId, designation } = req.body;
 
     const exists = await Faculty.findOne({ email: sanitizeEmail(email) });
     if (exists) {
@@ -114,6 +114,9 @@ export const registerFaculty = async (req, res, next) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    const role = (isUniversityOnEmployU && university && departmentId) ? "professor" : "faculty";
+
     const faculty = await Faculty.create({
       fullName,
       email: sanitizeEmail(email),
@@ -123,7 +126,14 @@ export const registerFaculty = async (req, res, next) => {
       professionalProfile,
       coursesOffered,
       profilePicture: s3ProfilePicture,
-      isApproved: false
+      isApproved: false,
+      role,
+      ...(role === "professor" && {
+        university: { universityId: university },
+        departmentId,
+        employeeId,
+        designation
+      })
     });
 
     return res.status(201).json({
