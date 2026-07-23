@@ -1,13 +1,15 @@
+import mongoose from "mongoose";
 import AssessmentQuestion from "../models/AssessmentQuestion.js";
 import AssessmentResponse from "../models/AssessmentResponse.js";
 import { ASSESSMENT_SECTIONS } from "../utils/assessmentConstants.js";
+import { Competency, Industry } from "../models/Competency.js";
 
 /**
  * Get all assessment questions, optionally filtered by section
  * @param {String} section - Optional section filter ("strengths" or "weaknesses")
  * @returns {Promise<Array>} Assessment questions
  */
-export const getAllQuestions = async (section = null) => {
+export const getAllQuestions = async (section = null, industry = null) => {
   try {
     let query = AssessmentQuestion.find({ isActive: true });
 
@@ -15,7 +17,28 @@ export const getAllQuestions = async (section = null) => {
       query = query.where("section").equals(section);
     }
 
-    const questions = await query.sort({ section: 1, questionId: 1 }).lean();
+    let questions = await query.sort({ section: 1, questionId: 1 }).lean();
+
+    if (industry) {
+      let industryId = industry;
+      // If it's not a valid Mongo ObjectId, search for Industry by name first
+      if (industry && !mongoose.Types.ObjectId.isValid(industry)) {
+        const indDoc = await Industry.findOne({ name: industry });
+        if (indDoc) {
+          industryId = indDoc._id;
+        }
+      }
+
+      const competencies = await Competency.find({ industries: industryId }).lean();
+      const competencyNames = competencies.map(c => c.name);
+
+      questions = questions.filter(q => {
+        if (q.section === "technical" || q.section === "hr_management") {
+          return competencyNames.includes(q.competencyTag);
+        }
+        return true;
+      });
+    }
 
     return {
       success: true,
@@ -48,7 +71,7 @@ const groupQuestionsBySection = (questions) => {
       grouped.weaknesses.push(question);
     } else if (question.section === ASSESSMENT_SECTIONS.COMMUNICATION || question.section === "communication") {
       grouped.communication.push(question);
-    } else if (question.section === ASSESSMENT_SECTIONS.TECHNICAL || question.section === "technical") {
+    } else if (question.section === ASSESSMENT_SECTIONS.TECHNICAL || question.section === "technical" || question.section === "hr_management") {
       grouped.technical.push(question);
     }
   });

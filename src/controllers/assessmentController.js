@@ -25,9 +25,9 @@ import {
  */
 export const getAssessmentQuestions = async (req, res, next) => {
   try {
-    const { section } = req.query;
+    const { section, industry } = req.query;
 
-    const result = await assessmentService.getAllQuestions(section);
+    const result = await assessmentService.getAllQuestions(section, industry);
 
     res.status(200).json({
       success: true,
@@ -56,7 +56,7 @@ export const submitAssessment = async (req, res, next) => {
 
       // 1. Fetch all active technical questions
       const techQuestions = await AssessmentQuestion.find({
-        section: "technical",
+        section: { $in: ["technical", "hr_management"] },
         isActive: true,
       }).lean();
 
