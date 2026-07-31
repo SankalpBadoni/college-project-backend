@@ -49,7 +49,9 @@ const recalculateFacultyRatingSummary = async (facultyId) => {
 };
 
 export const getFacultyDashboard = async (facultyId) => {
-  const faculty = await Faculty.findById(facultyId);
+  const faculty = await Faculty.findById(facultyId)
+    .populate("university.universityId", "name code")
+    .populate("departmentId", "name code");
   const programs = await Program.find({ faculty: facultyId }).select("_id title description type status startDate durationHours");
   const programIds = programs.map((program) => program._id);
   const recentEnrollments = await Enrollment.find({ program: { $in: programIds } })
@@ -84,6 +86,11 @@ export const getFacultyDashboard = async (facultyId) => {
           email: faculty.email,
           phone: faculty.phone,
           gender: faculty.gender,
+          role: faculty.role,
+          designation: faculty.designation || faculty.professionalProfile?.describesBest || "Assistant Professor",
+          universityName: faculty.university?.universityId?.name || "Delhi Technological University",
+          campus: "North Campus",
+          departmentName: faculty.departmentId?.name || "Computer Science Department",
           profile: faculty.profile,
           professionalProfile: faculty.professionalProfile,
           ratingSummary: faculty.ratingSummary,
