@@ -160,6 +160,8 @@ export const updateCourseOverview = async (facultyId, programId, updates) => {
   const payload = pick(updates, [
     "title",
     "description",
+    "industry",
+    "domain",
     "courseOverview",
     "courseIntroduction",
     "courseProgress",
