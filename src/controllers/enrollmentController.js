@@ -27,11 +27,11 @@ export const enrollProgram = async (req, res, next) => {
       return res.status(400).json({ message: "Student is not eligible for this program" });
     }
 
-    if (program.startDate && new Date() > new Date(program.startDate)) {
-      return res
-        .status(400)
-        .json({ message: "Enrollment by credits is allowed only till program start time" });
-    }
+    // if (program.startDate && new Date() > new Date(program.startDate)) {
+    //   return res
+    //     .status(400)
+    //     .json({ message: "Enrollment by credits is allowed only till program start time" });
+    // }
 
     let enrollment = await Enrollment.findOne({ student: student._id, program: program._id });
     if (enrollment && enrollment.status !== "cancelled") {

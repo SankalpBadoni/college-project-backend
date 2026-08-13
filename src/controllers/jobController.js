@@ -23,6 +23,7 @@ export const listJobPostings = async (req, res, next) => {
       $or: [{ deadline: { $exists: false } }, { deadline: null }, { deadline: { $gte: now } }]
     })
       .populate("linkedPrograms preferredCourses requiredCompetencyLinks preferredCompetencyLinks", "title type name")
+      .populate("industry", "name")
       .sort({ createdAt: -1 });
 
     return res.json(postings);
@@ -35,7 +36,8 @@ export const getJobById = async (req, res, next) => {
   try {
     const job = await JobPosting.findOne({ _id: req.params.id, isActive: true, status: "open" })
       .populate("employer", "companyName profileImage")
-      .populate("requiredCompetencyLinks preferredCompetencyLinks linkedPrograms", "title type name");
+      .populate("requiredCompetencyLinks preferredCompetencyLinks linkedPrograms", "title type name")
+      .populate("industry", "name");
     
     if (!job) {
       return res.status(404).json({ message: "Job not found" });

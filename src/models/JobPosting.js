@@ -79,7 +79,7 @@ const jobPostingSchema = new mongoose.Schema(
     requiredCompetencies: [{ type: String, trim: true }],
     requiredCompetencyLinks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Competency" }],
     preferredCompetencyLinks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Competency" }],
-    industry: { type: String, trim: true },
+    industry: { type: mongoose.Schema.Types.ObjectId, ref: "Industry" },
     function: { type: String, trim: true },
     deadline: { type: Date },
     applicationDeadline: { type: Date },

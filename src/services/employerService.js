@@ -89,7 +89,7 @@ const buildStudentFilter = async (posting, filters = {}) => {
 
 export const getEmployerDashboard = async (employerId) => {
   const employer = await Employer.findById(employerId);
-  const postings = await JobPosting.find({ employer: employerId }).populate("linkedPrograms preferredCourses shortlistedStudents.student");
+  const postings = await JobPosting.find({ employer: employerId }).populate("linkedPrograms preferredCourses shortlistedStudents.student").populate("industry", "name");
   const liveProjects = await Program.find({ employer: employerId, type: "live_project" }).sort({ createdAt: -1 });
 
   const postingCountByType = postings.reduce(
@@ -215,6 +215,7 @@ export const createJobPosting = async (employerId, payload) => {
 export const listEmployerPostings = async (employerId) => {
   const postings = await JobPosting.find({ employer: employerId })
     .populate("linkedPrograms preferredCourses shortlistedStudents.student")
+    .populate("industry", "name")
     .sort({ createdAt: -1 });
 
   return Promise.all(
@@ -232,9 +233,9 @@ export const listEmployerPostings = async (employerId) => {
 };
 
 export const getEmployerPosting = async (employerId, postingId) => {
-  const posting = await JobPosting.findOne({ _id: postingId, employer: employerId }).populate(
-    "linkedPrograms preferredCourses shortlistedStudents.student"
-  );
+  const posting = await JobPosting.findOne({ _id: postingId, employer: employerId })
+    .populate("linkedPrograms preferredCourses shortlistedStudents.student")
+    .populate("industry", "name");
   if (!posting) return null;
   const count = await JobApplication.countDocuments({ jobPosting: posting._id });
   const obj = posting.toObject();

@@ -20,24 +20,53 @@ export const getAllQuestions = async (section = null, industry = null) => {
     let questions = await query.sort({ section: 1, questionId: 1 }).lean();
 
     if (industry) {
-      let industryId = industry;
-      // If it's not a valid Mongo ObjectId, search for Industry by name first
-      if (industry && !mongoose.Types.ObjectId.isValid(industry)) {
-        const indDoc = await Industry.findOne({ name: industry });
+      let industryId = null;
+
+      // 1. If it looks like a Mongo ObjectId, use it directly
+      if (mongoose.Types.ObjectId.isValid(industry)) {
+        // Verify the industry actually exists before using the ID
+        const indDoc = await Industry.findById(industry);
         if (indDoc) {
           industryId = indDoc._id;
+        } else {
+          console.warn(`[Assessment] Industry ObjectId "${industry}" not found in DB`);
         }
       }
 
-      const competencies = await Competency.find({ industries: industryId }).lean();
-      const competencyNames = competencies.map(c => c.name);
-
-      questions = questions.filter(q => {
-        if (q.section === "technical" || q.section === "hr_management") {
-          return competencyNames.includes(q.competencyTag);
+      // 2. If not an ObjectId (or lookup failed), try case-insensitive name search
+      if (!industryId) {
+        const indDoc = await Industry.findOne({
+          name: { $regex: new RegExp(`^${industry.trim()}$`, "i") },
+        });
+        if (indDoc) {
+          industryId = indDoc._id;
+        } else {
+          console.warn(`[Assessment] Industry name "${industry}" not found in DB — returning all technical questions`);
         }
-        return true;
-      });
+      }
+
+      if (industryId) {
+        const competencies = await Competency.find({ industries: industryId }).lean();
+        const competencyNames = competencies.map(c => c.name);
+
+        console.log(`[Assessment] Industry "${industry}" → ${competencies.length} competencies: [${competencyNames.join(", ")}]`);
+
+        if (competencyNames.length > 0) {
+          // Filter technical questions to only those tagged with this industry's competencies
+          questions = questions.filter(q => {
+            if (q.section === "technical" || q.section === "hr_management") {
+              return competencyNames.includes(q.competencyTag);
+            }
+            return true;
+          });
+        } else {
+          // Industry exists in DB but has no linked competencies — return ALL technical questions
+          // rather than returning zero, so the assessment is still usable
+          console.warn(`[Assessment] No competencies linked to industry "${industry}" — returning all technical questions as fallback`);
+        }
+      }
+      // If industryId is still null (name not found), we skip the filter entirely
+      // and return all questions — safe fallback
     }
 
     return {
