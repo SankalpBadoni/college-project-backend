@@ -20,7 +20,7 @@ const industrySchema = new mongoose.Schema(
 const domainSchema = new mongoose.Schema(
   {
     name: { type: String, required: true, trim: true }, // e.g., "Data Science"
-    industry: { type: mongoose.Schema.Types.ObjectId, ref: "Industry", required: true },
+    industries: [{ type: mongoose.Schema.Types.ObjectId, ref: "Industry", required: true }],
   },
   { timestamps: true }
 );

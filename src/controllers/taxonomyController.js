@@ -54,12 +54,12 @@ export const listDomains = async (req, res, next) => {
       if (allAnyIndustry && req.query.industry === allAnyIndustry._id.toString()) {
         // Do not filter by industry to return all domains
       } else {
-        filter.industry = req.query.industry;
+        filter.industries = req.query.industry;
       }
     }
-    let domains = await Domain.find(filter).populate("industry", "name").sort({ name: 1 });
+    let domains = await Domain.find(filter).populate("industries", "name").sort({ name: 1 });
     // Always find and prepend the "All/Any" Domain if it exists
-    const allAnyDomain = await Domain.findOne({ name: "All/Any" }).populate("industry", "name");
+    const allAnyDomain = await Domain.findOne({ name: "All/Any" }).populate("industries", "name");
     if (allAnyDomain && !domains.some(d => d._id.toString() === allAnyDomain._id.toString())) {
       domains = [allAnyDomain, ...domains];
     }
@@ -75,17 +75,37 @@ export const listDomains = async (req, res, next) => {
  */
 export const createDomain = async (req, res, next) => {
   try {
-    const { name, industry } = req.body;
-    if (!name || !name.trim() || !industry) {
-      return res.status(400).json({ message: "Domain name and industry ID are required" });
+    const { name, industry, industries } = req.body;
+    
+    let finalIndustries = [];
+    if (industries && Array.isArray(industries)) {
+      finalIndustries = industries;
+    } else if (industry) {
+      finalIndustries = [industry];
     }
 
-    const existing = await Domain.findOne({ name: name.trim(), industry });
+    if (!name || !name.trim() || finalIndustries.length === 0) {
+      return res.status(400).json({ message: "Domain name and at least one industry ID are required" });
+    }
+
+    const existing = await Domain.findOne({ name: name.trim() });
     if (existing) {
+      let updated = false;
+      for (const i of finalIndustries) {
+        if (!existing.industries.includes(i)) {
+          existing.industries.push(i);
+          updated = true;
+        }
+      }
+      if (updated) {
+        await existing.save();
+      }
+      await existing.populate("industries", "name");
       return res.json(existing);
     }
 
-    const domain = await Domain.create({ name: name.trim(), industry });
+    const domain = await Domain.create({ name: name.trim(), industries: finalIndustries });
+    await domain.populate("industries", "name");
     return res.status(201).json(domain);
   } catch (error) {
     return next(error);
