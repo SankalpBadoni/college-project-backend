@@ -81,6 +81,7 @@ const liveProjectSchema = new mongoose.Schema(
     createdBy: { type: mongoose.Schema.Types.ObjectId, required: true, refPath: "createdByModel" },
     creatorRole: { type: String, enum: ["faculty", "employer"], required: true },
     industry: { type: mongoose.Schema.Types.ObjectId, ref: "Industry" },
+    industries: [{ type: mongoose.Schema.Types.ObjectId, ref: "Industry" }],
     domain: { type: mongoose.Schema.Types.ObjectId, ref: "Domain" },
     competencies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Competency" }],
     employerLogo: { type: String, trim: true },

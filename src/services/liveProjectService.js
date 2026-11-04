@@ -56,6 +56,10 @@ const populateProjectQuery = (query) =>
     .populate("enrolledStudents.student", "fullName email profile")
     .populate("groups.leader", "fullName email profile")
     .populate("groups.members", "fullName email profile")
+    .populate("industry", "name")
+    .populate("industries", "name")
+    .populate("domain", "name")
+    .populate("competencies", "name type")
     .populate("milestones.competencies", "name type")
     .populate("milestones.submissions.studentId", "fullName email profile");
 
@@ -67,6 +71,10 @@ const populateProjectDocument = async (document) =>
     { path: "enrolledStudents.student", select: "fullName email profile" },
     { path: "groups.leader", select: "fullName email profile" },
     { path: "groups.members", select: "fullName email profile" },
+    { path: "industry", select: "name" },
+    { path: "industries", select: "name" },
+    { path: "domain", select: "name" },
+    { path: "competencies", select: "name type" },
     { path: "milestones.competencies", select: "name type" },
     { path: "milestones.submissions.studentId", select: "fullName email profile" }
   ]);
@@ -79,7 +87,8 @@ const buildProjectPayload = (payload, creatorRole, creatorId) => ({
   createdBy: creatorId,
   createdByModel: creatorRole === "faculty" ? "Faculty" : "Employer",
   creatorRole,
-  industry: payload.industry || undefined,
+  industry: payload.industry || toArray(payload.industries)[0] || undefined,
+  industries: toArray(payload.industries),
   domain: payload.domain || undefined,
   competencies: toArray(payload.competencies),
   employerLogo: payload.employerLogo,
@@ -109,6 +118,10 @@ const projectLeanFields = {
   fullDescription: 1,
   bannerImage: 1,
   creatorRole: 1,
+  industry: 1,
+  industries: 1,
+  domain: 1,
+  competencies: 1,
   employerLogo: 1,
   descriptionPdfUrl: 1,
   companyName: 1,
@@ -146,6 +159,13 @@ const sortProjects = (query, sortBy) => {
   }
 };
 
+// When true, the general live-projects browse listing hides projects that are
+// linked to a course (the idea being those are reached via the course instead).
+// Disabled per product decision on 2026-11-04 so course-linked projects also
+// appear on the general browse page; kept here (rather than deleted) so it can
+// be re-enabled by flipping this back to true.
+const EXCLUDE_COURSE_LINKED_PROJECTS = false;
+
 const buildSearchQuery = ({ search, status, projectType, mode, creatorRole }) => {
   const query = {};
 
@@ -171,26 +191,28 @@ const buildSearchQuery = ({ search, status, projectType, mode, creatorRole }) =>
     $or: [{ linkedCourses: { $exists: false } }, { linkedCourses: { $size: 0 } }]
   };
 
+  const andClauses = [];
+  if (EXCLUDE_COURSE_LINKED_PROJECTS) {
+    andClauses.push(linkedCourseQuery);
+  }
+
   if (search) {
     const term = String(search).trim();
     if (term) {
-      query.$and = [
-        linkedCourseQuery,
-        {
-          $or: [
-            { title: { $regex: term, $options: "i" } },
-            { shortDescription: { $regex: term, $options: "i" } },
-            { fullDescription: { $regex: term, $options: "i" } },
-            { companyName: { $regex: term, $options: "i" } },
-            { skillsRequired: { $in: [new RegExp(term, "i")] } }
-          ]
-        }
-      ];
-    } else {
-      query.$and = [linkedCourseQuery];
+      andClauses.push({
+        $or: [
+          { title: { $regex: term, $options: "i" } },
+          { shortDescription: { $regex: term, $options: "i" } },
+          { fullDescription: { $regex: term, $options: "i" } },
+          { companyName: { $regex: term, $options: "i" } },
+          { skillsRequired: { $in: [new RegExp(term, "i")] } }
+        ]
+      });
     }
-  } else {
-    query.$and = [linkedCourseQuery];
+  }
+
+  if (andClauses.length > 0) {
+    query.$and = andClauses;
   }
 
   return query;
@@ -352,6 +374,10 @@ export const updateLiveProjectRecord = async (user, userRole, projectId, updates
     "descriptionPdfUrl",
     "companyName",
     "hiringOpportunity",
+    "industry",
+    "industries",
+    "domain",
+    "competencies",
     "linkedCourses",
     "skillsRequired",
     "duration",
@@ -371,6 +397,17 @@ export const updateLiveProjectRecord = async (user, userRole, projectId, updates
 
   if (payload.linkedCourses !== undefined) {
     payload.linkedCourses = toArray(payload.linkedCourses);
+  }
+
+  if (payload.industries !== undefined) {
+    payload.industries = toArray(payload.industries);
+    if (payload.industry === undefined) {
+      payload.industry = payload.industries[0] || undefined;
+    }
+  }
+
+  if (payload.competencies !== undefined) {
+    payload.competencies = toArray(payload.competencies);
   }
 
   if (payload.skillsRequired !== undefined) {
